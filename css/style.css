@@ -1909,3 +1909,31 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .lightbox-next{ right:8px; }
   .lightbox-fermer{ width:40px; height:40px; top:12px; right:12px; }
 }
+
+/* Adaptation automatique pour les téléphones (écrans de moins de 768px) */
+@media (max-width: 768px) {
+    /* Cache ou adapte le menu principal pour éviter qu'il ne dépasse */
+    .nav-conteneur {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        padding: 0;
+    }
+
+    /* Transforme les cartes d'activités (image + texte) en colonne empilée sur mobile */
+    .hero div[style*="display: flex"] {
+        flex-direction: column !important;
+        text-align: center;
+    }
+
+    /* Redimensionne les images des activités sur mobile pour qu'elles prennent toute la largeur */
+    .hero div[style*="display: flex"] img {
+        width: 100% !important;
+        height: 200px !important;
+    }
+}
