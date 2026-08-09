@@ -1,0 +1,15 @@
+# Fichiers temporaires Windows
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+
+# Dossiers système macOS
+.DS_Store
+
+# Scripts internes de nettoyage/recadrage (non nécessaires au site)
+*.ps1
+
+# Éditeurs
+.vscode/
+.idea/
+*.swp

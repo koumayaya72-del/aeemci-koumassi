@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact & Adhésion — AEEMCI Sous-Comité de Koumassi</title>
+<meta name="description" content="Contactez le bureau du Sous-Comité AEEMCI de Koumassi ou adhérez en ligne.">
+<link rel="icon" href="images/logo.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="entete">
+  <div class="conteneur barre-nav">
+<a href="index.html" class="marque">
+      <img src="images/logo.png" alt="Logo AEEMCI" onerror="this.src='logo.png'">
+      <span class="texte-marque">
+        <span class="sigle">AEEMCI</span>
+        <span class="sous-sigle">Sous-Comité de Koumassi</span>
+      </span>
+    </a>
+    <button class="menu-mobile-bouton" aria-label="Ouvrir le menu mobile" onclick="this.classList.toggle('ouvert'); document.querySelector('.nav-principale').classList.toggle('ouvert')">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="nav-principale">
+      <a href="index.html">Accueil</a>
+      <a href="activites.html">Activités</a>
+<a href="actualites.html">Actualités</a>
+      <a href="galerie.html">Galerie</a>
+      <a href="contact.html" class="actif">Contact</a>
+      <a href="contact.html#adhesion" class="bouton-cta">Nous rejoindre</a>
+    </nav>
+  </div>
+</header>
+
+<section class="banniere-page">
+  <div class="conteneur">
+    <p class="fil-ariane"><a href="index.html">Accueil</a> / Contact &amp; Adhésion</p>
+    <h1>Contactez-nous &amp; Devenez Membre</h1>
+    <p style="margin-top:10px; color:rgba(255,253,248,0.85); max-width:55ch;">
+      Une question, un besoin d'information ou l'envie d'adhérer au Sous-Comité ? Écrivez-nous ou remplissez notre formulaire.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="conteneur">
+    <div class="grille-contact">
+      <div class="coordonnees">
+        <div class="entete-section">
+          <p class="eyebrow">Informations de contact</p>
+          <h2>Nos Coordonnées</h2>
+          <p>Le secrétariat du Sous-Comité est à votre disposition pour toute information concernant nos activités et adhésions.</p>
+        </div>
+
+        <div class="item">
+          <div class="label">Localisation</div>
+          <div class="valeur">Commune de Koumassi, Abidjan, Côte d'Ivoire</div>
+        </div>
+
+        <div class="item">
+          <div class="label">Présidence &amp; Secrétariat</div>
+          <div class="valeur">+225 07 00 00 00 00 / +225 05 00 00 00 00</div>
+        </div>
+
+        <div class="item">
+          <div class="label">Adresse Email</div>
+          <div class="valeur">aeemci.koumassi@gmail.com</div>
+        </div>
+
+        <div class="item">
+          <div class="label">Permanences</div>
+          <div class="valeur">Les samedis et dimanches de 15h00 à 18h00</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="entete-section">
+          <p class="eyebrow">Message direct</p>
+          <h2>Écrivez-nous</h2>
+        </div>
+
+        <form class="formulaire" action="#" method="POST" onsubmit="event.preventDefault(); alert('Merci pour votre message ! Le bureau de l\'AEEMCI Koumassi vous répondra dans les plus brefs délais.'); this.reset();">
+          <div class="champ">
+            <label for="nom">Nom &amp; Prénom *</label>
+            <input type="text" id="nom" name="nom" placeholder="Ex: Traoré Aminata" required>
+          </div>
+
+          <div class="champ">
+            <label for="email">Adresse Email ou Numéro Téléphone *</label>
+            <input type="text" id="email" name="email" placeholder="Ex: aminata@gmail.com ou 0700000000" required>
+          </div>
+
+          <div class="champ">
+            <label for="objet">Sujet *</label>
+            <input type="text" id="objet" name="objet" placeholder="Ex: Demande d'information sur les cours de Coran" required>
+          </div>
+
+          <div class="champ">
+            <label for="message">Votre Message *</label>
+            <textarea id="message" name="message" placeholder="Votre message..." required></textarea>
+          </div>
+
+          <button type="submit" class="bouton-primaire" style="border:none; cursor:pointer;">Envoyer le message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section Carte de localisation -->
+<section class="motif-treillis">
+  <div class="conteneur">
+    <div class="entete-section centre">
+      <p class="eyebrow">Nous trouver</p>
+      <h2>Localisation du Sous-Comité</h2>
+      <p>Le siège du Sous-Comité AEEMCI de Koumassi vous accueille dans la commune de Koumassi, à Abidjan.</p>
+    </div>
+<div class="plan-google">
+      <iframe
+        title="Carte de localisation AEEMCI Koumassi"
+        src="https://www.google.com/maps?q=Koumassi,%20Abidjan,%20C%C3%B4te%20d%27Ivoire&output=embed"
+        width="100%" height="420" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- Section Adhésion Formulaire -->
+<section id="adhesion" class="motif-treillis">
+  <div class="conteneur">
+    <div class="entete-section centre">
+      <p class="eyebrow">Rejoindre la famille</p>
+      <h2>Formulaire d'Adhésion en Ligne</h2>
+<p>Remplissez le formulaire ci-dessous pour rejoindre l'AEEMCI Sous-Comité de Koumassi pour le mandat 2026.</p>
+    </div>
+
+    <div class="conteneur-google-form">
+      <div class="repli-google-form">
+        <h3 style="font-family:var(--display); font-size:1.4rem; color:var(--vert-profond); margin-bottom:12px;">Devenir Membre — Rejoindre le groupe WhatsApp</h3>
+        <p>Inscrivez-vous ci-dessous puis rejoignez directement le groupe WhatsApp officiel du Sous-Comité pour suivre les activités et échanger avec la communauté.</p>
+
+        <form id="formDevenirMembre" onsubmit="redirigerVersWhatsApp(event)" style="max-width:560px; margin:24px auto 0; text-align:left;" class="formulaire">
+          <div class="champ">
+            <label for="nom">Nom et Prénom *</label>
+            <input type="text" id="nom" name="nom" placeholder="Nom et Prénom" required>
+          </div>
+          <div class="champ">
+            <label for="telephone">Numéro de téléphone *</label>
+            <input type="tel" id="telephone" name="telephone" placeholder="Ex: +225 0700000000" required>
+          </div>
+          <button type="submit" class="btn-primary-custom" style="border:none; cursor:pointer; width:100%; text-align:center;">Valider et rejoindre le groupe WhatsApp</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="pied">
+  <div class="conteneur">
+    <div class="pied-grille">
+      <div>
+        <a href="index.html" class="marque">
+          <img src="images/logo.png" alt="Logo AEEMCI" onerror="this.src='logo.png'">
+          <span class="texte-marque">
+            <span class="sigle">AEEMCI</span>
+            <span class="sous-sigle">Sous-Comité de Koumassi</span>
+          </span>
+        </a>
+        <p class="desc">
+          Association des Élèves et Étudiants Musulmans de Côte d'Ivoire — Sous-Comité de Koumassi.
+        </p>
+        <div class="reseaux-sociaux" aria-label="Réseaux sociaux">
+          <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.3 0-1.1-.1-2-.1-2 0-3.4 1.2-3.4 3.5v2H8.5v3h2.5v7h2.5z"/></svg>
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 8.2a3.8 3.8 0 100 7.6 3.8 3.8 0 000-7.6zm0 6.2a2.4 2.4 0 110-4.8 2.4 2.4 0 010 4.8zm4.8-6.3a.9.9 0 11-1.8 0 .9.9 0 011.8 0zM12 5c2.1 0 2.4 0 3.2.1.8 0 1.2.2 1.5.3.4.2.6.3.9.6.3.3.5.6.6.9.1.3.2.7.3 1.5 0 .9.1 1.2.1 3.2s0 2.4-.1 3.2c0 .8-.2 1.2-.3 1.5-.2.4-.3.6-.6.9-.3.3-.6.5-.9.6-.3.1-.7.2-1.5.3-.9 0-1.2.1-3.2.1s-2.4 0-3.2-.1c-.8 0-1.2-.2-1.5-.3a2.5 2.5 0 01-.9-.6 2.5 2.5 0 01-.6-.9c-.1-.3-.2-.7-.3-1.5-.1-.9-.1-1.2-.1-3.2s0-2.4.1-3.2c0-.8.2-1.2.3-1.5.1-.3.3-.6.6-.9.3-.3.6-.5.9-.6.3-.1.7-.2 1.5-.3.8-.1 1.1-.1 3.2-.1m0-2c-2.1 0-2.4 0-3.2.1-.8 0-1.3.2-1.8.4-.5.2-.9.5-1.3.9-.4.4-.7.8-.9 1.3-.2.5-.4 1-.4 1.8-.1.8-.1 1.1-.1 3.2s0 2.4.1 3.2c0 .8.2 1.3.4 1.8.2.5.5.9.9 1.3.4.4.8.7 1.3.9.5.2 1 .4 1.8.4.8.1 1.1.1 3.2.1s2.4 0 3.2-.1c.8 0 1.3-.2 1.8-.4.5-.2.9-.5 1.3-.9.4-.4.7-.8.9-1.3.2-.5.4-1 .4-1.8.1-.8.1-1.1.1-3.2s0-2.4-.1-3.2c0-.8-.2-1.3-.4-1.8-.2-.5-.5-.9-.9-1.3a3.6 3.6 0 00-1.3-.9c-.5-.2-1-.4-1.8-.4-.8-.1-1.1-.1-3.2-.1z"/></svg>
+          </a>
+          <a href="https://wa.me/2250700000000" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
+            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.6 15.1L2.1 22l5-1.3A10 10 0 1012 2zm0 18.2c-1.6 0-3.1-.5-4.4-1.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.1-6.1c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.5 6.5 0 01-3.3-2.9c-.3-.4 0-.5.2-.7l.4-.5c.1-.2.1-.3.2-.5 0-.2 0-.3-.1-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.6 1.1 2.8c.1.2 1.9 2.9 4.6 4.1.6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1-.1-.1-.2-.2-.4-.3z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="activites.html">Activités</a></li>
+<li><a href="actualites.html">Actualités</a></li>
+          <li><a href="galerie.html">Galerie</a></li>
+          <li><a href="contact.html">Contact &amp; Adhésion</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Contact &amp; Secrétariat</h4>
+        <ul>
+          <li><span style="color:var(--or-clair);">Lieu :</span> Koumassi, Abidjan, Côte d'Ivoire</li>
+          <li><span style="color:var(--or-clair);">Email :</span> aeemci.koumassi@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+
+<div class="bas-pied">
+      <p>&copy; 2025 - 2026 AEEMCI Sous-Comité de Koumassi. Tous droits réservés.</p>
+      <p>Foi — Travail — Succès</p>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/2250700000000" class="bouton-whatsapp" target="_blank" rel="noopener" aria-label="Discuter sur WhatsApp" title="Écrire au Bureau sur WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.6 15.1L2.1 22l5-1.3A10 10 0 1012 2zm0 18.2c-1.6 0-3.1-.5-4.4-1.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.1-6.1c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.5 6.5 0 01-3.3-2.9c-.3-.4 0-.5.2-.7l.4-.5c.1-.2.1-.3.2-.5 0-.2 0-.3-.1-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.6 1.1 2.8c.1.2 1.9 2.9 4.6 4.1.6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1-.1-.1-.2-.2-.4-.3z"/></svg>
+</a>
+
+<script>
+function redirigerVersWhatsApp(event) {
+    // Empêche le comportement par défaut de la page
+    event.preventDefault();
+
+    // Redirection immédiate vers le groupe WhatsApp de l'AEEMCI Koumassi
+    window.location.href = "https://chat.whatsapp.com/KUd1Zmc2JEfBsIWdH5HPdm";
+}
+</script>
+
+</body>
+</html>
