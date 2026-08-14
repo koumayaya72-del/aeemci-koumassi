@@ -1,213 +1,368 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Actualités & Galerie — AEEMCI Sous-Comité de Koumassi</title>
-<meta name="description" content="Toute l'actualité et la galerie multimédia de l'AEEMCI Sous-Comité de Koumassi.">
+<title>Actualités & Activités — AEEMCI Sous-Comité de Koumassi</title>
+<meta name="description" content="Découvrez les 5 événements et activités majeurs du Sous-Comité AEEMCI de Koumassi : SECOFIS, SEFORES, Nuit de prière, Journée d'excellence et Iftar solidaire.">
 <link rel="icon" href="images/logo.png">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<header class="entete">
-  <div class="conteneur barre-nav">
-    <a href="index.html" class="marque">
+<!-- ===== VOILE D'ARRIÈRE-PLAN & SIDEBAR LATÉRALE (DARK MODE STYLE GEMINI) ===== -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="fermerSidebar()"></div>
+
+<aside class="sidebar-panneau" id="sidebarPanneau">
+  <div class="sidebar-entete">
+    <div class="sidebar-logo">
       <img src="images/logo.png" alt="Logo AEEMCI" onerror="this.src='logo.png'">
-      <span class="texte-marque">
+      <div class="sidebar-titre-marque">
         <span class="sigle">AEEMCI</span>
-        <span class="sous-sigle">Sous-Comité de Koumassi</span>
-      </span>
+        <span class="sous-sigle">Koumassi</span>
+      </div>
+    </div>
+    <button class="sidebar-fermer" aria-label="Fermer le menu" onclick="fermerSidebar()">&times;</button>
+  </div>
+
+  <div class="sidebar-corps">
+    <div class="sidebar-section-titre">Navigation</div>
+    <ul class="sidebar-liens">
+      <li>
+        <a href="index.html" class="sidebar-lien">
+          <svg class="sidebar-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          <span>Accueil</span>
+        </a>
+      </li>
+      <li>
+        <a href="historique.html" class="sidebar-lien">
+          <svg class="sidebar-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 16 14"></polyline></svg>
+          <span>Historique</span>
+        </a>
+      </li>
+      <li>
+        <a href="activites.html" class="sidebar-lien">
+          <svg class="sidebar-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+          <span>Activités</span>
+        </a>
+      </li>
+      <li>
+        <a href="actualites.html" class="sidebar-lien actif">
+          <svg class="sidebar-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v1m2 13a2 2 0 0 1-2-2V7m2 13a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2m-4-3H9M7 16h6M7 8h6m-6 4h6"></path></svg>
+          <span>Actualités</span>
+        </a>
+      </li>
+      <li>
+        <a href="galerie.html" class="sidebar-lien">
+          <svg class="sidebar-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+          <span>Galerie</span>
+        </a>
+      </li>
+      <li>
+        <a href="contact.html" class="sidebar-lien">
+          <svg class="sidebar-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          <span>Contact</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="sidebar-section-titre" style="margin-top: 24px;">Engagement</div>
+    <div class="sidebar-engagement-box">
+      <a href="https://wa.me/2250700000000?text=Bonjour,%20je%20souhaite%20rejoindre%20le%20Sous-Comit%C3%A9%20AEEMCI%20de%20Koumassi" target="_blank" rel="noopener" class="sidebar-bouton-rejoindre">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+        <span>Rejoindre l'AEEMCI</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="sidebar-footer">
+    <img src="images/logo.png" alt="Logo AEEMCI" onerror="this.src='logo.png'">
+    <span>AEEMCI - Sous-Comité Koumassi</span>
+  </div>
+</aside>
+
+<!-- ===== EN-TÊTE DE PAGE / HEADER ===== -->
+<header class="entete-site">
+  <div class="conteneur barre-navigation">
+    <a href="index.html" class="logo-marque">
+      <img src="images/logo.png" alt="Logo AEEMCI" onerror="this.src='logo.png'">
+      <div class="nom-organisation">
+        <span class="sigle-aeemci">AEEMCI</span>
+        <span class="sous-sigle-koumassi">Sous-Comité de Koumassi</span>
+      </div>
     </a>
-    <button class="menu-mobile-bouton" aria-label="Ouvrir le menu mobile" onclick="this.classList.toggle('ouvert'); document.querySelector('.nav-principale').classList.toggle('ouvert')">
+
+    <button class="menu-burger" aria-label="Ouvrir le menu latéral" onclick="ouvrirSidebar()">
       <span></span>
       <span></span>
       <span></span>
     </button>
-    <nav class="nav-principale">
+
+    <nav class="menu-navigation">
       <a href="index.html">Accueil</a>
+      <a href="historique.html">Historique</a>
       <a href="activites.html">Activités</a>
       <a href="actualites.html" class="actif">Actualités</a>
       <a href="galerie.html">Galerie</a>
       <a href="contact.html">Contact</a>
-      <a href="contact.html#adhesion" class="bouton-cta">Nous rejoindre</a>
+      <a href="contact.html#adhesion" class="bouton-cta-primaire">Rejoindre</a>
     </nav>
   </div>
 </header>
 
-<section class="banniere-page">
-  <div class="conteneur">
-    <p class="fil-ariane"><a href="index.html">Accueil</a> / Actualités &amp; Galerie</p>
-    <h1>Actualités &amp; Galerie Médias</h1>
-    <p style="margin-top:10px; color:rgba(255,253,248,0.85); max-width:55ch;">
-      Suivez la vie associative, les événements récents et consultez la galerie photo officielle du Sous-Comité de Koumassi.
+<!-- ===== BANNIÈRE EN-TÊTE ===== -->
+<section class="hero-moderne" style="padding: 60px 0;">
+  <div class="conteneur texte-centre m-auto" style="max-width: 720px;">
+    <span class="badge-tag or">Événements &amp; Projets</span>
+    <h1 class="hero-titre" style="margin-top: 12px; font-size: clamp(2.2rem, 4vw, 3.2rem);">
+      Actualités &amp; <span class="or-accent">Temps Forts</span>
+    </h1>
+    <p class="hero-description m-auto" style="font-size: 1.1rem;">
+      Retrouvez les 5 événements phares du Sous-Comité AEEMCI de Koumassi. Cliquez sur « Voir plus » pour ouvrir la couverture médiatique complète.
     </p>
   </div>
 </section>
 
-<section>
+<!-- ===== LES 5 ÉVÉNEMENTS COMPLETS (ATTRIBUTION DES IMAGES CORRIGÉE EXCLUSIVEMENT) ===== -->
+<section class="section-piliers">
   <div class="conteneur">
-<div class="news-section">
-      <h2 class="section-title">Fil d'actualité du Sous-Comité</h2>
+    <div class="grille-actualites-cartes">
 
-      <div class="news-container">
+      <!-- 1. SECOFIS 2026 (Affiche SECOFIS -> secofis.jpg) -->
+      <article class="carte-actualite-moderne">
+        <div class="carte-actu-image">
+          <span class="carte-actu-badge or">FORMATION</span>
+          <img src="images/secofis.jpg" alt="SECOFIS 2026 — Formation" loading="lazy" onerror="this.src='images/logo.png'; this.style.objectFit='contain'; this.style.padding='20px';">
+        </div>
+        <div class="carte-actu-corps">
+          <span class="carte-actu-date">Février 2026</span>
+          <h3 class="carte-actu-titre">SECOFIS 2026</h3>
+          <p class="carte-actu-desc">
+            Séminaire d'orientation et de formation axé sur le renforcement des capacités, l'initiation professionnelle et le développement personnel des membres du sous-comité.
+          </p>
+          <div class="carte-actu-action">
+            <button class="bouton-cta-contour" style="padding: 10px 22px; font-size: 0.88rem; width: 100%; border: 2px solid var(--vert-emeraude); cursor: pointer;" onclick="ouvrirCouvertureMedia('secofis')">Voir plus →</button>
+          </div>
+        </div>
+      </article>
 
-<!-- 1. Solidarité Ramadan -->
-        <article class="news-card">
-          <div class="news-image-container">
-            <img src="images/nuit-priere.jpg" alt="Solidarité Ramadan" loading="lazy" onerror="this.classList.add('img-fallback'); this.onerror=null;">
+      <!-- 2. SEFORES & Rentrée Solennelle (Affiche Rentrée -> rentree-solennelle.jpg) -->
+      <article class="carte-actualite-moderne">
+        <div class="carte-actu-image">
+          <span class="carte-actu-badge">ÉVÉNEMENT</span>
+          <img src="images/rentree-solennelle.jpg" alt="SEFORES & Rentrée Solennelle" loading="lazy" onerror="this.src='images/logo.png'; this.style.objectFit='contain'; this.style.padding='20px';">
+        </div>
+        <div class="carte-actu-corps">
+          <span class="carte-actu-date">Novembre 2025</span>
+          <h3 class="carte-actu-titre">SEFORES &amp; Rentrée Solennelle</h3>
+          <p class="carte-actu-desc">
+            Cérémonie officielle marquant le lancement des activités de l'année et le déploiement de la feuille de route du bureau sous le thème « Ensemble nous sommes plus forts ».
+          </p>
+          <div class="carte-actu-action">
+            <button class="bouton-cta-contour" style="padding: 10px 22px; font-size: 0.88rem; width: 100%; border: 2px solid var(--vert-emeraude); cursor: pointer;" onclick="ouvrirCouvertureMedia('sefores')">Voir plus →</button>
           </div>
-          <div class="news-content">
-            <div>
-              <span class="badge">Solidarité</span>
-              <h3>Solidarité Ramadan</h3>
-              <p>Action de solidarité et de partage organisée par le Sous-Comité en ce mois béni, au profit des familles et des membres les plus vulnérables de Koumassi.</p>
-            </div>
-            <a href="galerie.html" class="read-more">LIRE LA SUITE →</a>
-          </div>
-        </article>
+        </div>
+      </article>
 
-<!-- 2. Journée Culturelle d'Excellence -->
-        <article class="news-card">
-          <div class="news-image-container">
-            <img src="images/solidarite-ramadan.jpg" alt="Journée culturelle d'excellence" loading="lazy" onerror="this.classList.add('img-fallback'); this.onerror=null;">
+      <!-- 3. Nuit de Prière & Veillée Spirituelle (Affiche Nuit de Prière -> nuit-priere.jpg) -->
+      <article class="carte-actualite-moderne">
+        <div class="carte-actu-image">
+          <span class="carte-actu-badge">SPIRITUALITÉ</span>
+          <img src="images/nuit-priere.jpg" alt="Nuit de Prière & Veillée Spirituelle" loading="lazy" onerror="this.src='images/logo.png'; this.style.objectFit='contain'; this.style.padding='20px';">
+        </div>
+        <div class="carte-actu-corps">
+          <span class="carte-actu-date">Décembre 2025</span>
+          <h3 class="carte-actu-titre">Nuit de Prière &amp; Veillée Spirituelle</h3>
+          <p class="carte-actu-desc">
+            Veillée spirituelle de recueillement, d'invocations, de lecture coranique et de rappels religieux pour raffermir les cœurs et renforcer la cohésion fraternelle.
+          </p>
+          <div class="carte-actu-action">
+            <button class="bouton-cta-contour" style="padding: 10px 22px; font-size: 0.88rem; width: 100%; border: 2px solid var(--vert-emeraude); cursor: pointer;" onclick="ouvrirCouvertureMedia('priere')">Voir plus →</button>
           </div>
-          <div class="news-content">
-            <div>
-              <span class="badge">Culture</span>
-              <h3>Journée Culturelle d'Excellence</h3>
-              <p>Célébration du mérite académique, valorisation des talents et renforcement de la cohésion fraternelle au sein du sous-comité.</p>
-            </div>
-            <a href="galerie.html" class="read-more">LIRE LA SUITE →</a>
-          </div>
-        </article>
+        </div>
+      </article>
 
-<!-- 3. SECOFIS -->
-        <article class="news-card">
-          <div class="news-image-container">
-            <img src="images/journee-excellence.jpg" alt="SECOFIS" loading="lazy" onerror="this.classList.add('img-fallback'); this.onerror=null;">
+      <!-- 4. Journée de l'Excellence & de la Culture (Affiche Journée Culturelle -> journee-excellence.jpg) -->
+      <article class="carte-actualite-moderne">
+        <div class="carte-actu-image">
+          <span class="carte-actu-badge or">EXCELLENCE</span>
+          <img src="images/journee-excellence.jpg" alt="Journée Culturelle & d'Excellence" loading="lazy" onerror="this.src='images/logo.png'; this.style.objectFit='contain'; this.style.padding='20px';">
+        </div>
+        <div class="carte-actu-corps">
+          <span class="carte-actu-date">Mai 2026</span>
+          <h3 class="carte-actu-titre">Journée de l'Excellence &amp; de la Culture</h3>
+          <p class="carte-actu-desc">
+            Grand rassemblement annuel récompensant les meilleurs candidats et lauréats aux examens scolaires et concours coraniques de la commune de Koumassi.
+          </p>
+          <div class="carte-actu-action">
+            <button class="bouton-cta-contour" style="padding: 10px 22px; font-size: 0.88rem; width: 100%; border: 2px solid var(--vert-emeraude); cursor: pointer;" onclick="ouvrirCouvertureMedia('excellence')">Voir plus →</button>
           </div>
-          <div class="news-content">
-            <div>
-              <span class="badge">Formation</span>
-              <h3>SECOFIS 2026</h3>
-              <p>Séminaire de formation et d'activités axé sur le renforcement des capacités, l'initiation professionnelle et le développement personnel.</p>
-            </div>
-            <a href="galerie.html" class="read-more">LIRE LA SUITE →</a>
-          </div>
-        </article>
+        </div>
+      </article>
 
-<!-- 4. SEFORES & Rentrée Solennelle -->
-        <article class="news-card">
-          <div class="news-image-container">
-            <img src="images/secofis.jpg" alt="Rentrée solennelle" loading="lazy" onerror="this.classList.add('img-fallback'); this.onerror=null;">
+      <!-- 5. Iftar Solidaire & Partage Fraternel (Affiche Ramadan -> solidarite-ramadan.jpg) -->
+      <article class="carte-actualite-moderne">
+        <div class="carte-actu-image">
+          <span class="carte-actu-badge">ACTION SOCIALE</span>
+          <img src="images/solidarite-ramadan.jpg" alt="Solidarité Ramadan / Iftar" loading="lazy" onerror="this.src='images/logo.png'; this.style.objectFit='contain'; this.style.padding='20px';">
+        </div>
+        <div class="carte-actu-corps">
+          <span class="carte-actu-date">Ramadan 2026</span>
+          <h3 class="carte-actu-titre">Iftar Solidaire &amp; Partage Fraternel</h3>
+          <p class="carte-actu-desc">
+            Organisation de repas collectifs de rupture du jeûne et distribution de kits alimentaires d'urgence aux familles et étudiants dans le besoin à Koumassi.
+          </p>
+          <div class="carte-actu-action">
+            <button class="bouton-cta-contour" style="padding: 10px 22px; font-size: 0.88rem; width: 100%; border: 2px solid var(--vert-emeraude); cursor: pointer;" onclick="ouvrirCouvertureMedia('iftar')">Voir plus →</button>
           </div>
-          <div class="news-content">
-            <div>
-              <span class="badge">Officiel</span>
-              <h3>SEFORES &amp; Rentrée Solennelle</h3>
-              <p>Cérémonie officielle marquant le lancement des activités de l'année et le déploiement de la feuille de route du bureau.</p>
-            </div>
-            <a href="galerie.html" class="read-more">LIRE LA SUITE →</a>
-          </div>
-        </article>
+        </div>
+      </article>
 
-<!-- 5. Nuit de Prière -->
-        <article class="news-card">
-          <div class="news-image-container">
-            <img src="images/rentree-solennelle.jpg" alt="Nuit de prière" loading="lazy" onerror="this.classList.add('img-fallback'); this.onerror=null;">
-          </div>
-          <div class="news-content">
-            <div>
-              <span class="badge">Spiritualité</span>
-              <h3>Nuit de Prière</h3>
-              <p>Veillée spirituelle de recueillement, d'invocations et de rappels religieux pour clore les grands moments de l'année.</p>
-            </div>
-            <a href="galerie.html" class="read-more">LIRE LA SUITE →</a>
-          </div>
-        </article>
+    </div>
+  </div>
+</section>
 
+<!-- ===== MODALE DE COUVERTURE MÉDIATIQUE ===== -->
+<div class="modal-media-overlay" id="modalCouvertureMedias" onclick="fermerCouvertureMedia(event)">
+  <div class="modal-media-boite">
+    <div class="modal-media-entete">
+      <span class="badge-couverture-medias">Couverture Médiatique Officielle</span>
+      <h2 class="modal-media-titre" id="modalMediaTitre">SECOFIS 2026</h2>
+      <span class="modal-media-date" id="modalMediaDate">Février 2026</span>
+      <button class="modal-media-fermer" onclick="fermerCouvertureMediaDirect()">&times;</button>
+    </div>
+
+    <div class="modal-media-corps">
+      <img id="modalMediaImage" src="images/secofis.jpg" alt="Couverture Médiatique" class="modal-media-image" onerror="this.src='images/logo.png'; this.style.objectFit='contain'; this.style.padding='20px';">
+      
+      <p class="modal-media-communique" id="modalMediaCommunique">
+        La couverture médiatique officielle retrace les temps forts de cet événement marquant du Sous-Comité AEEMCI de Koumassi, avec des reportages, allocutions et albums souvenirs.
+      </p>
+
+      <div class="modal-media-actions">
+        <a id="modalMediaLienGalerie" href="galerie.html" class="bouton-cta-primaire">Accéder à la Galerie Photo →</a>
+        <button onclick="fermerCouvertureMediaDirect()" class="bouton-cta-secondaire" style="background: var(--vert-tendre); border-color: var(--vert-tendre); color: var(--vert-emeraude);">Fermer</button>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- Galerie Photo -->
-<section>
+<!-- ===== PIED DE PAGE / FOOTER ===== -->
+<footer class="pied-site">
   <div class="conteneur">
-    <div class="entete-section centre">
-      <p class="eyebrow">Galerie souvenir</p>
-      <h2>Moments forts en images</h2>
-      <p>Retrouvez en images les événements et activités marquantes de notre Sous-Comité, et téléchargez librement les photos.</p>
-    </div>
-
-    <div style="text-align:center;">
-      <a href="galerie.html" class="bouton-primaire" style="display:inline-flex; align-items:center; gap:10px;">
-        <svg viewBox="0 0 24 24" style="width:18px; height:18px; fill:currentColor;" aria-hidden="true"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zM6 18h12v2H6z"/></svg>
-        Ouvrir la galerie multimédia
-      </a>
-      <p style="margin-top:14px; color:var(--charbon-doux); font-size:0.9rem;">Cliquez pour accéder à la galerie complète et télécharger les photos de nos activités.</p>
-    </div>
-  </div>
-</section>
-
-<footer class="pied">
-  <div class="conteneur">
-    <div class="pied-grille">
+    <div class="grille-pied">
       <div>
-        <a href="index.html" class="marque">
+        <a href="index.html" class="logo-marque" style="margin-bottom: 16px;">
           <img src="images/logo.png" alt="Logo AEEMCI" onerror="this.src='logo.png'">
-          <span class="texte-marque">
-            <span class="sigle">AEEMCI</span>
-            <span class="sous-sigle">Sous-Comité de Koumassi</span>
-          </span>
+          <div class="nom-organisation">
+            <span class="sigle-aeemci" style="color: #FFFFFF;">AEEMCI</span>
+            <span class="sous-sigle-koumassi" style="color: var(--or-clair);">Sous-Comité de Koumassi</span>
+          </div>
         </a>
-<p class="desc">
+        <p style="font-size: 0.9rem; line-height: 1.6; color: rgba(255, 255, 255, 0.7);">
           Association des Élèves et Étudiants Musulmans de Côte d'Ivoire — Sous-Comité de Koumassi.
         </p>
-        <div class="reseaux-sociaux" aria-label="Réseaux sociaux">
-          <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
-            <svg viewBox="0 0 24 24"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.3 0-1.1-.1-2-.1-2 0-3.4 1.2-3.4 3.5v2H8.5v3h2.5v7h2.5z"/></svg>
-          </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
-            <svg viewBox="0 0 24 24"><path d="M12 8.2a3.8 3.8 0 100 7.6 3.8 3.8 0 000-7.6zm0 6.2a2.4 2.4 0 110-4.8 2.4 2.4 0 010 4.8zm4.8-6.3a.9.9 0 11-1.8 0 .9.9 0 011.8 0zM12 5c2.1 0 2.4 0 3.2.1.8 0 1.2.2 1.5.3.4.2.6.3.9.6.3.3.5.6.6.9.1.3.2.7.3 1.5 0 .9.1 1.2.1 3.2s0 2.4-.1 3.2c0 .8-.2 1.2-.3 1.5-.2.4-.3.6-.6.9-.3.3-.6.5-.9.6-.3.1-.7.2-1.5.3-.9 0-1.2.1-3.2.1s-2.4 0-3.2-.1c-.8 0-1.2-.2-1.5-.3a2.5 2.5 0 01-.9-.6 2.5 2.5 0 01-.6-.9c-.1-.3-.2-.7-.3-1.5-.1-.9-.1-1.2-.1-3.2s0-2.4.1-3.2c0-.8.2-1.2.3-1.5.1-.3.3-.6.6-.9.3-.3.6-.5.9-.6.3-.1.7-.2 1.5-.3.8-.1 1.1-.1 3.2-.1m0-2c-2.1 0-2.4 0-3.2.1-.8 0-1.3.2-1.8.4-.5.2-.9.5-1.3.9-.4.4-.7.8-.9 1.3-.2.5-.4 1-.4 1.8-.1.8-.1 1.1-.1 3.2s0 2.4.1 3.2c0 .8.2 1.3.4 1.8.2.5.5.9.9 1.3.4.4.8.7 1.3.9.5.2 1 .4 1.8.4.8.1 1.1.1 3.2.1s2.4 0 3.2-.1c.8 0 1.3-.2 1.8-.4.5-.2.9-.5 1.3-.9.4-.4.7-.8.9-1.3.2-.5.4-1 .4-1.8.1-.8.1-1.1.1-3.2s0-2.4-.1-3.2c0-.8-.2-1.3-.4-1.8-.2-.5-.5-.9-.9-1.3a3.6 3.6 0 00-1.3-.9c-.5-.2-1-.4-1.8-.4-.8-.1-1.1-.1-3.2-.1z"/></svg>
-          </a>
-          <a href="https://wa.me/2250700000000" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
-            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.6 15.1L2.1 22l5-1.3A10 10 0 1012 2zm0 18.2c-1.6 0-3.1-.5-4.4-1.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.1-6.1c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.5 6.5 0 01-3.3-2.9c-.3-.4 0-.5.2-.7l.4-.5c.1-.2.1-.3.2-.5 0-.2 0-.3-.1-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.6 1.1 2.8c.1.2 1.9 2.9 4.6 4.1.6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1-.1-.1-.2-.2-.4-.3z"/></svg>
-          </a>
-        </div>
       </div>
 
-      <div>
+      <div class="pied-colonne">
         <h4>Navigation</h4>
         <ul>
           <li><a href="index.html">Accueil</a></li>
+          <li><a href="historique.html">Historique</a></li>
           <li><a href="activites.html">Activités</a></li>
           <li><a href="actualites.html">Actualités</a></li>
-          <li><a href="galerie.html">Galerie</a></li>
+          <li><a href="galerie.html">Galerie Média</a></li>
           <li><a href="contact.html">Contact &amp; Adhésion</a></li>
         </ul>
       </div>
 
-      <div>
-        <h4>Contact &amp; Secrétariat</h4>
+      <div class="pied-colonne">
+        <h4>Secrétariat &amp; Siège</h4>
         <ul>
-          <li><span style="color:var(--or-clair);">Lieu :</span> Koumassi, Abidjan, Côte d'Ivoire</li>
-          <li><span style="color:var(--or-clair);">Email :</span> aeemci.koumassi@gmail.com</li>
+          <li><span style="color: var(--or-clair);">Localisation :</span> Koumassi, Abidjan, Côte d'Ivoire</li>
+          <li><span style="color: var(--or-clair);">Contact :</span> +225 07 00 00 00 00</li>
+          <li><span style="color: var(--or-clair);">Email :</span> aeemci.koumassi@gmail.com</li>
         </ul>
       </div>
     </div>
 
-<div class="bas-pied">
+    <div class="bas-pied-site">
       <p>&copy; 2025 - 2026 AEEMCI Sous-Comité de Koumassi. Tous droits réservés.</p>
-      <p>Foi — Travail — Succès</p>
+      <p style="color: var(--or-clair); font-weight: 700; letter-spacing: 1px;">« Ensemble nous sommes plus forts »</p>
     </div>
   </div>
 </footer>
 
-<a href="https://wa.me/2250700000000" class="bouton-whatsapp" target="_blank" rel="noopener" aria-label="Discuter sur WhatsApp" title="Écrire au Bureau sur WhatsApp">
-  <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.6 15.1L2.1 22l5-1.3A10 10 0 1012 2zm0 18.2c-1.6 0-3.1-.5-4.4-1.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.1-6.1c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.5 6.5 0 01-3.3-2.9c-.3-.4 0-.5.2-.7l.4-.5c.1-.2.1-.3.2-.5 0-.2 0-.3-.1-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.6 1.1 2.8c.1.2 1.9 2.9 4.6 4.1.6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1-.1-.1-.2-.2-.4-.3z"/></svg>
-</a>
+<script>
+function ouvrirSidebar() {
+  document.getElementById('sidebarPanneau').classList.add('ouvert');
+  document.getElementById('sidebarOverlay').classList.add('ouvert');
+  document.body.style.overflow = 'hidden';
+}
+function fermerSidebar() {
+  document.getElementById('sidebarPanneau').classList.remove('ouvert');
+  document.getElementById('sidebarOverlay').classList.remove('ouvert');
+  document.body.style.overflow = '';
+}
+
+// Données précises des couvertures médiatiques des 5 événements avec les images EXACTES
+var donneesMedias = {
+  secofis: {
+    titre: "SECOFIS 2026 — Couverture Médiatique & Formation",
+    date: "Février 2026",
+    img: "images/secofis.jpg",
+    communique: "Le Séminaire d'Orientation et de Formation des Élèves et Étudiants (SECOFIS 2026) a réuni les membres de Koumassi pour un programme intensif de leadership, d'éthique et d'initiation professionnelle."
+  },
+  sefores: {
+    titre: "SEFORES & Rentrée Solennelle — Couverture Médiatique",
+    date: "Novembre 2025",
+    img: "images/rentree-solennelle.jpg",
+    communique: "La cérémonie officielle de la Rentrée Solennelle a réuni les autorités locales, encadreurs et militants autour de la feuille de route du mandat 2025–2026 : « Ensemble nous sommes plus forts »."
+  },
+  priere: {
+    titre: "Nuit de Prière & Veillée Spirituelle — Couverture Médiatique",
+    date: "Décembre 2025",
+    img: "images/nuit-priere.jpg",
+    communique: "Moments forts de recueillement, de psalmodie coranique et d'invocations lors de la grande veillée spirituelle du Sous-Comité de Koumassi."
+  },
+  excellence: {
+    titre: "Journée de l'Excellence & de la Culture — Couverture Médiatique",
+    date: "Mai 2026",
+    img: "images/journee-excellence.jpg",
+    communique: "Distinction solennelle des lauréats aux examens officiels (BEPC, BAC) et prix d'excellence attribués aux meilleurs élèves et étudiants musulmans de Koumassi."
+  },
+  iftar: {
+    titre: "Iftar Solidaire & Action Ramadan — Couverture Médiatique",
+    date: "Ramadan 2026",
+    img: "images/solidarite-ramadan.jpg",
+    communique: "Opération d'entraide et d'Iftar collectif : partage quotidien de repas et remises de kits alimentaires pour accompagner la communauté pendant le mois béni."
+  }
+};
+
+function ouvrirCouvertureMedia(eventId) {
+  var data = donneesMedias[eventId] || donneesMedias.secofis;
+  document.getElementById('modalMediaTitre').textContent = data.titre;
+  document.getElementById('modalMediaDate').textContent = data.date;
+  document.getElementById('modalMediaImage').src = data.img;
+  document.getElementById('modalMediaCommunique').textContent = data.communique;
+  
+  var modal = document.getElementById('modalCouvertureMedias');
+  modal.classList.add('ouvert');
+  document.body.style.overflow = 'hidden';
+}
+
+function fermerCouvertureMediaDirect() {
+  var modal = document.getElementById('modalCouvertureMedias');
+  modal.classList.remove('ouvert');
+  document.body.style.overflow = '';
+}
+
+function fermerCouvertureMedia(e) {
+  if (e.target.id === 'modalCouvertureMedias') {
+    fermerCouvertureMediaDirect();
+  }
+}
+</script>
 
 </body>
 </html>

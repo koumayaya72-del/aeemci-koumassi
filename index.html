@@ -3,510 +3,511 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AEEMCI Koumassi — Association des Élèves et Étudiants Musulmans</title>
-<meta name="description" content="Site officiel du Sous-Comité de Koumassi de l'AEEMCI : activités, programme religieux, actualités et vie associative.">
+<title>Sous-Comité AEEMCI de Koumassi — Ensemble nous sommes plus forts</title>
+<meta name="description" content="Site officiel du Sous-Comité AEEMCI de Koumassi : activités, éducation, solidarité et vie associative des élèves et étudiants musulmans de Koumassi.">
 <link rel="icon" href="images/logo.png">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<header class="entete">
-  <div class="conteneur barre-nav">
-    <a href="index.html" class="marque">
+<!-- ===== VOILE D'ARRIÈRE-PLAN & SIDEBAR LATÉRALE (DARK MODE STYLE GEMINI) ===== -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="fermerSidebar()"></div>
+
+<aside class="sidebar-panneau" id="sidebarPanneau">
+  <div class="sidebar-entete">
+    <div class="sidebar-logo">
       <img src="images/logo.png" alt="Logo AEEMCI" onerror="this.src='logo.png'">
-      <span class="texte-marque">
+      <div class="sidebar-titre-marque">
         <span class="sigle">AEEMCI</span>
-        <span class="sous-sigle">Sous-Comité de Koumassi</span>
-      </span>
+        <span class="sous-sigle">Koumassi</span>
+      </div>
+    </div>
+    <button class="sidebar-fermer" aria-label="Fermer le menu" onclick="fermerSidebar()">&times;</button>
+  </div>
+
+  <div class="sidebar-corps">
+    <div class="sidebar-section-titre">Navigation</div>
+    <ul class="sidebar-liens">
+      <li>
+        <a href="index.html" class="sidebar-lien actif">
+          <svg class="sidebar-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          <span>Accueil</span>
+        </a>
+      </li>
+      <li>
+        <a href="historique.html" class="sidebar-lien">
+          <svg class="sidebar-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <span>Historique</span>
+        </a>
+      </li>
+      <li>
+        <a href="activites.html" class="sidebar-lien">
+          <svg class="sidebar-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+          <span>Activités</span>
+        </a>
+      </li>
+      <li>
+        <a href="actualites.html" class="sidebar-lien">
+          <svg class="sidebar-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v1m2 13a2 2 0 0 1-2-2V7m2 13a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2m-4-3H9M7 16h6M7 8h6m-6 4h6"></path></svg>
+          <span>Actualités</span>
+        </a>
+      </li>
+      <li>
+        <a href="galerie.html" class="sidebar-lien">
+          <svg class="sidebar-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+          <span>Galerie</span>
+        </a>
+      </li>
+      <li>
+        <a href="contact.html" class="sidebar-lien">
+          <svg class="sidebar-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          <span>Contact</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="sidebar-section-titre" style="margin-top: 24px;">Engagement</div>
+    <div class="sidebar-engagement-box">
+      <a href="contact.html#adhesion" class="sidebar-bouton-rejoindre">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+        <span>Rejoindre l'AEEMCI</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="sidebar-footer">
+    <img src="images/logo.png" alt="Logo AEEMCI" onerror="this.src='logo.png'">
+    <span>AEEMCI - Sous-Comité Koumassi</span>
+  </div>
+</aside>
+
+<!-- ===== EN-TÊTE / NAVIGATION ===== -->
+<header class="entete-site">
+  <div class="conteneur barre-navigation">
+    <a href="index.html" class="logo-marque">
+      <img src="images/logo.png" alt="Logo AEEMCI" onerror="this.src='logo.png'">
+      <div class="nom-organisation">
+        <span class="sigle-aeemci">AEEMCI</span>
+        <span class="sous-sigle-koumassi">Sous-Comité de Koumassi</span>
+      </div>
     </a>
-    <button class="menu-mobile-bouton" aria-label="Ouvrir le menu mobile" onclick="this.classList.toggle('ouvert'); document.querySelector('.nav-principale').classList.toggle('ouvert')">
+
+    <button class="menu-burger" aria-label="Ouvrir le menu latéral" onclick="ouvrirSidebar()">
       <span></span>
       <span></span>
       <span></span>
     </button>
-<nav class="nav-principale">
-<ul class="nav-links">
-        <li><a href="index.html" class="actif">Accueil</a></li>
-        <li><a href="activites.html">Activités</a></li>
-<li><a href="actualites.html">Actualités</a></li>
-        <li><a href="galerie.html">Galerie</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <a href="contact.html#adhesion" class="bouton-cta">Nous rejoindre</a>
+
+    <nav class="menu-navigation">
+      <a href="index.html" class="actif">Accueil</a>
+      <a href="#historique">Historique</a>
+      <a href="activites.html">Activités</a>
+      <a href="actualites.html">Actualités</a>
+      <a href="galerie.html">Galerie</a>
+      <a href="contact.html">Contact</a>
+      <a href="contact.html#adhesion" class="bouton-cta-primaire">Rejoindre</a>
     </nav>
   </div>
 </header>
 
-<section class="hero-section">
-  <!-- Motif islamique décoratif discret en arrière-plan -->
-  <div class="hero-overlay" aria-hidden="true"></div>
+<!-- ===== HERO SECTION (MODERNE & LUMINEUX) ===== -->
+<section class="hero-moderne">
+  <div class="conteneur hero-grille">
+    <div>
+      <div class="slogan-majestueux-box">
+        <span class="slogan-majestueux">Ensemble nous sommes plus forts</span>
+      </div>
 
-  <div class="hero-crefichie">
-    <div class="hero-crefichie-haut">
-<div class="hero-logo-container">
-        <img src="images/logo.png" alt="Logo AEEMCI" onerror="this.src='logo.png'">
+      <h1 class="hero-titre">
+        Sous-Comité <br>AEEMCI de <span class="or-accent">Koumassi</span>
+      </h1>
+
+      <p class="hero-description">
+        Cultiver la foi, bâtir la réussite scolaire et promouvoir la solidarité parmi les élèves et étudiants musulmans de la commune de Koumassi.
+      </p>
+
+      <div class="hero-actions">
+        <a href="activites.html" class="bouton-cta-primaire">
+          <span>Découvrir nos activités</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+        <a href="contact.html#adhesion" class="bouton-cta-secondaire">Devenir membre</a>
       </div>
     </div>
 
-    <div class="hero-subtitle">Association des Élèves &amp; Étudiants Musulmans de Côte d'Ivoire</div>
-
-<h1 class="hero-title">
-      Sous-Comité <span class="hero-title-sep">•</span> AEEMCI de Koumassi
-    </h1>
-
-    <p class="hero-slogan">« Cultiver la foi, bâtir <em>la réussite</em> des élèves et étudiants musulmans. »</p>
-
-<p class="hero-description">
-      Le Sous-Comité de Koumassi accompagne les jeunes dans leur formation religieuse, leur réussite scolaire et leur engagement solidaire, au service de la communauté.
-    </p>
-
-    <div class="hero-buttons">
-<a href="activites.html" class="btn-primary-custom">Découvrir nos activités</a>
-      <a href="contact.html" class="btn-secondary-custom">Devenir membre</a>
-    </div>
-  </div>
-
-  <!-- Bandeau de statistiques institutionnelles -->
-  <div class="hero-stats">
-    <div class="hero-stat">
-      <span class="hero-stat-num">40+</span>
-      <span class="hero-stat-label">Membres actifs</span>
-    </div>
-    <div class="hero-stat">
-      <span class="hero-stat-num">6</span>
-      <span class="hero-stat-label">Commissions</span>
-    </div>
-<div class="hero-stat">
-      <span class="hero-stat-num">2026</span>
-      <span class="hero-stat-label">Mandat en cours</span>
-    </div>
-    <div class="hero-stat">
-      <span class="hero-stat-num">100%</span>
-      <span class="hero-stat-label">Engagement citoyen</span>
-    </div>
-  </div>
-</section>
-
-<section class="bandeau-citation">
-  <div class="conteneur">
-    <blockquote>« Il n'y a de divinité qu'Allah et Mouhammad est Son Messager. »
-      Devise de l'AEEMCI
-    </blockquote>
-  </div>
-</section>
-
-<section class="valeur-section">
-  <div class="conteneur">
-    <div class="entete-section centre">
-      <p class="eyebrow">Notre devise</p>
-      <h2>Nos Valeurs Fondatrices</h2>
-      <p>Trois principes guident l'ensemble de nos actions au sein de la commune de Koumassi.</p>
-    </div>
-    <div class="grille-valeurs">
-      <div class="carte-valeur">
-        <span class="glyphe">﴾﴿</span>
-        <h3>Foi</h3>
-        <p>Ancrer la jeunesse dans une foi sincère et une pratique éclairée de l'Islam, fondée sur la science et la bonne conduite.</p>
-      </div>
-      <div class="carte-valeur">
-        <span class="glyphe">📚</span>
-        <h3>Travail</h3>
-        <p>Encourager l'excellence scolaire et universitaire à travers l'effort, la discipline et l'entraide entre élèves et étudiants.</p>
-      </div>
-      <div class="carte-valeur">
-        <span class="glyphe">✶</span>
-        <h3>Succès</h3>
-        <p>Célébrer la réussite de chacun et la mettre au service de la communauté par la solidarité et l'engagement associatif.</p>
+    <div class="hero-carte-visuelle">
+      <div class="hero-medaillon-cadre">
+        <img src="images/logo.png" alt="Emblème AEEMCI Koumassi" onerror="this.src='logo.png'">
+        <div class="hero-medaillon-nom">AEEMCI Koumassi</div>
+        <div class="hero-medaillon-devise">« Il n'y a de divinité qu'Allah et Mouhammad est Son Messager »</div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="mot-president">
+<!-- ===== SECTION HISTORIQUE (FRISE CHRONOLOGIQUE) ===== -->
+<section id="historique" class="section-historique">
   <div class="conteneur">
-    <div class="entete-section">
-      <p class="eyebrow">Allocution</p>
-      <h2>Mot du Président</h2>
+    <div class="entete-section-moderne">
+      <span class="badge-tag or">Notre Histoire &amp; Vision</span>
+      <h2>De 1978 à Aujourd'hui</h2>
+      <p>Découvrez comment l'AEEMCI s'est développée au niveau national et l'impact du Sous-Comité de Koumassi au service de la jeunesse.</p>
     </div>
-    <div class="mot-president">
-      <div class="photo-president">
-        <!-- Remplacer par une photo individuelle du Président si disponible : <img src="images/president.jpg" alt="Sow Mohamed, Président du Sous-Comité de Koumassi"> -->
-        <span class="initiales-president">SM</span>
-      </div>
-      <div class="texte-president">
-        <blockquote>« Au nom d'Allah, le Tout Miséricordieux, le Très Miséricordieux. »</blockquote>
-        <p>Chers frères et sœurs, chers élèves et étudiants de la commune de Koumassi, c'est avec une immense joie que je vous accueille au nom du Bureau du Sous-Comité AEEMCI de Koumassi. Notre association a pour vocation d'accompagner chaque élève et chaque étudiant musulman dans son parcours de foi et de réussite.</p>
-        <p>Notre mission repose sur trois piliers : la formation spirituelle, à travers l'enseignement du Coran et des sciences religieuses ; la réussite scolaire et universitaire, par l'encadrement et l'entraide entre membres ; et la solidarité sociale, au service des familles de notre commune. Je vous invite à rejoindre cette belle famille et à prendre une part active à ses activités.</p>
-        <div class="signature-president">
-          <span class="nom">Sow Mohamed</span>
-          <span class="fonction">Président — Sous-Comité AEEMCI Koumassi</span>
+
+    <div class="frise-chronologique">
+      
+      <!-- Étape 1 : 1978 -->
+      <div class="etape-historique">
+        <div class="etape-point"></div>
+        <div class="etape-carte">
+          <span class="etape-annee">1978</span>
+          <h3>Fondation Nationale de l'AEEMCI</h3>
+          <p>Création officielle de l'Association des Élèves et Étudiants Musulmans de Côte d'Ivoire à Abidjan pour rassembler la jeunesse estudiantine autour des valeurs de foi, d'instruction et de fraternité.</p>
         </div>
       </div>
+
+      <!-- Étape 2 : 1995 -->
+      <div class="etape-historique">
+        <div class="etape-point"></div>
+        <div class="etape-carte">
+          <span class="etape-annee">1995</span>
+          <h3>Implantation à Koumassi</h3>
+          <p>Naissance du Sous-Comité de Koumassi. Déploiement des premières cellules d'encadrement dans les lycées et collèges de la commune.</p>
+        </div>
+      </div>
+
+      <!-- Étape 3 : 2015 -->
+      <div class="etape-historique">
+        <div class="etape-point"></div>
+        <div class="etape-carte">
+          <span class="etape-annee">2015</span>
+          <h3>Soutien Scolaire &amp; Actions Sociales</h3>
+          <p>Lancement des grands programmes de révision d'examens (BEPC, BAC), distributions de kits scolaires et Iftar solidaire pendant le mois de Ramadan.</p>
+        </div>
+      </div>
+
+      <!-- Étape 4 : 2025 - 2026 -->
+      <div class="etape-historique">
+        <div class="etape-point"></div>
+        <div class="etape-carte">
+          <span class="etape-annee">Mandat 2025 – 2026</span>
+          <h3>« Ensemble nous sommes plus forts »</h3>
+          <p>Sous la présidence de Sow Mohamed, le Sous-Comité renforce sa dynamique d'excellence académique, sa présence numérique et son engagement citoyen à Koumassi.</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
-<section id="bureau" class="motif-treillis">
+<!-- ===== SECTION PILIERS D'ENGAGEMENT ===== -->
+<section class="section-piliers">
   <div class="conteneur">
-    <div class="entete-section centre">
-      <p class="eyebrow">Organisation</p>
-      <h2>Le Bureau du Sous-Comité</h2>
-      <p>Une équipe engagée au service des élèves et étudiants musulmans de Koumassi.</p>
+    <div class="entete-section-moderne">
+      <span class="badge-tag">Nos Missions</span>
+      <h2>Un Engagement à Quatre Dimensions</h2>
+      <p>Chaque projet du Sous-Comité de Koumassi est guidé par nos piliers fondamentaux.</p>
     </div>
-<p style="font-family:var(--mono); font-size:0.72rem; letter-spacing:1px; text-transform:uppercase; color:var(--vert-logo); margin-bottom:36px; text-align:center;">Mandat 2026</p>
+
+    <div class="grille-cartes-piliers">
+      <div class="carte-pilier-moderne">
+        <div class="pilier-icone">📖</div>
+        <h3>Formation Religieuse</h3>
+        <p>Cours de Coran, apprentissage du Tajwid, séances de Tafsir et causeries pour ancrer les membres dans une foi vive et éclairée.</p>
+      </div>
+
+      <div class="carte-pilier-moderne">
+        <div class="pilier-icone">🎓</div>
+        <h3>Réussite Académique</h3>
+        <p>Groupes de révision collective, tutorat entre étudiants et parrainage des candidats aux examens officiels (BEPC, BAC).</p>
+      </div>
+
+      <div class="carte-pilier-moderne">
+        <div class="pilier-icone">🤝</div>
+        <h3>Solidarité Sociale</h3>
+        <p>Distribution de fournitures scolaires, assistance aux élèves vulnérables et actions caritatives au sein de Koumassi.</p>
+      </div>
+
+      <div class="carte-pilier-moderne">
+        <div class="pilier-icone">🌟</div>
+        <h3>Vie Associative</h3>
+        <p>Journée culturelle, activités sportives et fraternelles pour renforcer l'unité et le leadership des jeunes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION BUREAU & ORGANISATION ===== -->
+<section id="bureau" class="section-bureau">
+  <div class="conteneur">
+    <div class="entete-section-moderne">
+      <span class="badge-tag or">Organisation</span>
+      <h2>Le Bureau du Sous-Comité</h2>
+      <p>Une équipe dynamique et dévouée au service des élèves et étudiants de Koumassi pour le mandat 2025 – 2026.</p>
+    </div>
 
     <!-- Présidence -->
-    <div class="groupe-bureau">
-      <div class="entete-groupe">
-        <span class="titre-groupe">Présidence</span>
-      </div>
-      <div class="grille-bureau">
-        <div class="carte-membre">
-          <div class="avatar-membre"><span class="initiales">SM</span><img src="images/membres/sow-mohamed.jpg" alt="Sow Mohamed" onerror="this.style.opacity='0';"></div>
-          <div class="nom-membre">Sow Mohamed</div>
-          <div class="role-membre">Président</div>
+    <div class="groupe-bureau-bloc">
+      <h3 class="titre-groupe-bureau">Présidence</h3>
+      <div class="grille-membres-bureau">
+        <div class="carte-membre-bureau">
+          <div class="avatar-rond">
+            <img src="images/membres/sow-mohamed.jpg" alt="Sow Mohamed" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="initiales-secours" style="display:none;">SM</div>
+          </div>
+          <div class="membre-nom">Sow Mohamed</div>
+          <div class="membre-role">Président</div>
         </div>
-        <div class="carte-membre">
-          <div class="avatar-membre"><span class="initiales">ZA</span><img src="images/membres/zeba-askandar.jpg" alt="Zeba Askandar" onerror="this.style.opacity='0';"></div>
-          <div class="nom-membre">Zeba Askandar</div>
-          <div class="role-membre">1er Vice-Président</div>
+
+        <div class="carte-membre-bureau">
+          <div class="avatar-rond">
+            <img src="images/membres/zeba-askandar.jpg" alt="Zeba Askandar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="initiales-secours" style="display:none;">ZA</div>
+          </div>
+          <div class="membre-nom">Zeba Askandar</div>
+          <div class="membre-role">1er Vice-Président</div>
         </div>
-        <div class="carte-membre">
-          <div class="avatar-membre"><span class="initiales">SO</span><img src="images/membres/sangare-ousmane.jpg" alt="Sangare Ousmane" onerror="this.style.opacity='0';"></div>
-          <div class="nom-membre">Sangare Ousmane</div>
-          <div class="role-membre">2e Vice-Président</div>
+
+        <div class="carte-membre-bureau">
+          <div class="avatar-rond">
+            <img src="images/membres/sangare-ousmane.jpg" alt="Sangare Ousmane" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="initiales-secours" style="display:none;">SO</div>
+          </div>
+          <div class="membre-nom">Sangare Ousmane</div>
+          <div class="membre-role">2e Vice-Président</div>
         </div>
-        <div class="carte-membre">
-          <div class="avatar-membre"><span class="initiales">KM</span><img src="images/membres/konate-mariam.jpg" alt="Konate Mariam" onerror="this.style.opacity='0';"></div>
-          <div class="nom-membre">Konate Mariam</div>
-          <div class="role-membre">Vice-Présidente</div>
+
+        <div class="carte-membre-bureau">
+          <div class="avatar-rond">
+            <img src="images/membres/konate-mariam.jpg" alt="Konate Mariam" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="initiales-secours" style="display:none;">KM</div>
+          </div>
+          <div class="membre-nom">Konate Mariam</div>
+          <div class="membre-role">Vice-Présidente</div>
         </div>
       </div>
     </div>
 
     <!-- Secrétariat -->
-    <div class="groupe-bureau">
-      <div class="entete-groupe">
-        <span class="titre-groupe">Secrétariat</span>
-      </div>
-      <div class="grille-bureau">
-        <div class="carte-membre">
-          <div class="avatar-membre"><span class="initiales">DF</span><img src="images/membres/diabate-fode.jpg" alt="Diabate Fode" onerror="this.style.opacity='0';"></div>
-          <div class="nom-membre">Diabate Fode</div>
-          <div class="role-membre">Secrétaire Générale</div>
+    <div class="groupe-bureau-bloc">
+      <h3 class="titre-groupe-bureau">Secrétariat Général</h3>
+      <div class="grille-membres-bureau">
+        <div class="carte-membre-bureau">
+          <div class="avatar-rond">
+            <img src="images/membres/diabate-fode.jpg" alt="Diabate Fode" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="initiales-secours" style="display:none;">DF</div>
+          </div>
+          <div class="membre-nom">Diabate Fode</div>
+          <div class="membre-role">Secrétaire Générale</div>
         </div>
-        <div class="carte-membre">
-          <div class="avatar-membre"><span class="initiales">KY</span><img src="images/membres/kouma-yaya.jpg" alt="Kouma Yaya" onerror="this.style.opacity='0';"></div>
-          <div class="nom-membre">Kouma Yaya</div>
-          <div class="role-membre">SG – Adjoint</div>
+
+        <div class="carte-membre-bureau">
+          <div class="avatar-rond">
+            <img src="images/membres/kouma-yaya.jpg" alt="Kouma Yaya" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="initiales-secours" style="display:none;">KY</div>
+          </div>
+          <div class="membre-nom">Kouma Yaya</div>
+          <div class="membre-role">SG – Adjoint</div>
         </div>
-        <div class="carte-membre">
-          <div class="avatar-membre"><span class="initiales">DN</span><img src="images/membres/dabre-nassira.jpg" alt="Dabre Nassira" onerror="this.style.opacity='0';"></div>
-          <div class="nom-membre">Dabre Nassira</div>
-          <div class="role-membre">SG – Adjointe</div>
+
+        <div class="carte-membre-bureau">
+          <div class="avatar-rond">
+            <img src="images/membres/dabre-nassira.jpg" alt="Dabre Nassira" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="initiales-secours" style="display:none;">DN</div>
+          </div>
+          <div class="membre-nom">Dabre Nassira</div>
+          <div class="membre-role">SG – Adjointe</div>
         </div>
-      </div>
-      <div class="grille-bureau-membres">
-        <div class="carte-membre petite"><div class="avatar-membre"><span class="initiales">ON</span><img src="images/membres/ouedraogo-nafissa.jpg" alt="Ouedraogo Nafissa" onerror="this.style.opacity='0';"></div><div class="nom-membre">Ouedraogo Nafissa</div><div class="role-membre">Membre</div></div>
-        <div class="carte-membre petite"><div class="avatar-membre"><span class="initiales">CK</span><img src="images/membres/coulibaly-kadidia.jpg" alt="Coulibaly Kadidia" onerror="this.style.opacity='0';"></div><div class="nom-membre">Coulibaly Kadidia</div><div class="role-membre">Membre</div></div>
-        <div class="carte-membre petite"><div class="avatar-membre"><span class="initiales">KK</span><img src="images/membres/keita-karidja.jpg" alt="Keïta Karidja" onerror="this.style.opacity='0';"></div><div class="nom-membre">Keïta Karidja</div><div class="role-membre">Membre</div></div>
-        <div class="carte-membre petite"><div class="avatar-membre"><span class="initiales">KN</span><img src="images/membres/karamoko-noura.jpg" alt="Karamoko Noura" onerror="this.style.opacity='0';"></div><div class="nom-membre">Karamoko Noura</div><div class="role-membre">Membre</div></div>
-        <div class="carte-membre petite"><div class="avatar-membre"><span class="initiales">KA</span><img src="images/membres/kone-aliman.jpg" alt="Kone Aliman" onerror="this.style.opacity='0';"></div><div class="nom-membre">Kone Aliman</div><div class="role-membre">Membre</div></div>
-        <div class="carte-membre petite"><div class="avatar-membre"><span class="initiales">KO</span><img src="images/membres/kone-oumou.jpg" alt="Kone Oumou" onerror="this.style.opacity='0';"></div><div class="nom-membre">Kone Oumou</div><div class="role-membre">Membre</div></div>
       </div>
     </div>
 
     <!-- Trésorerie -->
-    <div class="groupe-bureau">
-      <div class="entete-groupe">
-        <span class="titre-groupe">Trésorerie</span>
-      </div>
-      <div class="grille-bureau">
-        <div class="carte-membre">
-          <div class="avatar-membre"><span class="initiales">SF</span><img src="images/membres/sogne-foussena.jpg" alt="Sogne Foussena" onerror="this.style.opacity='0';"></div>
-          <div class="nom-membre">Sogne Foussena</div>
-          <div class="role-membre">Trésorière</div>
+    <div class="groupe-bureau-bloc">
+      <h3 class="titre-groupe-bureau">Trésorerie</h3>
+      <div class="grille-membres-bureau">
+        <div class="carte-membre-bureau">
+          <div class="avatar-rond">
+            <img src="images/membres/sogne-foussena.jpg" alt="Sogne Foussena" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="initiales-secours" style="display:none;">SF</div>
+          </div>
+          <div class="membre-nom">Sogne Foussena</div>
+          <div class="membre-role">Trésorière</div>
         </div>
-        <div class="carte-membre">
-          <div class="avatar-membre"><span class="initiales">GF</span><img src="images/membres/gana-fatim.jpg" alt="Gana Fatim" onerror="this.style.opacity='0';"></div>
-          <div class="nom-membre">Gana Fatim</div>
-          <div class="role-membre">Adjointe</div>
+
+        <div class="carte-membre-bureau">
+          <div class="avatar-rond">
+            <img src="images/membres/gana-fatim.jpg" alt="Gana Fatim" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="initiales-secours" style="display:none;">GF</div>
+          </div>
+          <div class="membre-nom">Gana Fatim</div>
+          <div class="membre-role">Adjointe</div>
         </div>
-        <div class="carte-membre">
-          <div class="avatar-membre"><span class="initiales">TA</span><img src="images/membres/traore-aicha.jpg" alt="Traore Aïcha" onerror="this.style.opacity='0';"></div>
-          <div class="nom-membre">Traore Aïcha</div>
-          <div class="role-membre">Membre</div>
+
+        <div class="carte-membre-bureau">
+          <div class="avatar-rond">
+            <img src="images/membres/traore-aicha.jpg" alt="Traore Aïcha" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="initiales-secours" style="display:none;">TA</div>
+          </div>
+          <div class="membre-nom">Traore Aïcha</div>
+          <div class="membre-role">Membre</div>
         </div>
       </div>
     </div>
 
     <!-- Délégation Culturelle -->
-    <div class="groupe-bureau">
-      <div class="entete-groupe">
-        <span class="titre-groupe">Délégation Culturelle</span>
-      </div>
-      <div class="grille-bureau">
-        <div class="carte-membre">
-          <div class="avatar-membre"><span class="initiales">KM</span><img src="images/membres/kokora-mohamed.jpg" alt="Kokora Mohamed" onerror="this.style.opacity='0';"></div>
-          <div class="nom-membre">Kokora Mohamed</div>
-          <div class="role-membre">Délégué Culturel Responsable</div>
+    <div class="groupe-bureau-bloc">
+      <h3 class="titre-groupe-bureau">Délégation Culturelle</h3>
+      <div class="grille-membres-bureau">
+        <div class="carte-membre-bureau">
+          <div class="avatar-rond">
+            <img src="images/membres/kokora-mohamed.jpg" alt="Kokora Mohamed" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="initiales-secours" style="display:none;">KM</div>
+          </div>
+          <div class="membre-nom">Kokora Mohamed</div>
+          <div class="membre-role">Délégué Culturel Responsable</div>
         </div>
-        <div class="carte-membre">
-          <div class="avatar-membre"><span class="initiales">SM</span><img src="images/membres/sawadodo-muslim.jpg" alt="Sawadodo Muslim" onerror="this.style.opacity='0';"></div>
-          <div class="nom-membre">Sawadodo Muslim</div>
-          <div class="role-membre">DC – Adjoint</div>
+
+        <div class="carte-membre-bureau">
+          <div class="avatar-rond">
+            <img src="images/membres/sawadodo-muslim.jpg" alt="Sawadodo Muslim" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="initiales-secours" style="display:none;">SM</div>
+          </div>
+          <div class="membre-nom">Sawadodo Muslim</div>
+          <div class="membre-role">DC – Adjoint</div>
         </div>
-        <div class="carte-membre">
-          <div class="avatar-membre"><span class="initiales">ZS</span><img src="images/membres/zeba-samira.jpg" alt="Zeba Samira" onerror="this.style.opacity='0';"></div>
-          <div class="nom-membre">Zeba Samira</div>
-          <div class="role-membre">DC – Adjointe</div>
+
+        <div class="carte-membre-bureau">
+          <div class="avatar-rond">
+            <img src="images/membres/zeba-samira.jpg" alt="Zeba Samira" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="initiales-secours" style="display:none;">ZS</div>
+          </div>
+          <div class="membre-nom">Zeba Samira</div>
+          <div class="membre-role">DC – Adjointe</div>
         </div>
-      </div>
-      <div class="grille-bureau-membres">
-        <div class="carte-membre petite"><div class="avatar-membre"><span class="initiales">OA</span><img src="images/membres/ouattara-abdoul-aziz.jpg" alt="Ouattara Abdoul Aziz" onerror="this.style.opacity='0';"></div><div class="nom-membre">Ouattara Abdoul Aziz</div><div class="role-membre">Membre</div></div>
-        <div class="carte-membre petite"><div class="avatar-membre"><span class="initiales">SA</span><img src="images/membres/sidibe-anass.jpg" alt="Sidibe Anass" onerror="this.style.opacity='0';"></div><div class="nom-membre">Sidibe Anass</div><div class="role-membre">Membre</div></div>
-        <div class="carte-membre petite"><div class="avatar-membre"><span class="initiales">ZY</span><img src="images/membres/zampaligre-youssouf.jpg" alt="Zampaligre Youssouf" onerror="this.style.opacity='0';"></div><div class="nom-membre">Zampaligre Youssouf</div><div class="role-membre">Membre</div></div>
-        <div class="carte-membre petite"><div class="avatar-membre"><span class="initiales">BH</span><img src="images/membres/bakayoko-hawa.jpg" alt="Bakayoko Hawa" onerror="this.style.opacity='0';"></div><div class="nom-membre">Bakayoko Hawa</div><div class="role-membre">Membre</div></div>
       </div>
     </div>
 
     <!-- Délégation Sociale -->
-    <div class="groupe-bureau">
-      <div class="entete-groupe">
-        <span class="titre-groupe">Délégation Sociale</span>
-      </div>
-      <div class="grille-bureau">
-        <div class="carte-membre">
-          <div class="avatar-membre"><span class="initiales">KS</span><img src="images/membres/kangoute-salimata.jpg" alt="Kangoute Salimata" onerror="this.style.opacity='0';"></div>
-          <div class="nom-membre">Kangoute Salimata</div>
-          <div class="role-membre">Déléguée Sociale</div>
+    <div class="groupe-bureau-bloc">
+      <h3 class="titre-groupe-bureau">Délégation Sociale</h3>
+      <div class="grille-membres-bureau">
+        <div class="carte-membre-bureau">
+          <div class="avatar-rond">
+            <img src="images/membres/kangoute-salimata.jpg" alt="Kangoute Salimata" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="initiales-secours" style="display:none;">KS</div>
+          </div>
+          <div class="membre-nom">Kangoute Salimata</div>
+          <div class="membre-role">Déléguée Sociale</div>
         </div>
-        <div class="carte-membre">
-          <div class="avatar-membre"><span class="initiales">DM</span><img src="images/membres/diallo-mariam.jpg" alt="Diallo Mariam" onerror="this.style.opacity='0';"></div>
-          <div class="nom-membre">Diallo Mariam</div>
-          <div class="role-membre">DS – Adjointe</div>
+
+        <div class="carte-membre-bureau">
+          <div class="avatar-rond">
+            <img src="images/membres/diallo-mariam.jpg" alt="Diallo Mariam" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="initiales-secours" style="display:none;">DM</div>
+          </div>
+          <div class="membre-nom">Diallo Mariam</div>
+          <div class="membre-role">DS – Adjointe</div>
         </div>
-      </div>
-      <div class="grille-bureau-membres">
-        <div class="carte-membre petite"><div class="avatar-membre"><span class="initiales">BK</span><img src="images/membres/banse-kissa-barakissa.jpg" alt="Banse Kissa Barakissa" onerror="this.style.opacity='0';"></div><div class="nom-membre">Banse Kissa Barakissa</div><div class="role-membre">Membre</div></div>
-        <div class="carte-membre petite"><div class="avatar-membre"><span class="initiales">TA</span><img src="images/membres/traore-abdoul-kadr.jpg" alt="Traore Abdoul Kadr" onerror="this.style.opacity='0';"></div><div class="nom-membre">Traore Abdoul Kadr</div><div class="role-membre">Membre</div></div>
-        <div class="carte-membre petite"><div class="avatar-membre"><span class="initiales">DR</span><img src="images/membres/diene-rachida.jpg" alt="Diene Rachida" onerror="this.style.opacity='0';"></div><div class="nom-membre">Diene Rachida</div><div class="role-membre">Membre</div></div>
-        <div class="carte-membre petite"><div class="avatar-membre"><span class="initiales">GD</span><img src="images/membres/gombane-abdoul-dramane.jpg" alt="Gombane Abdoul Dramane" onerror="this.style.opacity='0';"></div><div class="nom-membre">Gombane Abdoul Dramane</div><div class="role-membre">Membre</div></div>
       </div>
     </div>
 
-    <!-- Délégation à l'Organisation et à la Mobilisation -->
-    <div class="groupe-bureau">
-      <div class="entete-groupe">
-        <span class="titre-groupe">Délégation à l'Organisation et à la Mobilisation</span>
-      </div>
-      <div class="grille-bureau">
-        <div class="carte-membre">
-          <div class="avatar-membre"><span class="initiales">SM</span><img src="images/membres/simpore-mohamed.jpg" alt="Simpore Mohamed" onerror="this.style.opacity='0';"></div>
-          <div class="nom-membre">Simpore Mohamed</div>
-          <div class="role-membre">DOM</div>
+    <!-- DOM -->
+    <div class="groupe-bureau-bloc">
+      <h3 class="titre-groupe-bureau">Délégation à l'Organisation et à la Mobilisation (DOM)</h3>
+      <div class="grille-membres-bureau">
+        <div class="carte-membre-bureau">
+          <div class="avatar-rond">
+            <img src="images/membres/simpore-mohamed.jpg" alt="Simpore Mohamed" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="initiales-secours" style="display:none;">SM</div>
+          </div>
+          <div class="membre-nom">Simpore Mohamed</div>
+          <div class="membre-role">DOM</div>
         </div>
-        <div class="carte-membre">
-          <div class="avatar-membre"><span class="initiales">KA</span><img src="images/membres/keita-abdoulaye.jpg" alt="Keïta Abdoulaye" onerror="this.style.opacity='0';"></div>
-          <div class="nom-membre">Keïta Abdoulaye</div>
-          <div class="role-membre">DOM – Adjoint</div>
+
+        <div class="carte-membre-bureau">
+          <div class="avatar-rond">
+            <img src="images/membres/keita-abdoulaye.jpg" alt="Keïta Abdoulaye" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="initiales-secours" style="display:none;">KA</div>
+          </div>
+          <div class="membre-nom">Keïta Abdoulaye</div>
+          <div class="membre-role">DOM – Adjoint</div>
         </div>
-      </div>
-      <div class="grille-bureau-membres">
-        <div class="carte-membre petite"><div class="avatar-membre"><span class="initiales">DM</span><img src="images/membres/diarrassouba-mariam.jpg" alt="Diarrassouba Mariam" onerror="this.style.opacity='0';"></div><div class="nom-membre">Diarrassouba Mariam</div><div class="role-membre">Membre</div></div>
-        <div class="carte-membre petite"><div class="avatar-membre"><span class="initiales">OO</span><img src="images/membres/ouedraogo-oumou-koulsoum.jpg" alt="Ouedraogo Oumou Koulsoum" onerror="this.style.opacity='0';"></div><div class="nom-membre">Ouedraogo Oumou Koulsoum</div><div class="role-membre">Membre</div></div>
-        <div class="carte-membre petite"><div class="avatar-membre"><span class="initiales">OM</span><img src="images/membres/ouattara-madjalia.jpg" alt="Ouattara Madjalia" onerror="this.style.opacity='0';"></div><div class="nom-membre">Ouattara Madjalia</div><div class="role-membre">Membre</div></div>
-        <div class="carte-membre petite"><div class="avatar-membre"><span class="initiales">ZA</span><img src="images/membres/zeba-abdoul-samad.jpg" alt="Zeba Abdoul Samad" onerror="this.style.opacity='0';"></div><div class="nom-membre">Zeba Abdoul Samad</div><div class="role-membre">Membre</div></div>
-        <div class="carte-membre petite"><div class="avatar-membre"><span class="initiales">TM</span><img src="images/membres/traore-mohamed-amine.jpg" alt="Traore Mohamed Amine" onerror="this.style.opacity='0';"></div><div class="nom-membre">Traore Mohamed Amine</div><div class="role-membre">Membre</div></div>
-        <div class="carte-membre petite"><div class="avatar-membre"><span class="initiales">SD</span><img src="images/membres/simadou-djeneba.jpg" alt="Simadou Djeneba" onerror="this.style.opacity='0';"></div><div class="nom-membre">Simadou Djeneba</div><div class="role-membre">Membre</div></div>
-        <div class="carte-membre petite"><div class="avatar-membre"><span class="initiales">DV</span><img src="images/membres/diarrassouba-vakaba-mohamed.jpg" alt="Diarrassouba Vakaba Mohamed" onerror="this.style.opacity='0';"></div><div class="nom-membre">Diarrassouba Vakaba Mohamed</div><div class="role-membre">Membre</div></div>
-        <div class="carte-membre petite"><div class="avatar-membre"><span class="initiales">DD</span><img src="images/membres/diarrassouba-djeneba.jpg" alt="Diarrassouba Djeneba" onerror="this.style.opacity='0';"></div><div class="nom-membre">Diarrassouba Djeneba</div><div class="role-membre">Membre</div></div>
-        <div class="carte-membre petite"><div class="avatar-membre"><span class="initiales">BY</span><img src="images/membres/bamba-youssouf-bilal.jpg" alt="Bamba Youssouf Bilal" onerror="this.style.opacity='0';"></div><div class="nom-membre">Bamba Youssouf Bilal</div><div class="role-membre">Membre</div></div>
       </div>
     </div>
 
   </div>
 </section>
 
-<section>
-  <div class="conteneur">
-    <div class="entete-section centre">
-      <p class="eyebrow">Nos piliers</p>
-      <h2>Un engagement à quatre dimensions</h2>
-      <p>Chaque action du Sous-Comité de Koumassi s'inscrit dans l'une de ces missions, héritées de la vision nationale de l'AEEMCI.</p>
-    </div>
-  </div>
-  <div class="conteneur">
-    <div class="grille-piliers">
-      <div class="carte-pilier">
-        <span class="num">01</span>
-        <h3>Formation religieuse</h3>
-        <p>Cours de Coran, de Tajwid et de Tafsir pour ancrer les membres dans une pratique éclairée de l'Islam.</p>
-      </div>
-      <div class="carte-pilier">
-        <span class="num">02</span>
-        <h3>Réussite scolaire</h3>
-        <p>Encadrement, groupes d'étude et suivi des élèves et étudiants du sous-comité vers l'excellence académique.</p>
-      </div>
-      <div class="carte-pilier">
-        <span class="num">03</span>
-        <h3>Solidarité sociale</h3>
-        <p>Actions caritatives, soutien aux familles et aux membres en difficulté au sein de la commune de Koumassi.</p>
-      </div>
-      <div class="carte-pilier">
-        <span class="num">04</span>
-        <h3>Vie associative</h3>
-        <p>Fraternité, journées culturelles et cohésion entre les élèves et étudiants musulmans de Koumassi.</p>
-      </div>
+<!-- ===== SECTION CTA GLOBALE ===== -->
+<section class="section-cta-globale">
+  <div class="conteneur contenu-cta">
+    <h2>Rejoignez le Sous-Comité AEEMCI de Koumassi</h2>
+    <p>Que vous soyez élève, étudiant ou sympathisant, participez activement à nos formations, activités et projets solidaires.</p>
+    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+      <a href="contact.html#adhesion" class="bouton-cta-primaire">Adhérer maintenant</a>
+      <a href="contact.html" class="bouton-cta-secondaire" style="background: transparent; border-color: #FFFFFF; color: #FFFFFF;">Nous contacter</a>
     </div>
   </div>
 </section>
 
-<section id="activites" class="motif-treillis">
+<!-- ===== PIED DE PAGE / FOOTER ===== -->
+<footer class="pied-site">
   <div class="conteneur">
-    <div class="entete-section">
-      <p class="eyebrow">Vie du sous-comité</p>
-      <h2>Nos activités phares</h2>
-      <p>Un aperçu du programme mené tout au long de l'année scolaire et universitaire.</p>
-    </div>
-    <div class="grille-activites">
-      <div class="carte-activite">
-        <div class="entete-carte">
-          <span class="icone">﴾﴿</span>
-          <h3>Cours de Coran &amp; Tajwid</h3>
-        </div>
-        <div class="corps-carte">
-          <p>Apprentissage de la lecture, de la récitation et des règles de psalmodie du Saint Coran, pour tous les niveaux.</p>
-          <span class="rythme">Chaque semaine</span>
-        </div>
-      </div>
-      <div class="carte-activite">
-        <div class="entete-carte">
-          <span class="icone">☾</span>
-          <h3>Causeries religieuses</h3>
-        </div>
-        <div class="corps-carte">
-          <p>Conférences et débats animés par des enseignants sur des thématiques de foi, d'éthique et de vie quotidienne.</p>
-          <span class="rythme">Mensuel</span>
-        </div>
-      </div>
-      <div class="carte-activite">
-        <div class="entete-carte">
-          <span class="icone">✶</span>
-          <h3>Journée culturelle</h3>
-        </div>
-        <div class="corps-carte">
-          <p>Un rendez-vous annuel festif et fédérateur : expositions, prestations et valorisation de la culture musulmane.</p>
-          <span class="rythme">Annuel</span>
-        </div>
-      </div>
-    </div>
-<div style="margin-top:40px; text-align:center;">
-      <a href="activites.html" class="bouton-secondaire" style="color:var(--vert-profond); border-color:rgba(22,60,44,0.3);">Voir toutes les activités</a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== Programme hebdomadaire ===== -->
-<section id="programme">
-  <div class="conteneur">
-    <div class="entete-section centre">
-      <p class="eyebrow">Nos rendez-vous</p>
-      <h2>Programme Hebdomadaire</h2>
-      <p>Retrouvez les horaires de nos activités régulières et les lieux de rencontre du sous-comité.</p>
-    </div>
-    <div class="program-grid">
-      <!-- Mercredi -->
-      <div class="program-card">
-        <span class="program-day">Mercredi</span>
-        <h3>Cours en Sections</h3>
-        <p>Cours dispensés dans les sections du Sous-comité.</p>
-      </div>
-      <!-- Vendredi -->
-      <div class="program-card">
-        <span class="program-day">Vendredi</span>
-        <h3>La Voix du Coran</h3>
-        <p>Séance spirituelle et d'apprentissage.</p>
-      </div>
-      <!-- Samedi -->
-      <div class="program-card">
-        <span class="program-day">Samedi</span>
-        <h3>Réunion Hebdomadaire</h3>
-        <p>Réunion du sous-comité qui se tient à l'ISTCO.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== Section Appel à l'action / Adhésion ===== -->
-<section style="background:var(--vert-profond); color:var(--blanc); text-align:center; padding:72px 0;">
-  <div class="conteneur">
-    <p class="eyebrow" style="justify-content:center; color:var(--or-clair);">Rejoindre la communauté</p>
-    <h2 style="font-family:var(--display); font-size:clamp(1.8rem, 3.2vw, 2.6rem); color:var(--blanc); margin-bottom:16px;">Prêt à vous engager avec le Sous-Comité de Koumassi ?</h2>
-    <p style="max-width:54ch; margin:0 auto 32px; color:rgba(255,253,248,0.85); font-size:1.05rem;">
-      Que vous souhaitiez devenir membre ou participer à nos activités, votre engagement est précieux.
-    </p>
-    <div class="groupe-boutons" style="justify-content:center;">
-      <a href="contact.html#adhesion" class="bouton-primaire">Formulaire d'Adhésion</a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== Pied de page ===== -->
-<footer class="pied">
-  <div class="conteneur">
-    <div class="pied-grille">
+    <div class="grille-pied">
       <div>
-        <a href="index.html" class="marque">
+        <a href="index.html" class="logo-marque" style="margin-bottom: 16px;">
           <img src="images/logo.png" alt="Logo AEEMCI" onerror="this.src='logo.png'">
-          <span class="texte-marque">
-            <span class="sigle">AEEMCI</span>
-            <span class="sous-sigle">Sous-Comité de Koumassi</span>
-          </span>
+          <div class="nom-organisation">
+            <span class="sigle-aeemci" style="color: #FFFFFF;">AEEMCI</span>
+            <span class="sous-sigle-koumassi" style="color: var(--or-clair);">Sous-Comité de Koumassi</span>
+          </div>
         </a>
-        <p class="desc">
+        <p style="font-size: 0.9rem; line-height: 1.6; color: rgba(255, 255, 255, 0.7);">
           Association des Élèves et Étudiants Musulmans de Côte d'Ivoire — Sous-Comité de la commune de Koumassi, Abidjan.
         </p>
-        <div class="reseaux-sociaux" aria-label="Réseaux sociaux">
-          <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
-            <svg viewBox="0 0 24 24"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.3 0-1.1-.1-2-.1-2 0-3.4 1.2-3.4 3.5v2H8.5v3h2.5v7h2.5z"/></svg>
-          </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
-            <svg viewBox="0 0 24 24"><path d="M12 8.2a3.8 3.8 0 100 7.6 3.8 3.8 0 000-7.6zm0 6.2a2.4 2.4 0 110-4.8 2.4 2.4 0 010 4.8zm4.8-6.3a.9.9 0 11-1.8 0 .9.9 0 011.8 0zM12 5c2.1 0 2.4 0 3.2.1.8 0 1.2.2 1.5.3.4.2.6.3.9.6.3.3.5.6.6.9.1.3.2.7.3 1.5 0 .9.1 1.2.1 3.2s0 2.4-.1 3.2c0 .8-.2 1.2-.3 1.5-.2.4-.3.6-.6.9-.3.3-.6.5-.9.6-.3.1-.7.2-1.5.3-.9 0-1.2.1-3.2.1s-2.4 0-3.2-.1c-.8 0-1.2-.2-1.5-.3a2.5 2.5 0 01-.9-.6 2.5 2.5 0 01-.6-.9c-.1-.3-.2-.7-.3-1.5-.1-.9-.1-1.2-.1-3.2s0-2.4.1-3.2c0-.8.2-1.2.3-1.5.1-.3.3-.6.6-.9.3-.3.6-.5.9-.6.3-.1.7-.2 1.5-.3.8-.1 1.1-.1 3.2-.1m0-2c-2.1 0-2.4 0-3.2.1-.8 0-1.3.2-1.8.4-.5.2-.9.5-1.3.9-.4.4-.7.8-.9 1.3-.2.5-.4 1-.4 1.8-.1.8-.1 1.1-.1 3.2s0 2.4.1 3.2c0 .8.2 1.3.4 1.8.2.5.5.9.9 1.3.4.4.8.7 1.3.9.5.2 1 .4 1.8.4.8.1 1.1.1 3.2.1s2.4 0 3.2-.1c.8 0 1.3-.2 1.8-.4.5-.2.9-.5 1.3-.9.4-.4.7-.8.9-1.3.2-.5.4-1 .4-1.8.1-.8.1-1.1.1-3.2s0-2.4-.1-3.2c0-.8-.2-1.3-.4-1.8-.2-.5-.5-.9-.9-1.3a3.6 3.6 0 00-1.3-.9c-.5-.2-1-.4-1.8-.4-.8-.1-1.1-.1-3.2-.1z"/></svg>
-          </a>
-          <a href="https://wa.me/2250700000000" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
-            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.6 15.1L2.1 22l5-1.3A10 10 0 1012 2zm0 18.2c-1.6 0-3.1-.5-4.4-1.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.1-6.1c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.5 6.5 0 01-3.3-2.9c-.3-.4 0-.5.2-.7l.4-.5c.1-.2.1-.3.2-.5 0-.2 0-.3-.1-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.6 1.1 2.8c.1.2 1.9 2.9 4.6 4.1.6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1-.1-.1-.2-.2-.4-.3z"/></svg>
-          </a>
-        </div>
       </div>
 
-      <div>
+      <div class="pied-colonne">
         <h4>Navigation</h4>
-<ul>
-<li><a href="index.html">Accueil</a></li>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="#historique">Historique</a></li>
           <li><a href="activites.html">Activités</a></li>
-<li><a href="actualites.html">Actualités</a></li>
-          <li><a href="galerie.html">Galerie</a></li>
+          <li><a href="actualites.html">Actualités</a></li>
+          <li><a href="galerie.html">Galerie Média</a></li>
           <li><a href="contact.html">Contact &amp; Adhésion</a></li>
         </ul>
       </div>
 
-      <div>
-        <h4>Contact &amp; Secrétariat</h4>
+      <div class="pied-colonne">
+        <h4>Secrétariat &amp; Siège</h4>
         <ul>
-          <li><span style="color:var(--or-clair);">Lieu :</span> Koumassi, Abidjan, Côte d'Ivoire</li>
-          <li><span style="color:var(--or-clair);">Téléphone :</span> +225 07 00 00 00 00</li>
-          <li><span style="color:var(--or-clair);">Email :</span> aeemci.koumassi@gmail.com</li>
+          <li><span style="color: var(--or-clair);">Localisation :</span> Koumassi, Abidjan, Côte d'Ivoire</li>
+          <li><span style="color: var(--or-clair);">Contact :</span> +225 07 00 00 00 00</li>
+          <li><span style="color: var(--or-clair);">Email :</span> aeemci.koumassi@gmail.com</li>
         </ul>
       </div>
     </div>
 
-<div class="bas-pied">
+    <div class="bas-pied-site">
       <p>&copy; 2025 - 2026 AEEMCI Sous-Comité de Koumassi. Tous droits réservés.</p>
-      <p>Foi — Travail — Succès</p>
+      <p style="color: var(--or-clair); font-weight: 700; letter-spacing: 1px;">« Ensemble nous sommes plus forts »</p>
     </div>
   </div>
 </footer>
 
-<a href="https://wa.me/2250700000000" class="bouton-whatsapp" target="_blank" rel="noopener" aria-label="Discuter sur WhatsApp" title="Écrire au Bureau sur WhatsApp">
-  <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.6 15.1L2.1 22l5-1.3A10 10 0 1012 2zm0 18.2c-1.6 0-3.1-.5-4.4-1.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.1-6.1c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1l-.8 1c
+<script>
+function ouvrirSidebar() {
+  document.getElementById('sidebarPanneau').classList.add('ouvert');
+  document.getElementById('sidebarOverlay').classList.add('ouvert');
+  document.body.style.overflow = 'hidden';
+}
+function fermerSidebar() {
+  document.getElementById('sidebarPanneau').classList.remove('ouvert');
+  document.getElementById('sidebarOverlay').classList.remove('ouvert');
+  document.body.style.overflow = '';
+}
+</script>
+
+</body>
+</html>
