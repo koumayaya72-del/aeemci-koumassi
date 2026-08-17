@@ -1352,3 +1352,308 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+
+/* ==========================================================================
+   COMPOSANTS D'ATTRACTIVITÉ & INTERACTIVITÉ
+   ========================================================================== */
+
+/* 1. Bouton Flottant WhatsApp (Global) */
+.widget-whatsapp-flottant {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 9990;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.widget-whatsapp-flottant:hover {
+  transform: translateY(-4px) scale(1.04);
+}
+
+.bulle-whatsapp-texte {
+  background: #0F0F0F;
+  color: #FFFFFF;
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.1);
+  white-space: nowrap;
+  animation: floatPulse 3s ease-in-out infinite;
+}
+
+.icone-whatsapp-cercle {
+  width: 56px;
+  height: 56px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+  position: relative;
+}
+
+.icone-whatsapp-cercle::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid #25D366;
+  animation: rippleRing 2s linear infinite;
+}
+
+@keyframes floatPulse {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes rippleRing {
+  0% { transform: scale(0.9); opacity: 1; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+/* 2. Section Chiffres Clés / Impact */
+.grille-chiffres-cles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.carte-chiffre-cle {
+  background: #FFFFFF;
+  border-radius: var(--rayon-carte);
+  padding: 32px 24px;
+  text-align: center;
+  border: 1px solid var(--bordure-douce);
+  box-shadow: var(--ombre-douce);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.carte-chiffre-cle:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--ombre-survol);
+  border-color: var(--or-sombre);
+}
+
+.nombre-chiffre-cle {
+  font-family: var(--font-titre);
+  font-size: clamp(2.5rem, 4vw, 3.4rem);
+  font-weight: 800;
+  color: var(--vert-emeraude);
+  line-height: 1;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, var(--vert-emeraude) 0%, var(--vert-sombre) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.label-chiffre-cle {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--texte-sombre);
+  line-height: 1.4;
+}
+
+/* 3. Témoignages & Paroles de Militants */
+.grille-temoignages {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.carte-temoignage {
+  background: #FFFFFF;
+  border-radius: var(--rayon-carte);
+  padding: 36px 30px;
+  border: 1px solid var(--bordure-douce);
+  box-shadow: var(--ombre-douce);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: var(--transition);
+  position: relative;
+}
+
+.carte-temoignage:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--ombre-survol);
+}
+
+.citation-texte {
+  font-style: italic;
+  color: var(--texte-sombre);
+  font-size: 0.98rem;
+  line-height: 1.7;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.citation-texte::before {
+  content: "“";
+  font-family: var(--font-titre);
+  font-size: 4rem;
+  color: rgba(212, 175, 55, 0.25);
+  position: absolute;
+  top: -24px;
+  left: -12px;
+  line-height: 1;
+}
+
+.auteur-temoignage {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatar-temoignage {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--or-clair);
+}
+
+.infos-auteur h4 {
+  font-size: 1.05rem;
+  color: var(--vert-emeraude);
+  margin-bottom: 2px;
+}
+
+.infos-auteur span {
+  font-size: 0.82rem;
+  color: var(--texte-doux);
+  font-weight: 500;
+}
+
+/* 4. Compte à Rebours Prochain Événement */
+.banniere-evenement-compteur {
+  background: linear-gradient(135deg, var(--vert-emeraude) 0%, var(--vert-sombre) 100%);
+  border-radius: var(--rayon-carte);
+  padding: 40px 32px;
+  color: #FFFFFF;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  box-shadow: var(--ombre-elevee);
+  position: relative;
+  overflow: hidden;
+}
+
+.banniere-evenement-compteur::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.compte-rebours-box {
+  display: flex;
+  gap: 16px;
+}
+
+.chronometre-unite {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 12px 18px;
+  text-align: center;
+  min-width: 70px;
+}
+
+.chronometre-valeur {
+  font-family: var(--font-titre);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--or-clair);
+  line-height: 1;
+}
+
+.chronometre-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 4px;
+}
+
+/* 5. FAQ Accordéon */
+.grille-faq {
+  max-width: 800px;
+  margin: 40px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.faq-item {
+  background: #FFFFFF;
+  border-radius: 14px;
+  border: 1px solid var(--bordure-douce);
+  overflow: hidden;
+  box-shadow: var(--ombre-douce);
+  transition: var(--transition);
+}
+
+.faq-question {
+  width: 100%;
+  padding: 20px 24px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-family: var(--font-titre);
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--vert-emeraude);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.faq-question:hover {
+  background: var(--vert-tendre);
+}
+
+.faq-icone-chevron {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+  color: var(--or-sombre);
+}
+
+.faq-item.ouvert .faq-icone-chevron {
+  transform: rotate(180deg);
+}
+
+.faq-reponse {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  padding: 0 24px;
+  color: var(--texte-doux);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.faq-item.ouvert .faq-reponse {
+  max-height: 300px;
+  padding: 0 24px 20px 24px;
+}

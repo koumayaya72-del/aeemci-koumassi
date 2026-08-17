@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact & Adhésion — AEEMCI Sous-Comité de Koumassi</title>
-<meta name="description" content="Contactez le bureau du Sous-Comité AEEMCI de Koumassi ou adhérez en ligne.">
+<title>Contact &amp; Adhésion — AEEMCI Sous-Comité de Koumassi</title>
+<meta name="description" content="Contactez le bureau du Sous-Comité AEEMCI de Koumassi ou adhérez directement en ligne pour rejoindre nos activités et formations.">
 <link rel="icon" href="images/logo.png">
 <link rel="stylesheet" href="css/style.css">
+<script src="js/base_donnees.js" defer></script>
 </head>
 <body>
 
@@ -68,9 +69,9 @@
 
     <div class="sidebar-section-titre" style="margin-top: 24px;">Engagement</div>
     <div class="sidebar-engagement-box">
-      <a href="contact.html#adhesion" class="sidebar-bouton-rejoindre">
+      <a href="https://chat.whatsapp.com/KUd1Zmc2JEfBsIWdH5HPdm" target="_blank" rel="noopener" class="sidebar-bouton-rejoindre">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
-        <span>Rejoindre l'AEEMCI</span>
+        <span>Groupe WhatsApp Officiel</span>
       </a>
     </div>
   </div>
@@ -81,7 +82,7 @@
   </div>
 </aside>
 
-<!-- ===== EN-TÊTE / NAVIGATION ===== -->
+<!-- ===== EN-TÊTE DE PAGE / HEADER ===== -->
 <header class="entete-site">
   <div class="conteneur barre-navigation">
     <a href="index.html" class="logo-marque">
@@ -118,12 +119,12 @@
       Contactez-nous &amp; <span class="or-accent">Rejoignez-nous</span>
     </h1>
     <p class="hero-description m-auto" style="font-size: 1.1rem;">
-      Une question, une suggestion ou l'envie d'adhérer au Sous-Comité de Koumassi ? Écrivez-nous directement.
+      Une question, une suggestion ou l'envie d'adhérer au Sous-Comité de Koumassi ? Écrivez-nous directement ou inscrivez-vous au registre des adhérents.
     </p>
   </div>
 </section>
 
-<!-- ===== FORMULAIRE DE CONTACT ===== -->
+<!-- ===== FORMULAIRE DE CONTACT & INFOS ===== -->
 <section class="section-piliers">
   <div class="conteneur">
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px;">
@@ -138,20 +139,30 @@
         </div>
 
         <div style="margin-bottom: 20px;">
-          <strong style="color: var(--or-sombre); display: block; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 1px;">Secrétariat / Présidence</strong>
-          <p style="color: var(--texte-doux); margin-top: 4px;">+225 07 00 00 00 00 / +225 05 00 00 00 00</p>
+          <strong style="color: var(--or-sombre); display: block; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 1px;">Contacts Officiels</strong>
+          <p style="color: var(--texte-doux); margin-top: 4px; line-height: 1.6;">
+            📞 <strong>Ligne 1 :</strong> +225 05 45 30 51 80<br>
+            📞 <strong>Ligne 2 :</strong> +225 07 57 47 73 72
+          </p>
         </div>
 
         <div style="margin-bottom: 20px;">
           <strong style="color: var(--or-sombre); display: block; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 1px;">Email Officiel</strong>
           <p style="color: var(--texte-doux); margin-top: 4px;">aeemci.koumassi@gmail.com</p>
         </div>
+
+        <div style="margin-bottom: 20px;">
+          <strong style="color: var(--or-sombre); display: block; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 1px;">Groupe WhatsApp Officiel</strong>
+          <a href="https://chat.whatsapp.com/KUd1Zmc2JEfBsIWdH5HPdm" target="_blank" rel="noopener" style="color: #25D366; font-weight: 700; display: inline-block; margin-top: 4px;">
+            Rejoindre la communauté sur WhatsApp →
+          </a>
+        </div>
       </div>
 
       <!-- Formulaire de Message -->
       <div class="carte-pilier-moderne">
         <h3 style="font-size: 1.4rem; margin-bottom: 20px; color: var(--vert-emeraude);">Envoyer un Message</h3>
-        <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Merci pour votre message ! Le bureau de l\'AEEMCI Koumassi vous répondra dans les plus brefs délais.'); this.reset();" style="display: flex; flex-direction: column; gap: 16px;">
+        <form action="#" method="POST" onsubmit="enregistrerContactFormulaire(event)" style="display: flex; flex-direction: column; gap: 16px;">
           <div>
             <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; color: var(--texte-sombre);">Nom &amp; Prénom *</label>
             <input type="text" required placeholder="Ex: Sow Mohamed" style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--bordure-douce); font-family: inherit;">
@@ -159,7 +170,7 @@
 
           <div>
             <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; color: var(--texte-sombre);">Email ou Téléphone *</label>
-            <input type="text" required placeholder="Ex: contact@gmail.com ou 0700000000" style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--bordure-douce); font-family: inherit;">
+            <input type="text" required placeholder="Ex: contact@gmail.com ou 0545305180" style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--bordure-douce); font-family: inherit;">
           </div>
 
           <div>
@@ -175,38 +186,38 @@
   </div>
 </section>
 
-<!-- ===== SECTION ADHÉSION (TARGET #adhesion) ===== -->
+<!-- ===== SECTION ADHÉSION & BASE DE DONNÉES (TARGET #adhesion) ===== -->
 <section id="adhesion" class="section-historique">
   <div class="conteneur">
     <div class="entete-section-moderne">
-      <span class="badge-tag or">Adhésion</span>
+      <span class="badge-tag or">Base de Données &amp; Adhésion</span>
       <h2>Devenir Membre de l'AEEMCI Koumassi</h2>
-      <p>Remplissez les informations ci-dessous pour rejoindre la grande famille du Sous-Comité.</p>
+      <p>Remplissez le formulaire ci-dessous pour être automatiquement inscrit(e) au registre officiel et intégrer le groupe WhatsApp officiel.</p>
     </div>
 
     <div class="carte-pilier-moderne m-auto" style="max-width: 600px;">
-      <form action="#" method="POST" onsubmit="validerAdhesionWhatsApp(event)" style="display: flex; flex-direction: column; gap: 16px;">
+      <form action="#" method="POST" onsubmit="enregistrerAdhesionFormulaire(event)" style="display: flex; flex-direction: column; gap: 16px;">
         <div>
           <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; color: var(--texte-sombre);">Nom &amp; Prénom *</label>
-          <input type="text" required placeholder="Ex: Traoré Aminata" style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--bordure-douce); font-family: inherit;">
+          <input type="text" name="nom" required placeholder="Ex: Traoré Aminata" style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--bordure-douce); font-family: inherit;">
         </div>
 
         <div>
           <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; color: var(--texte-sombre);">Statut *</label>
-          <input type="text" required placeholder="Ex: Élève (Lycée moderne), Étudiant (UFHB), Autre" style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--bordure-douce); font-family: inherit;">
+          <input type="text" name="statut" required placeholder="Ex: Élève (Lycée moderne), Étudiant (UFHB), Autre" style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--bordure-douce); font-family: inherit;">
         </div>
 
         <div>
           <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; color: var(--texte-sombre);">Quartier à Koumassi *</label>
-          <input type="text" required placeholder="Ex: Prodomo, Remblais, Sicogi..." style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--bordure-douce); font-family: inherit;">
+          <input type="text" name="quartier" required placeholder="Ex: Prodomo, Remblais, Sicogi..." style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--bordure-douce); font-family: inherit;">
         </div>
 
         <div>
-          <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; color: var(--texte-sombre);">Téléphone / WhatsApp *</label>
-          <input type="tel" required placeholder="Ex: +225 0700000000" style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--bordure-douce); font-family: inherit;">
+          <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; color: var(--texte-sombre);">Numéro Téléphone / WhatsApp *</label>
+          <input type="tel" name="telephone" required placeholder="Ex: +225 0545305180" style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--bordure-douce); font-family: inherit;">
         </div>
 
-        <button type="submit" class="bouton-cta-primaire" style="width: 100%; border: none;">Confirmer mon Adhésion sur WhatsApp →</button>
+        <button type="submit" class="bouton-cta-primaire" style="width: 100%; border: none;">Confirmer mon Adhésion &amp; Rejoindre WhatsApp →</button>
       </form>
     </div>
   </div>
@@ -242,11 +253,12 @@
       </div>
 
       <div class="pied-colonne">
-        <h4>Secrétariat &amp; Siège</h4>
+        <h4>Si�ge &amp; Coordonn�es</h4>
         <ul>
           <li><span style="color: var(--or-clair);">Localisation :</span> Koumassi, Abidjan, Côte d'Ivoire</li>
-          <li><span style="color: var(--or-clair);">Contact :</span> +225 07 00 00 00 00</li>
+          <li><span style="color: var(--or-clair);">Contact :</span> +225 05 45 30 51 80 / +225 07 57 47 73 72</li>
           <li><span style="color: var(--or-clair);">Email :</span> aeemci.koumassi@gmail.com</li>
+          
         </ul>
       </div>
     </div>
@@ -257,6 +269,14 @@
     </div>
   </div>
 </footer>
+
+<!-- ===== BOUTON FLOTTANT WHATSAPP GLOBAL ===== -->
+<a href="https://chat.whatsapp.com/KUd1Zmc2JEfBsIWdH5HPdm" target="_blank" rel="noopener" class="widget-whatsapp-flottant" aria-label="Rejoindre le Groupe WhatsApp Officiel">
+  <div class="bulle-whatsapp-texte">Rejoindre le Groupe WhatsApp Officiel</div>
+  <div class="icone-whatsapp-cercle">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+  </div>
+</a>
 
 <script>
 function ouvrirSidebar() {
@@ -269,13 +289,13 @@ function fermerSidebar() {
   document.getElementById('sidebarOverlay').classList.remove('ouvert');
   document.body.style.overflow = '';
 }
-function validerAdhesionWhatsApp(event) {
-  event.preventDefault();
-  alert("Félicitations ! Votre demande d'adhésion est validée. Vous allez être redirigé(e) vers le groupe WhatsApp officiel du Sous-Comité AEEMCI de Koumassi.");
-  window.open("https://wa.me/2250700000000?text=Bonjour,%20je%20souhaite%20rejoindre%20le%20Sous-Comit%C3%A9%20AEEMCI%20de%20Koumassi", "_blank");
-  event.target.reset();
-}
 </script>
 
 </body>
 </html>
+
+
+
+
+
+
