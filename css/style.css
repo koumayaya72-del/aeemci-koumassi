@@ -676,6 +676,296 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0.5px;
 }
 
+/* ==========================================================================
+   TÉMOIGNAGES & PAROLES DE MILITANTS (DESIGN EXÉCUTIF)
+   ========================================================================== */
+.grille-temoignages {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+  margin-top: 40px;
+}
+
+.carte-temoignage {
+  background: #FFFFFF !important;
+  border-radius: var(--rayon-carte, 16px) !important;
+  padding: 32px 26px !important;
+  border: 1px solid var(--bordure-douce, rgba(0,0,0,0.08)) !important;
+  box-shadow: 0 10px 30px rgba(12, 56, 35, 0.06) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  position: relative !important;
+}
+
+.carte-temoignage:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 18px 40px rgba(12, 56, 35, 0.12) !important;
+  border-color: rgba(212, 175, 55, 0.5) !important;
+}
+
+.citation-texte {
+  font-style: italic !important;
+  color: var(--texte-sombre, #2D3748) !important;
+  font-size: 0.95rem !important;
+  line-height: 1.7 !important;
+  margin-bottom: 24px !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+.citation-texte::before {
+  content: "“" !important;
+  font-family: Georgia, serif !important;
+  font-size: 3.5rem !important;
+  color: rgba(212, 175, 55, 0.25) !important;
+  position: absolute !important;
+  top: -20px !important;
+  left: -10px !important;
+  line-height: 1 !important;
+  z-index: -1 !important;
+}
+
+.auteur-temoignage {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  border-top: 1px solid var(--bordure-douce, rgba(0,0,0,0.06)) !important;
+  padding-top: 18px !important;
+}
+
+.avatar-temoignage {
+  width: 56px !important;
+  height: 56px !important;
+  min-width: 56px !important;
+  min-height: 56px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  border: 2px solid var(--or, #D4AF37) !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12) !important;
+  display: block !important;
+}
+
+.infos-auteur h4 {
+  font-family: var(--font-titre, sans-serif) !important;
+  font-size: 1.02rem !important;
+  font-weight: 700 !important;
+  color: var(--vert-emeraude, #0C3823) !important;
+  margin: 0 0 2px 0 !important;
+}
+
+.infos-auteur span {
+  font-size: 0.80rem !important;
+  color: var(--or-sombre, #B8860B) !important;
+  font-weight: 600 !important;
+}
+
+/* ==========================================================================
+   FAQ ACCORDÉON INTERACTIF (DESIGN EXÉCUTIF ET ULTRA-MODERNE)
+   ========================================================================== */
+.grille-faq {
+  max-width: 840px !important;
+  margin: 40px auto 0 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+}
+
+.faq-item {
+  background: #FFFFFF !important;
+  border-radius: 14px !important;
+  border: 1px solid var(--bordure-douce, rgba(0,0,0,0.08)) !important;
+  overflow: hidden !important;
+  box-shadow: 0 6px 18px rgba(12, 56, 35, 0.04) !important;
+  transition: all 0.3s ease !important;
+}
+
+.faq-item:hover {
+  box-shadow: 0 10px 25px rgba(12, 56, 35, 0.08) !important;
+  border-color: rgba(212, 175, 55, 0.4) !important;
+}
+
+.faq-question {
+  width: 100% !important;
+  padding: 22px 26px !important;
+  background: #FFFFFF !important;
+  border: none !important;
+  outline: none !important;
+  text-align: left !important;
+  font-family: var(--font-titre, sans-serif) !important;
+  font-size: 1.08rem !important;
+  font-weight: 700 !important;
+  color: var(--vert-emeraude, #0C3823) !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  cursor: pointer !important;
+  transition: background 0.3s ease, color 0.3s ease !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  box-shadow: none !important;
+}
+
+.faq-question:hover {
+  background: var(--vert-tendre, #E8F5E9) !important;
+  color: var(--vert-emeraude, #0C3823) !important;
+}
+
+.faq-icone-chevron {
+  font-size: 1rem !important;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  color: var(--or-sombre, #B8860B) !important;
+  font-weight: bold !important;
+}
+
+.faq-item.ouvert .faq-icone-chevron {
+  transform: rotate(180deg) !important;
+}
+
+.faq-reponse {
+  max-height: 0 !important;
+  overflow: hidden !important;
+  transition: max-height 0.4s ease, padding 0.4s ease !important;
+  padding: 0 26px !important;
+  color: var(--texte-doux, #4A5568) !important;
+  font-size: 0.96rem !important;
+  line-height: 1.7 !important;
+  background: #FFFFFF !important;
+}
+
+.faq-item.ouvert .faq-reponse {
+  max-height: 300px !important;
+  padding: 0 26px 22px 26px !important;
+  border-top: 1px solid rgba(0,0,0,0.04) !important;
+}
+
+/* ==========================================================================
+   BANNIÈRE ÉVÉNEMENT & COMPTE À REBOURS
+   ========================================================================== */
+.banniere-evenement-compteur {
+  background: linear-gradient(135deg, var(--vert-emeraude, #0C3823) 0%, #062215 100%) !important;
+  border-radius: var(--rayon-carte, 16px) !important;
+  padding: 36px 32px !important;
+  color: #FFFFFF !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 24px !important;
+  box-shadow: 0 12px 30px rgba(12, 56, 35, 0.2) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  margin-bottom: 20px !important;
+}
+
+.banniere-evenement-compteur::after {
+  content: "" !important;
+  position: absolute !important;
+  top: -50% !important;
+  right: -20% !important;
+  width: 300px !important;
+  height: 300px !important;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, transparent 70%) !important;
+  pointer-events: none !important;
+}
+
+.compte-rebours-box {
+  display: flex !important;
+  gap: 14px !important;
+  align-items: center !important;
+}
+
+.chronometre-unite {
+  background: rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 12px !important;
+  padding: 10px 16px !important;
+  text-align: center !important;
+  min-width: 65px !important;
+}
+
+.chronometre-valeur {
+  font-family: var(--font-titre, sans-serif) !important;
+  font-size: 1.7rem !important;
+  font-weight: 800 !important;
+  color: var(--or-clair, #F5D061) !important;
+  line-height: 1 !important;
+}
+
+.chronometre-label {
+  font-size: 0.70rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  margin-top: 4px !important;
+}
+
+/* ==========================================================================
+   CHIFFRES CLÉS & CARTE D'IMPACT (4 COLONNES PARFAITES EN 1 LIGNE SUR PC)
+   ========================================================================== */
+.grille-chiffres-cles {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 20px !important;
+  margin-top: 36px !important;
+}
+
+@media (max-width: 1024px) {
+  .grille-chiffres-cles {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 18px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .grille-chiffres-cles {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+}
+
+.carte-chiffre-cle {
+  background: #FFFFFF !important;
+  border-radius: var(--rayon-carte, 16px) !important;
+  padding: 28px 20px !important;
+  text-align: center !important;
+  border: 1px solid var(--bordure-douce, rgba(0,0,0,0.08)) !important;
+  box-shadow: 0 8px 24px rgba(12, 56, 35, 0.05) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+  position: relative !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+}
+
+.carte-chiffre-cle:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 16px 36px rgba(12, 56, 35, 0.12) !important;
+  border-color: rgba(212, 175, 55, 0.5) !important;
+}
+
+.nombre-chiffre-cle {
+  font-family: var(--font-titre, sans-serif) !important;
+  font-size: clamp(2rem, 3.2vw, 2.7rem) !important;
+  font-weight: 800 !important;
+  color: var(--vert-emeraude, #0C3823) !important;
+  line-height: 1.1 !important;
+  margin-bottom: 8px !important;
+  background: linear-gradient(135deg, var(--vert-emeraude, #0C3823) 0%, #062215 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.label-chiffre-cle {
+  font-size: 0.88rem !important;
+  font-weight: 500 !important;
+  color: var(--texte-doux, #4A5568) !important;
+  line-height: 1.45 !important;
+}
+
 /* ---------- Section CTA Adhésion / Dons ---------- */
 .section-cta-globale {
   padding: 90px 0;
