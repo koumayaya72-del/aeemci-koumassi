@@ -482,18 +482,33 @@
 </a>
 
 <script>
-window.ouvrirSidebar = function() { var p = document.getElementById('sidebarPanneau'); var o = document.getElementById('sidebarOverlay'); if(p) p.classList.add('ouvert'); if(o) o.classList.add('ouvert'); document.body.style.overflow = 'hidden'; };
-window.fermerSidebar = function() { var p = document.getElementById('sidebarPanneau'); var o = document.getElementById('sidebarOverlay'); if(p) p.classList.remove('ouvert'); if(o) o.classList.remove('ouvert'); document.body.style.overflow = ''; };
-function ouvrirSidebar_old() {
-  document.getElementById('sidebarPanneau').classList.add('ouvert');
-  document.getElementById('sidebarOverlay').classList.add('ouvert');
+function ouvrirSidebar() {
+  var p = document.getElementById('sidebarPanneau');
+  var o = document.getElementById('sidebarOverlay');
+  if (p) p.classList.add('ouvert');
+  if (o) o.classList.add('ouvert');
   document.body.style.overflow = 'hidden';
 }
 function fermerSidebar() {
-  document.getElementById('sidebarPanneau').classList.remove('ouvert');
-  document.getElementById('sidebarOverlay').classList.remove('ouvert');
+  var p = document.getElementById('sidebarPanneau');
+  var o = document.getElementById('sidebarOverlay');
+  if (p) p.classList.remove('ouvert');
+  if (o) o.classList.remove('ouvert');
   document.body.style.overflow = '';
 }
+window.ouvrirSidebar = ouvrirSidebar;
+window.fermerSidebar = fermerSidebar;
+
+document.addEventListener('DOMContentLoaded', function() {
+  var burgerBtns = document.querySelectorAll('.menu-burger');
+  burgerBtns.forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      ouvrirSidebar();
+    });
+  });
+});
 
 // Injection dynamique des photos importees via AEEMCI Studio dans la Galerie Web
 function chargerGalerieStudio() {
