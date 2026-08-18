@@ -1,8 +1,5 @@
 /* =========================================================
-   AEEMCI — SOUS-COMITÉ DE KOUMASSI
-   Nouveau Système de Design (Moderne, Lumineux, Dynamique)
-   Palette   : Vert Émeraude Institutionnel (#0C3823) + Or Raffiné (#D4AF37) + Blanc/Crème
-   Slogan    : "Ensemble nous sommes plus forts"
+   AEEMCI — SOUS-COMITÉ DE KOUMASSI (DESIGN SYSTEM 2026 NEXT-GEN)
    ========================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=Inter:wght@300;400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap');
@@ -30,11 +27,11 @@
   --font-corps     : 'Inter', sans-serif;
   --font-arabe     : 'Amiri', serif;
   
-  --rayon-carte    : 16px;
+  --rayon-carte    : 20px;
   --rayon-bouton   : 50px;
-  --ombre-douce    : 0 10px 30px -10px rgba(12, 56, 35, 0.08);
-  --ombre-survol   : 0 20px 40px -15px rgba(12, 56, 35, 0.16);
-  --transition     : all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --ombre-douce    : 0 12px 35px -10px rgba(12, 56, 35, 0.08);
+  --ombre-survol   : 0 24px 50px -12px rgba(12, 56, 35, 0.18);
+  --transition     : all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 *, *::before, *::after {
@@ -52,6 +49,9 @@ body {
   font-family: var(--font-corps);
   color: var(--texte-sombre);
   background-color: var(--fond-clair);
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(12, 56, 35, 0.03) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.04) 0%, transparent 40%);
   line-height: 1.65;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -74,11 +74,11 @@ ul {
 }
 
 .conteneur {
-  width: min(1200px, 92%);
+  width: min(1220px, 92%);
   margin-inline: auto;
 }
 
-/* ---------- Typography & Utility ---------- */
+/* ---------- Typography & Utility 2026 ---------- */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-titre);
   font-weight: 700;
@@ -93,26 +93,84 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 16px;
+  padding: 7px 18px;
   border-radius: 50px;
   background: var(--vert-tendre);
   color: var(--vert-emeraude);
   font-family: var(--font-titre);
-  font-size: 0.82rem;
+  font-size: 0.80rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
   border: 1px solid rgba(12, 56, 35, 0.12);
+  box-shadow: 0 4px 12px rgba(12, 56, 35, 0.04);
 }
 
 .badge-tag.or {
   background: rgba(212, 175, 55, 0.12);
   color: var(--or-sombre);
-  border-color: rgba(212, 175, 55, 0.25);
+  border-color: rgba(212, 175, 55, 0.35);
 }
 
-/* ---------- Boutons CTA ---------- */
+.badge-tag.or::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--or);
+  box-shadow: 0 0 8px var(--or);
+  animation: pulseGold 2s infinite ease-in-out;
+}
+
+@keyframes pulseGold {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.4); }
+}
+
+/* ---------- Boutons CTA 2026 avec Effet de Brillance ---------- */
 .bouton-cta-primaire {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--vert-emeraude) 0%, #062215 100%) !important;
+  color: #FFFFFF !important;
+  font-family: var(--font-titre);
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 14px 32px;
+  border-radius: var(--rayon-bouton);
+  box-shadow: 0 10px 25px rgba(12, 56, 35, 0.25);
+  transition: var(--transition);
+  border: 1px solid rgba(212, 175, 55, 0.4) !important;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.bouton-cta-primaire::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: rotate(25deg);
+  transition: left 0.75s ease;
+}
+
+.bouton-cta-primaire:hover::after {
+  left: 140%;
+}
+
+.bouton-cta-primaire:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 16px 35px rgba(12, 56, 35, 0.35);
+}
+
+.bouton-cta-secondaire {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -122,40 +180,17 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-titre);
   font-weight: 800;
   font-size: 0.95rem;
-  padding: 14px 30px;
+  padding: 14px 32px;
   border-radius: var(--rayon-bouton);
-  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
-  transition: var(--transition);
   border: none;
-  cursor: pointer;
-}
-
-.bouton-cta-primaire:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 14px 28px rgba(212, 175, 55, 0.45);
-}
-
-.bouton-cta-secondaire {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: var(--vert-emeraude);
-  color: #FFFFFF;
-  font-family: var(--font-titre);
-  font-weight: 700;
-  font-size: 0.95rem;
-  padding: 14px 30px;
-  border-radius: var(--rayon-bouton);
-  border: 1px solid var(--vert-emeraude);
+  box-shadow: 0 8px 22px rgba(212, 175, 55, 0.3);
   transition: var(--transition);
   cursor: pointer;
 }
 
 .bouton-cta-secondaire:hover {
-  background: var(--vert-moyen);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 24px rgba(12, 56, 35, 0.25);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 14px 30px rgba(212, 175, 55, 0.45);
 }
 
 .bouton-cta-contour {
@@ -180,23 +215,28 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(-3px);
 }
 
-/* ---------- En-tête / Header ---------- */
+/* ---------- En-tête / Header Flottant 2026 Glassmorphism ---------- */
 .entete-site {
   position: sticky;
-  top: 0;
+  top: 12px;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--bordure-douce);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  width: min(1240px, 94%);
+  margin: 12px auto 0 auto;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.88) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 1px solid rgba(212, 175, 55, 0.3) !important;
+  box-shadow: 0 12px 35px rgba(12, 56, 35, 0.08) !important;
+  padding: 4px 24px;
+  transition: var(--transition);
 }
 
 .barre-navigation {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 0;
+  padding: 8px 0;
 }
 
 .logo-marque {
@@ -297,14 +337,37 @@ h1, h2, h3, h4, h5, h6 {
   transition: var(--transition);
 }
 
-/* ---------- Hero Section (Moderne & Lumineux) ---------- */
+/* ---------- Hero Section (2026 EXECUTIVE LUXURY BANNER) ---------- */
 .hero-moderne {
   position: relative;
-  padding: 90px 0 80px;
-  background: radial-gradient(circle at 90% 10%, rgba(212, 175, 55, 0.08) 0%, transparent 40%),
-              radial-gradient(circle at 10% 90%, rgba(12, 56, 35, 0.06) 0%, transparent 50%),
-              var(--fond-clair);
+  padding: 100px 0 90px;
+  background: linear-gradient(135deg, #062215 0%, #0C3823 55%, #03140A 100%) !important;
+  color: #FFFFFF !important;
   overflow: hidden;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+  box-shadow: inset 0 -20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.hero-moderne::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: -20%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.18) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-moderne::after {
+  content: "";
+  position: absolute;
+  bottom: -30%;
+  right: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(35, 138, 86, 0.25) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .hero-grille {
@@ -312,22 +375,26 @@ h1, h2, h3, h4, h5, h6 {
   grid-template-columns: 1.15fr 0.85fr;
   gap: 56px;
   align-items: center;
+  position: relative;
+  z-index: 2;
 }
 
 .slogan-majestueux-box {
   display: inline-block;
-  margin-bottom: 16px;
-  padding: 8px 20px;
-  background: linear-gradient(135deg, rgba(12, 56, 35, 0.06), rgba(212, 175, 55, 0.12));
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  margin-bottom: 20px;
+  padding: 10px 24px;
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.4);
   border-radius: 50px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .slogan-majestueux {
   font-family: var(--font-titre);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 800;
-  color: var(--vert-emeraude);
+  color: var(--or-clair);
   text-transform: uppercase;
   letter-spacing: 2px;
   display: flex;
@@ -338,33 +405,44 @@ h1, h2, h3, h4, h5, h6 {
 .slogan-majestueux::before {
   content: "★";
   color: var(--or);
+  font-size: 1.1rem;
+}
+
+.sous-slogan-devise {
+  display: block;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 2px;
+  font-style: italic;
 }
 
 .hero-titre {
-  font-size: clamp(2.3rem, 4.5vw, 3.8rem);
+  font-size: clamp(2.4rem, 4.8vw, 4.2rem);
   font-weight: 800;
-  color: var(--vert-emeraude);
-  letter-spacing: -1px;
-  margin-bottom: 20px;
-  line-height: 1.12;
+  color: #FFFFFF !important;
+  letter-spacing: -1.2px;
+  margin-bottom: 22px;
+  line-height: 1.10;
 }
 
 .hero-titre span.or-accent {
-  background: var(--or-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  background: linear-gradient(135deg, #F5D77F 0%, #D4AF37 50%, #E8C15A 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  filter: drop-shadow(0 2px 10px rgba(212, 175, 55, 0.3));
 }
 
 .hero-description {
-  font-size: 1.12rem;
-  color: var(--texte-doux);
+  font-size: 1.15rem;
+  color: rgba(255, 255, 255, 0.88) !important;
   max-width: 52ch;
-  margin-bottom: 36px;
+  margin-bottom: 38px;
+  line-height: 1.7;
 }
 
 .hero-actions {
   display: flex;
-  gap: 16px;
+  gap: 18px;
   flex-wrap: wrap;
 }
 
@@ -378,34 +456,43 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   width: 100%;
   max-width: 360px;
-  background: var(--fond-carte);
-  border-radius: 24px;
-  padding: 36px 28px;
-  box-shadow: var(--ombre-survol);
-  border: 1px solid var(--bordure-douce);
+  background: rgba(255, 255, 255, 0.07) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-radius: 28px;
+  padding: 40px 30px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(212, 175, 55, 0.35) !important;
   text-align: center;
+  transition: transform 0.4s ease;
+}
+
+.hero-medaillon-cadre:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(212, 175, 55, 0.7) !important;
 }
 
 .hero-medaillon-cadre img {
-  width: 140px;
-  height: 140px;
-  margin: 0 auto 20px;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 22px;
   object-fit: contain;
-  filter: drop-shadow(0 10px 20px rgba(12, 56, 35, 0.15));
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.4));
 }
 
 .hero-medaillon-nom {
   font-family: var(--font-titre);
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   font-weight: 800;
-  color: var(--vert-emeraude);
+  color: #FFFFFF !important;
+  letter-spacing: 0.5px;
 }
 
 .hero-medaillon-devise {
   font-family: var(--font-arabe);
-  font-size: 1.1rem;
-  color: var(--or-sombre);
-  margin-top: 8px;
+  font-size: 1.18rem;
+  color: var(--or-clair) !important;
+  margin-top: 10px;
   font-style: italic;
 }
 
