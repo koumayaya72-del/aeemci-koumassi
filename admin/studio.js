@@ -44,8 +44,15 @@
     document.querySelectorAll(".studio-tab-content").forEach(tab => tab.classList.remove("active"));
     
     element.classList.add("active");
-    document.getElementById("tab-" + tabName).classList.add("active");
-    document.getElementById("studioPageTitle").textContent = element.textContent.trim();
+    var targetTab = document.getElementById("tab-" + tabName);
+    if (targetTab) targetTab.classList.add("active");
+    
+    var titleEl = document.getElementById("studioPageTitle");
+    if (titleEl) titleEl.textContent = element.textContent.trim();
+
+    if (tabName === 'parametres') {
+      chargerChampsEditeurGlobal();
+    }
   };
 
   /* =========================================================
@@ -83,6 +90,7 @@
       document.getElementById("editLienWhatsapp").value = siteData.lienWhatsapp || "https://chat.whatsapp.com/KUd1Zmc2JEfBsIWdH5HPdm";
     }
   }
+  window.chargerChampsEditeurGlobal = chargerChampsEditeurGlobal;
 
   window.sauvegarderConfigurationFull = function(e) {
     if(e) e.preventDefault();
