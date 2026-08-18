@@ -29,7 +29,7 @@
       height: 52px;
       background: linear-gradient(135deg, #0C3823, #062215);
       border-bottom: 2px solid #D4AF37;
-      z-index: 10000;
+      z-index: 100000;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -52,7 +52,15 @@
     `;
 
     document.body.prepend(barre);
-    document.body.style.paddingTop = "52px";
+
+    // Ajustement dynamique des positions pour empêcher tout chevauchement avec l'en-tête du site
+    var styleOffset = document.createElement("style");
+    styleOffset.innerHTML = `
+      body { padding-top: 52px !important; }
+      .entete-site { top: 52px !important; }
+      .sidebar-panneau { top: 52px !important; }
+    `;
+    document.head.appendChild(styleOffset);
   }
 
   function activerBoutonsEditionDirecte() {
