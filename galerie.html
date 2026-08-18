@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -454,7 +454,7 @@
       </div>
 
       <div class="pied-colonne">
-        <h4>Si�ge &amp; Coordonn�es</h4>
+        <h4>Si�ge &amp; Coordonn�es</h4>
         <ul>
           <li><span style="color: var(--or-clair);">Localisation :</span> Koumassi, Abidjan, Côte d'Ivoire</li>
           <li><span style="color: var(--or-clair);">Contact :</span> +225 05 45 30 51 80 / +225 07 57 47 73 72</li>
@@ -464,7 +464,7 @@
       </div>
     </div>
 
-    <div class="bas-pied-site">
+    <div class="bas-pied-site" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
       <p>&copy; 2025 - 2026 AEEMCI Sous-Comité de Koumassi. Tous droits réservés.</p>
       <p style="color: var(--or-clair); font-weight: 700; letter-spacing: 1px;">« AEEMCI, Pour une identité islamique ! » — « Ensemble nous sommes plus forts »</p>
     </div>
@@ -490,6 +490,26 @@ function fermerSidebar() {
   document.getElementById('sidebarOverlay').classList.remove('ouvert');
   document.body.style.overflow = '';
 }
+
+// Injection dynamique des photos importees via AEEMCI Studio dans la Galerie Web
+function chargerGalerieStudio() {
+  var grille = document.querySelector('.grille-galerie');
+  if (!grille) return;
+
+  var listeGalerie = JSON.parse(localStorage.getItem('aeemci_galerie_custom') || '[]');
+  listeGalerie.forEach(function(item) {
+    var carte = document.createElement('div');
+    carte.className = 'carte-galerie-item';
+    carte.setAttribute('data-categorie', (item.categorie || 'formation').toLowerCase());
+    carte.innerHTML = '<a href="' + item.photo + '" class="glightbox" data-gallery="galerie-aeemci" data-title="' + item.titre + '"><div class="carte-galerie-image-box"><img src="' + item.photo + '" alt="' + item.titre + '" loading="lazy" onerror="this.src=\'images/logo.png\';"><div class="carte-galerie-survol"><span class="badge-galerie-tag">' + (item.categorie || 'Photos') + '</span><h3 class="carte-galerie-titre">' + item.titre + '</h3></div></div></a>';
+    grille.prepend(carte);
+  });
+
+  if (typeof GLightbox !== 'undefined') {
+    GLightbox({ selector: '.glightbox' });
+  }
+}
+chargerGalerieStudio();
 </script>
 
 </body>

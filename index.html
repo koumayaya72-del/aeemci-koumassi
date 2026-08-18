@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -206,30 +206,41 @@
   </div>
 </section>
 
-<!-- ===== WIDGET PROCHAIN ÉVÉNEMENT & COMPTE À REBOURS ===== -->
+<!-- ===== WIDGET PROCHAIN ÉVÉNEMENT & COMPTE À REBOURS (MAHOULOUD 2026) ===== -->
 <section style="padding: 40px 0 0 0; background: var(--fond-clair);">
   <div class="conteneur">
-    <div class="banniere-evenement-compteur">
+    <div class="banniere-evenement-compteur" style="display: grid; grid-template-columns: 90px 1.4fr 0.9fr; gap: 24px; align-items: center;">
+      <!-- Vignette Affiche Officielle -->
+      <div style="position: relative; cursor: pointer;" onclick="ouvrirAfficheModal('images/maouloud.jpg')">
+        <img src="images/maouloud.jpg" alt="Affiche Nuit du Mahouloud 2026" style="width: 85px; height: 115px; object-fit: cover; border-radius: 10px; border: 2px solid var(--or); box-shadow: 0 8px 20px rgba(0,0,0,0.3); transition: transform 0.3s ease;">
+        <span style="position: absolute; bottom: 4px; right: 4px; background: rgba(0,0,0,0.7); color: #FFF; font-size: 0.65rem; padding: 2px 5px; border-radius: 4px;">🔍 Zoom</span>
+      </div>
+
+      <!-- Informations Événement -->
       <div>
         <span class="badge-tag or" style="margin-bottom: 8px;">Prochain Grand Rendez-vous</span>
-        <h3 style="font-size: 1.6rem; color: #FFFFFF; font-family: var(--font-titre);">SECOFIS 2026 — Séminaire de Formation</h3>
-        <p style="color: rgba(255,255,255,0.85); margin-top: 6px; font-size: 0.95rem;">
-          L'événement de formation et d'orientation majeur des élèves &amp; étudiants musulmans de Koumassi.
+        <h3 style="font-size: 1.5rem; color: #FFFFFF; font-family: var(--font-titre); margin-bottom: 4px;">Nuit Du MAHOULOUD 2026</h3>
+        <div style="font-size: 0.92rem; color: var(--or-clair); font-weight: 700; margin-bottom: 6px;">
+          Thème : « Le Sermon d'Adieu : enseignements et leçons pour le musulman »
+        </div>
+        <p style="color: rgba(255,255,255,0.85); font-size: 0.88rem; margin: 0;">
+          📍 Collège Moderne La Colombe • Dans la nuit du 25 au 26 Août 2026 à partir de 20H
         </p>
       </div>
 
+      <!-- Compte à rebours & CTA -->
       <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 12px;">
         <div class="compte-rebours-box">
           <div class="chronometre-unite">
-            <div class="chronometre-valeur" id="compteurJours">14</div>
+            <div class="chronometre-valeur" id="compteurJours">07</div>
             <div class="chronometre-label">Jours</div>
           </div>
           <div class="chronometre-unite">
-            <div class="chronometre-valeur" id="compteurHeures">08</div>
+            <div class="chronometre-valeur" id="compteurHeures">09</div>
             <div class="chronometre-label">Heures</div>
           </div>
           <div class="chronometre-unite">
-            <div class="chronometre-valeur" id="compteurMinutes">45</div>
+            <div class="chronometre-valeur" id="compteurMinutes">15</div>
             <div class="chronometre-label">Min</div>
           </div>
         </div>
@@ -700,9 +711,9 @@
       </div>
     </div>
 
-    <div class="bas-pied-site">
+    <div class="bas-pied-site" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
       <p>&copy; 2025 - 2026 AEEMCI Sous-Comité de Koumassi. Tous droits réservés.</p>
-      <p style="color: var(--or-clair); font-weight: 700; letter-spacing: 1px;">« Ensemble nous sommes plus forts »</p>
+      <a href="admin/index.html" class="bouton-cta-contour" style="padding: 6px 14px; font-size: 0.78rem; border-radius: 20px; border: 1px solid var(--or-sombre); color: var(--or-clair); text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">🔐 Connexion Admin Studio</a>
     </div>
   </div>
 </footer>
@@ -724,7 +735,123 @@ function toggleFaq(btn) {
   var item = btn.parentElement;
   item.classList.toggle('ouvert');
 }
+
+// Compte à rebours dynamique pour la Nuit du Maouloud 2026 (Nuit du 25 au 26 Août 2026)
+function demarrerCompteReboursMaouloud() {
+  var dateEvenement = new Date("August 25, 2026 20:00:00").getTime();
+  
+  function mettreAJourChronometre() {
+    var maintenant = new Date().getTime();
+    var ecart = dateEvenement - maintenant;
+
+    if (ecart <= 0) {
+      document.getElementById('compteurJours').textContent = "00";
+      document.getElementById('compteurHeures').textContent = "00";
+      document.getElementById('compteurMinutes').textContent = "00";
+      return;
+    }
+
+    var jours = Math.floor(ecart / (1000 * 60 * 60 * 24));
+    var heures = Math.floor((ecart % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((ecart % (1000 * 60 * 60)) / (1000 * 60));
+
+    document.getElementById('compteurJours').textContent = jours < 10 ? "0" + jours : jours;
+    document.getElementById('compteurHeures').textContent = heures < 10 ? "0" + heures : heures;
+    document.getElementById('compteurMinutes').textContent = minutes < 10 ? "0" + minutes : minutes;
+  }
+
+  mettreAJourChronometre();
+  setInterval(mettreAJourChronometre, 30000);
+}
+demarrerCompteReboursMaouloud();
+
+// Lightbox Affiche Officielle
+function ouvrirAfficheModal(src) {
+  var modal = document.getElementById('modalAfficheOfficielle');
+  if(!modal) return;
+  document.getElementById('imgAfficheHD').src = src;
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function fermerAfficheModal() {
+  var modal = document.getElementById('modalAfficheOfficielle');
+  if(!modal) return;
+  modal.style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+// Injection dynamique des nouveaux membres du bureau ajoutés via AEEMCI Studio
+function chargerBureauStudio() {
+  var sectionBureau = document.querySelector('#bureau .groupe-bureau-bloc .grille-membres-bureau');
+  if (!sectionBureau) return;
+
+  var listeCustom = JSON.parse(localStorage.getItem('aeemci_bureau_custom') || '[]');
+  listeCustom.forEach(function(item) {
+    var carte = document.createElement('div');
+    carte.className = 'carte-membre-bureau';
+    carte.innerHTML = `
+      <div class="photo-membre-box">
+        <img src="${item.photo}" alt="${item.nom}" loading="lazy" onerror="this.src='images/logo.png'; this.style.objectFit='contain';">
+      </div>
+      <div class="infos-membre-box">
+        <h4 class="nom-membre">${item.nom}</h4>
+        <span class="role-membre">${item.poste}</span>
+        <span class="badge-tag or" style="margin-top: 6px; font-size: 0.7rem;">${item.pole}</span>
+  });
+}
+chargerBureauStudio();
+
+// Application dynamique de TOUTES les modifications du site enregistrées via AEEMCI Studio
+function chargerSiteConfigFull() {
+  var siteData = JSON.parse(localStorage.getItem('aeemci_site_config_full') || '{}');
+  if (!siteData.heroTitre) return;
+
+  var elHeroTitle = document.querySelector('.hero-moderne h1, .titre-hero');
+  if (elHeroTitle && siteData.heroTitre) elHeroTitle.textContent = siteData.heroTitre;
+
+  var elHeroSubtitle = document.querySelector('.hero-moderne p, .description-hero');
+  if (elHeroSubtitle && siteData.heroSousTitre) elHeroSubtitle.textContent = siteData.heroSousTitre;
+
+  var elHeroBadge = document.querySelector('.hero-moderne .slogan-majestueux-box span');
+  if (elHeroBadge && siteData.heroBadge) elHeroBadge.textContent = siteData.heroBadge;
+
+  var cartesChiffres = document.querySelectorAll('.grille-chiffres-cles .carte-chiffre-cle');
+  if (cartesChiffres.length >= 4) {
+    if (siteData.impact1Chiffre) {
+      cartesChiffres[0].querySelector('.nombre-chiffre').textContent = siteData.impact1Chiffre;
+      cartesChiffres[0].querySelector('.titre-chiffre').textContent = siteData.impact1Titre;
+      cartesChiffres[0].querySelector('.desc-chiffre').textContent = siteData.impact1Desc;
+    }
+    if (siteData.impact2Chiffre) {
+      cartesChiffres[1].querySelector('.nombre-chiffre').textContent = siteData.impact2Chiffre;
+      cartesChiffres[1].querySelector('.titre-chiffre').textContent = siteData.impact2Titre;
+      cartesChiffres[1].querySelector('.desc-chiffre').textContent = siteData.impact2Desc;
+    }
+    if (siteData.impact3Chiffre) {
+      cartesChiffres[2].querySelector('.nombre-chiffre').textContent = siteData.impact3Chiffre;
+      cartesChiffres[2].querySelector('.titre-chiffre').textContent = siteData.impact3Titre;
+      cartesChiffres[2].querySelector('.desc-chiffre').textContent = siteData.impact3Desc;
+    }
+    if (siteData.impact4Chiffre) {
+      cartesChiffres[3].querySelector('.nombre-chiffre').textContent = siteData.impact4Chiffre;
+      cartesChiffres[3].querySelector('.titre-chiffre').textContent = siteData.impact4Titre;
+      cartesChiffres[3].querySelector('.desc-chiffre').textContent = siteData.impact4Desc;
+    }
+  }
+}
+chargerSiteConfigFull();
 </script>
+
+<!-- MODALE AFFICHE HD -->
+<div id="modalAfficheOfficielle" onclick="fermerAfficheModal()" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 3000; align-items: center; justify-content: center; padding: 20px;">
+  <div style="position: relative; max-width: 500px; width: 100%; text-align: center;" onclick="event.stopPropagation()">
+    <button onclick="fermerAfficheModal()" style="position: absolute; top: -15px; right: -15px; background: var(--or); color: #000; border: none; font-size: 1.4rem; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-weight: bold; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">&times;</button>
+    <img id="imgAfficheHD" src="images/maouloud.jpg" alt="Affiche Officielle Nuit du Mahouloud 2026" style="width: 100%; max-height: 85vh; object-fit: contain; border-radius: 14px; border: 3px solid var(--or); box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+    <div style="margin-top: 14px;">
+      <a href="images/maouloud.jpg" download="Affiche_Nuit_du_Mahouloud_2026_AEEMCI_Koumassi.jpg" class="bouton-cta-primaire" style="font-size: 0.88rem; padding: 10px 24px;">Télécharger l'Affiche HD ↓</a>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
