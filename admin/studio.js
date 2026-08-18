@@ -1,4 +1,4 @@
-// AEEMCI Koumassi Studio — Full 100% Site Editor Logic
+// AEEMCI Koumassi Studio — Full 100% Site Editor Logic & Robust Image Manager
 (function() {
   const PIN_CORRECT = "2026";
   
@@ -27,6 +27,16 @@
     chargerTableGalerie();
     chargerChampsEditeurGlobal();
     rafraichirStatsDashboard();
+  }
+
+  // Normalisation des chemins d'images (pour affichage sans erreur en admin et sur le site public)
+  function normaliserCheminAdmin(path) {
+    if (!path) return "../images/logo.png";
+    if (path.startsWith("data:image/") || path.startsWith("http://") || path.startsWith("https://")) {
+      return path;
+    }
+    if (path.startsWith("../")) return path;
+    return "../" + path;
   }
 
   window.changerOnglet = function(tabName, element) {
@@ -125,8 +135,9 @@
     const reader = new FileReader();
     reader.onload = function(e) {
       tempImageUploaded = e.target.result;
-      document.getElementById("eventImagePreviewThumb").src = tempImageUploaded;
-      document.getElementById("eventImagePreviewThumb").style.display = "block";
+      var thumb = document.getElementById("eventImagePreviewThumb");
+      thumb.src = tempImageUploaded;
+      thumb.style.display = "block";
     };
     reader.readAsDataURL(file);
   };
@@ -137,7 +148,8 @@
     var date = document.getElementById("eventDate").value;
     var badge = document.getElementById("eventBadge").value;
     var desc = document.getElementById("eventDesc").value;
-    var image = tempImageUploaded || "../images/secofis.jpg";
+    var imagePreset = document.getElementById("eventImagePreset") ? document.getElementById("eventImagePreset").value : "";
+    var image = tempImageUploaded || imagePreset || "images/secofis.jpg";
 
     if (!titre || !date || !desc) {
       alert("Veuillez remplir le titre, la date et la description.");
@@ -158,6 +170,7 @@
     localStorage.setItem("aeemci_evenements_custom", JSON.stringify(listeActuelle));
 
     alert("🎉 Nouvel événement « " + titre + " » publié avec succès sur le site public !");
+    tempImageUploaded = "";
     fermerModalAjoutEvenement();
     chargerTableEvenements();
     rafraichirStatsDashboard();
@@ -189,7 +202,7 @@
     listeActuelle.forEach(function(item, index) {
       html += `
         <tr>
-          <td><img src="${item.image}" class="thumb-preview"></td>
+          <td><img src="${normaliserCheminAdmin(item.image)}" class="thumb-preview"></td>
           <td><strong>${item.titre}</strong></td>
           <td>${item.date}</td>
           <td><span style="color: var(--studio-gold);">${item.badge}</span></td>
@@ -228,8 +241,9 @@
     const reader = new FileReader();
     reader.onload = function(e) {
       tempPhotoUploaded = e.target.result;
-      document.getElementById("membrePhotoPreviewThumb").src = tempPhotoUploaded;
-      document.getElementById("membrePhotoPreviewThumb").style.display = "block";
+      var thumb = document.getElementById("membrePhotoPreviewThumb");
+      thumb.src = tempPhotoUploaded;
+      thumb.style.display = "block";
     };
     reader.readAsDataURL(file);
   };
@@ -239,7 +253,7 @@
     var nom = document.getElementById("membreNom").value;
     var poste = document.getElementById("membrePoste").value;
     var pole = document.getElementById("membrePole").value;
-    var photo = tempPhotoUploaded || "../images/logo.png";
+    var photo = tempPhotoUploaded || "images/logo.png";
 
     if (!nom || !poste) {
       alert("Veuillez saisir le nom et le poste du membre.");
@@ -259,6 +273,7 @@
     localStorage.setItem("aeemci_bureau_custom", JSON.stringify(listeBureau));
 
     alert("👤 Nouveau membre « " + nom + " » ajouté au bureau avec succès !");
+    tempPhotoUploaded = "";
     fermerModalAjoutMembre();
     chargerTableBureau();
     rafraichirStatsDashboard();
@@ -290,7 +305,7 @@
     listeBureau.forEach(function(item, index) {
       html += `
         <tr>
-          <td><img src="${item.photo}" class="thumb-preview" onerror="this.src='../images/logo.png'"></td>
+          <td><img src="${normaliserCheminAdmin(item.photo)}" class="thumb-preview" onerror="this.src='../images/logo.png'"></td>
           <td><strong>${item.nom}</strong></td>
           <td>${item.poste}</td>
           <td><span style="color: var(--studio-gold);">${item.pole}</span></td>
@@ -313,7 +328,7 @@
   };
 
   /* =========================================================
-     4. GESTION GALERIE PHOTO
+     4. GESTION GALERIE PHOTO (AVEC APERÇU ET PRÉSÉLECTIONS)
      ========================================================= */
   window.ouvrirModalAjoutGalerie = function() {
     document.getElementById("modalAjoutGalerie").style.display = "flex";
@@ -329,8 +344,10 @@
     const reader = new FileReader();
     reader.onload = function(e) {
       tempGaleriePhotoUploaded = e.target.result;
-      document.getElementById("galeriePhotoPreviewThumb").src = tempGaleriePhotoUploaded;
-      document.getElementById("galeriePhotoPreviewThumb").style.display = "block";
+      var thumb = document.getElementById("galeriePhotoPreviewThumb");
+      thumb.src = tempGaleriePhotoUploaded;
+      thumb.style.display = "block";
+      document.getElementById("msgPhotoOk").style.display = "block";
     };
     reader.readAsDataURL(file);
   };
@@ -339,7 +356,8 @@
     if(e) e.preventDefault();
     var titre = document.getElementById("galerieTitre").value;
     var categorie = document.getElementById("galerieCategorie").value;
-    var photo = tempGaleriePhotoUploaded || "../images/secofis.jpg";
+    var photoPreset = document.getElementById("galeriePhotoPreset") ? document.getElementById("galeriePhotoPreset").value : "";
+    var photo = tempGaleriePhotoUploaded || photoPreset || "images/secofis.jpg";
 
     if (!titre || !photo) {
       alert("Veuillez remplir le titre et sélectionner une photo.");
@@ -358,7 +376,8 @@
     listeGalerie.unshift(nouvellePhoto);
     localStorage.setItem("aeemci_galerie_custom", JSON.stringify(listeGalerie));
 
-    alert("🖼️ Photo « " + titre + " » ajoutée avec succès à la Galerie publique !");
+    alert("🖼️ Photo « " + titre + " » publiée avec succès dans la Galerie publique !");
+    tempGaleriePhotoUploaded = "";
     fermerModalAjoutGalerie();
     chargerTableGalerie();
     rafraichirStatsDashboard();
@@ -374,7 +393,7 @@
     listeGalerie.forEach(function(item, index) {
       html += `
         <tr>
-          <td><img src="${item.photo}" class="thumb-preview"></td>
+          <td><img src="${normaliserCheminAdmin(item.photo)}" class="thumb-preview" onerror="this.src='../images/logo.png'"></td>
           <td><strong>${item.titre}</strong></td>
           <td><span style="color: var(--studio-gold);">${item.categorie}</span></td>
           <td>${item.date}</td>

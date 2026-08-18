@@ -60,7 +60,8 @@
   <main class="studio-main">
     <header class="studio-header">
       <h1 class="studio-header-title" id="studioPageTitle">Tableau de bord</h1>
-      <div style="display: flex; align-items: center; gap: 16px;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <button onclick="document.getElementById('modalGuideDebutant').style.display='flex'" style="background: rgba(212,175,55,0.2); color: var(--studio-gold); border: 1px solid var(--studio-gold); padding: 8px 16px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.85rem;">❓ Guide Facile (0-Code)</button>
         <span style="font-size: 0.85rem; color: #10B981; font-weight: 600;">🟢 En direct (Online 2026)</span>
         <a href="../index.html" target="_blank" class="btn-studio-primary" style="font-size: 0.85rem; padding: 8px 16px;">Voir le site public ↗</a>
       </div>
@@ -404,17 +405,64 @@
           </select>
         </div>
 
-        <div style="margin-bottom: 24px;">
-          <label style="display: block; font-size: 0.85rem; color: var(--studio-subtext); margin-bottom: 6px;">Sélectionner le Fichier Photo * :</label>
-          <input type="file" id="galeriePhotoFile" accept="image/*" onchange="handleGaleriePhotoChoice(event)" style="display: block; color: var(--studio-subtext); font-size: 0.85rem;">
-          <img id="galeriePhotoPreviewThumb" src="" alt="Aperçu" style="display: none; width: 100px; height: 75px; object-fit: cover; border-radius: 8px; margin-top: 8px; border: 2px solid var(--studio-gold);">
+        <div style="margin-bottom: 20px; background: rgba(255,255,255,0.03); padding: 16px; border-radius: 10px; border: 1px dashed var(--studio-border);">
+          <label style="display: block; font-size: 0.88rem; color: var(--studio-gold); font-weight: 700; margin-bottom: 8px;">Option 1 : Importer une photo depuis votre appareil :</label>
+          <input type="file" id="galeriePhotoFile" accept="image/*" onchange="handleGaleriePhotoChoice(event)" style="display: block; color: var(--studio-subtext); font-size: 0.85rem; width: 100%;">
+          
+          <div style="margin-top: 14px; border-top: 1px solid var(--studio-border); padding-top: 12px;">
+            <label style="display: block; font-size: 0.88rem; color: var(--studio-gold); font-weight: 700; margin-bottom: 6px;">Option 2 : Ou choisir une photo existante de la banque :</label>
+            <select id="galeriePhotoPreset" style="width: 100%; padding: 10px; background: #121212; border: 1px solid var(--studio-border); border-radius: 8px; color: #FFF;">
+              <option value="images/secofis.jpg">SECOFIS 2026 (Formation)</option>
+              <option value="images/maouloud.jpg">Affiche Nuit du Mahouloud 2026</option>
+              <option value="images/rentree-solennelle.jpg">Rentrée Solennelle &amp; SEFORES</option>
+              <option value="images/nuit-priere.jpg">Nuit de Prière &amp; Veillée Spirituelle</option>
+              <option value="images/journee-excellence.jpg">Journée de l'Excellence</option>
+              <option value="images/solidarite-ramadan.jpg">Iftar Solidaire Ramadan</option>
+            </select>
+          </div>
+
+          <div style="margin-top: 14px; text-align: center;">
+            <img id="galeriePhotoPreviewThumb" src="" alt="Aperçu" style="display: none; width: 120px; height: 90px; object-fit: cover; border-radius: 8px; margin: 0 auto; border: 2px solid var(--studio-gold);">
+            <p id="msgPhotoOk" style="display: none; color: #10B981; font-weight: 700; font-size: 0.88rem; margin-top: 8px;">✅ Photo chargée avec succès ! Cliquez sur "Publier" ci-dessous.</p>
+          </div>
         </div>
 
         <div style="display: flex; gap: 12px; justify-content: flex-end;">
           <button type="button" onclick="fermerModalAjoutGalerie()" style="background: transparent; color: var(--studio-subtext); border: 1px solid var(--studio-border); padding: 10px 20px; border-radius: 8px; cursor: pointer;">Annuler</button>
-          <button type="submit" class="btn-studio-primary" style="background: #10B981; color: #FFF; padding: 10px 24px;">Publier dans la Galerie Web →</button>
+          <button type="submit" class="btn-studio-primary" style="background: #10B981; color: #FFF; padding: 12px 28px; font-size: 0.95rem;">Publier dans la Galerie Web →</button>
         </div>
       </form>
+    </div>
+  </div>
+
+  <!-- MODALE TUTORIEL DÉBUTANT (0-CODE FACILE) -->
+  <div id="modalGuideDebutant" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 9999; align-items: center; justify-content: center; padding: 20px;">
+    <div style="background: var(--studio-sidebar); border: 2px solid var(--studio-gold); border-radius: 20px; padding: 36px; max-width: 580px; width: 100%; box-shadow: 0 25px 60px rgba(0,0,0,0.7);" onclick="event.stopPropagation()">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--studio-border); padding-bottom: 14px;">
+        <h3 style="font-family: var(--font-titre); color: var(--studio-gold); font-size: 1.4rem;">💡 Guide 100% Facile (Aucune programmation requise)</h3>
+        <button onclick="document.getElementById('modalGuideDebutant').style.display='none'" style="background: transparent; color: var(--studio-subtext); border: none; font-size: 1.6rem; cursor: pointer;">&times;</button>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="background: rgba(255,255,255,0.04); padding: 16px; border-radius: 12px; border-left: 4px solid var(--studio-gold);">
+          <h4 style="color: #FFF; font-size: 1rem; margin-bottom: 4px;">1️⃣ Pour Ajouter un Événement ou une Photo</h4>
+          <p style="font-size: 0.88rem; color: var(--studio-subtext);">Cliquez sur l'un des boutons dorés <strong>« + Nouvel Événement »</strong> ou <strong>« + Publier Photo Galerie »</strong>. Un petit formulaire très simple s'ouvre : remplissez le titre et choisissez votre photo, puis validez !</p>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.04); padding: 16px; border-radius: 12px; border-left: 4px solid #10B981;">
+          <h4 style="color: #FFF; font-size: 1rem; margin-bottom: 4px;">2️⃣ Pour Modifier le Texte Directement sur l'Écran</h4>
+          <p style="font-size: 0.88rem; color: var(--studio-subtext);">Survolez n'importe quel titre ou paragraphe sur le site public : un badge <strong>« ✏️ Modifier »</strong> apparaît ! Cliquez dessus pour taper directement votre nouveau texte.</p>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.04); padding: 16px; border-radius: 12px; border-left: 4px solid #EF4444;">
+          <h4 style="color: #FFF; font-size: 1rem; margin-bottom: 4px;">3️⃣ Pour Supprimer une Erreur</h4>
+          <p style="font-size: 0.88rem; color: var(--studio-subtext);">Un bouton rouge vif <strong>« Supprimer 🗑️ »</strong> est présent en face de chaque élément. Un clic suffit pour le retirer instantanément du site.</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 28px; text-align: center;">
+        <button onclick="document.getElementById('modalGuideDebutant').style.display='none'" class="btn-studio-primary" style="padding: 12px 32px; font-size: 1rem;">J'ai compris, c'est super facile ! 👍</button>
+      </div>
     </div>
   </div>
 
