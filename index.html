@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -721,7 +721,9 @@
 </footer>
 
 <script>
-function ouvrirSidebar() {
+window.ouvrirSidebar = function() { var p = document.getElementById('sidebarPanneau'); var o = document.getElementById('sidebarOverlay'); if(p) p.classList.add('ouvert'); if(o) o.classList.add('ouvert'); document.body.style.overflow = 'hidden'; };
+window.fermerSidebar = function() { var p = document.getElementById('sidebarPanneau'); var o = document.getElementById('sidebarOverlay'); if(p) p.classList.remove('ouvert'); if(o) o.classList.remove('ouvert'); document.body.style.overflow = ''; };
+function ouvrirSidebar_old() {
   document.getElementById('sidebarPanneau').classList.add('ouvert');
   document.getElementById('sidebarOverlay').classList.add('ouvert');
   document.body.style.overflow = 'hidden';
