@@ -1,47 +1,31 @@
 # AEEMCI — Sous-Comité de Koumassi
 
-Site officiel de l'Association des Élèves et Étudiants Musulmans de Côte d'Ivoire (AEEMCI), Sous-Comité de la commune de Koumassi, Abidjan.
+> **Association des Élèves et Étudiants Musulmans de Côte d'Ivoire (AEEMCI)**  
+> **Secrétariat Régional Abidjan-Sud — Sous-Comité de Koumassi**  
+> *« Ensemble nous sommes plus forts »* • *« AEEMCI, Pour une identité islamique ! »*
 
-## Structure du projet
+---
 
-```
-AEEMCI/
-├── index.html          → Page d'accueil
-├── activites.html      → Activités
-├── actualites.html     → Actualités
-├── galerie.html        → Galerie photo/vidéo
-├── contact.html        → Contact & adhésion
-├── css/
-│   └── style.css       → Feuille de style principale
-├── images/             → Toutes les images et vidéos
-└── README.md
-```
+## 🌟 Présentation du Projet Officiel
 
-## Pile technique
+Ce dépôt contient la plateforme numérique et le site web officiel 2026 du **Sous-Comité AEEMCI de Koumassi** (Commune de Koumassi, Abidjan, Côte d'Ivoire).
 
-- **HTML5** + **CSS3** (site 100 % statique)
-- Aucune base de données, aucun backend
-- Les chemins sont **relatifs** (`images/logo.png`, `css/style.css`)
+Le projet comprend :
+- 🏠 **Page d'Accueil de Prestige** : Hero banner d'exception, compte à rebours dynamique pour la **Nuit du Mahouloud 2026**, 4 cartes d'impact alignées, présentation du bureau et FAQ.
+- 📰 **Actualités & Événements** : Les 5 grands événements majeurs (SECOFIS, SEFORES, Nuit de Prière, Journée de l'Excellence, Iftar Solidaire).
+- 🖼️ **Médiathèque & Galerie Photo** : Albums photos interactifs avec zoom plein écran (GLightbox).
+- 👤 **Bureau Exécutif** : Liste officielle des responsables du sous-comité (Présidence, SG, Trésorerie).
+- 📞 **Contact & Adhésion** : Formulaire d'adhésion en ligne et localisation du siège.
+- 🎬 **AEEMCI Studio (/admin/)** : Interface d'administration privée et ultra-facile (0-code) pour modifier le site et téléverser des photos sans toucher au code HTML.
 
-## Hébergement
+---
 
-Ce site étant statique, il peut être déployé gratuitement sur :
+## 🔗 Liens Officiels
 
-- **GitHub Pages** : `https://<votre-utilisateur>.github.io/<nom-du-depot>/`
-- **Netlify** : glisser le dossier dans le navigateur
-- **Vercel** : import du dépôt
+- 🌍 **Site Web Public** : [https://koumayaya72-del.github.io/aeemci-koumassi/](https://koumayaya72-del.github.io/aeemci-koumassi/)
+- 🎬 **Administration Studio** : [https://koumayaya72-del.github.io/aeemci-koumassi/admin/](https://koumayaya72-del.github.io/aeemci-koumassi/admin/) *(Code PIN : `2026`)*
+- 💬 **Groupe WhatsApp Officiel** : [https://chat.whatsapp.com/KUd1Zmc2JEfBsIWdH5HPdm](https://chat.whatsapp.com/KUd1Zmc2JEfBsIWdH5HPdm)
 
-## Déploiement sur GitHub Pages
+---
 
-1. Créer un dépôt GitHub (via `gh repo create` ou l'interface web).
-2. Pousser le contenu du dossier sur la branche `main`.
-3. Activer **Settings → Pages → Build and deployment** :
-   - Source : `Deploy from a branch`
-   - Branche : `main`, dossier `/ (root)`
-4. Le site est publié sur `https://<utilisateur>.github.io/<nom-du-depot>/`
-
-## Auteur
-
-Bureau du Sous-Comité AEEMCI de Koumassi — Mandat 2026
-
-Foi — Travail — Succès
+&copy; 2025 - 2026 AEEMCI Sous-Comité de Koumassi. Tous droits réservés.
