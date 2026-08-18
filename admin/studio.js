@@ -439,6 +439,17 @@
     if(elGalCount) elGalCount.textContent = listGal.length;
   }
 
+  window.reinitialiserToutLeSite = function() {
+    if (confirm("⚠️ Voulez-vous vraiment réinitialiser toutes les modifications personnalisées et restaurer le site d'origine par défaut ?")) {
+      localStorage.removeItem("aeemci_evenements_custom");
+      localStorage.removeItem("aeemci_bureau_custom");
+      localStorage.removeItem("aeemci_galerie_custom");
+      localStorage.removeItem("aeemci_site_config_full");
+      alert("✅ Le site a été réinitialisé d'origine avec succès !");
+      location.reload();
+    }
+  };
+
   window.deconnexionStudio = function() {
     sessionStorage.removeItem("aeemci_studio_auth");
     location.reload();

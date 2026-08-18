@@ -424,3 +424,59 @@ function actualiserCompteursBadges() {
   document.querySelectorAll('.compteur-sport-badge').forEach(b => b.textContent = listeSport.length);
   document.querySelectorAll('.compteur-sorties-badge').forEach(b => b.textContent = listeSorties.length);
 }
+
+// ==========================================
+// 5. APPLICATION PERMANENTE DES MODIFICATIONS AEEMCI STUDIO
+// ==========================================
+function chargerSiteConfigFull() {
+  try {
+    var siteData = JSON.parse(localStorage.getItem('aeemci_site_config_full') || '{}');
+    if (!siteData.heroTitre) return;
+
+    var elHeroTitle = document.querySelector('.hero-moderne h1, .hero-titre, .titre-hero');
+    if (elHeroTitle && siteData.heroTitre) elHeroTitle.innerHTML = siteData.heroTitre.replace(/\n/g, '<br>');
+
+    var elHeroSubtitle = document.querySelector('.hero-moderne p, .description-hero, .hero-description');
+    if (elHeroSubtitle && siteData.heroSousTitre) elHeroSubtitle.textContent = siteData.heroSousTitre;
+
+    var elHeroBadge = document.querySelector('.slogan-majestueux-box span.slogan-majestueux');
+    if (elHeroBadge && siteData.heroBadge) elHeroBadge.textContent = siteData.heroBadge;
+
+    var cartesChiffres = document.querySelectorAll('.grille-chiffres-cles .carte-chiffre-cle');
+    if (cartesChiffres.length >= 4) {
+      if (siteData.impact1Chiffre) {
+        var n = cartesChiffres[0].querySelector('.nombre-chiffre'); if (n) n.textContent = siteData.impact1Chiffre;
+        var t = cartesChiffres[0].querySelector('.titre-chiffre'); if (t) t.textContent = siteData.impact1Titre;
+        var d = cartesChiffres[0].querySelector('.desc-chiffre'); if (d) d.textContent = siteData.impact1Desc;
+      }
+      if (siteData.impact2Chiffre) {
+        var n = cartesChiffres[1].querySelector('.nombre-chiffre'); if (n) n.textContent = siteData.impact2Chiffre;
+        var t = cartesChiffres[1].querySelector('.titre-chiffre'); if (t) t.textContent = siteData.impact2Titre;
+        var d = cartesChiffres[1].querySelector('.desc-chiffre'); if (d) d.textContent = siteData.impact2Desc;
+      }
+      if (siteData.impact3Chiffre) {
+        var n = cartesChiffres[2].querySelector('.nombre-chiffre'); if (n) n.textContent = siteData.impact3Chiffre;
+        var t = cartesChiffres[2].querySelector('.titre-chiffre'); if (t) t.textContent = siteData.impact3Titre;
+        var d = cartesChiffres[2].querySelector('.desc-chiffre'); if (d) d.textContent = siteData.impact3Desc;
+      }
+      if (siteData.impact4Chiffre) {
+        var n = cartesChiffres[3].querySelector('.nombre-chiffre'); if (n) n.textContent = siteData.impact4Chiffre;
+        var t = cartesChiffres[3].querySelector('.titre-chiffre'); if (t) t.textContent = siteData.impact4Titre;
+        var d = cartesChiffres[3].querySelector('.desc-chiffre'); if (d) d.textContent = siteData.impact4Desc;
+      }
+    }
+
+    if (siteData.telPresident || siteData.telSecGen) {
+      var elContacts = document.querySelectorAll('.pied-colonne li');
+      elContacts.forEach(function(li) {
+        if (li.textContent.includes('Contact :')) {
+          li.innerHTML = '<span style="color: var(--or-clair);">Contact :</span> ' + (siteData.telPresident || '+225 05 45 30 51 80') + ' / ' + (siteData.telSecGen || '+225 07 57 47 73 72');
+        }
+      });
+    }
+  } catch (err) {
+    console.error("Erreur lors de l'application de la config du site:", err);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', chargerSiteConfigFull);
