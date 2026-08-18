@@ -2035,3 +2035,24 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1.1rem !important;
   }
 }
+/* Correction bug bouton burger page accueil */
+.entete-site {
+  position: relative;
+  z-index: 4000 !important;
+}
+
+.menu-burger {
+  position: relative;
+  z-index: 4001 !important;
+  cursor: pointer;
+}
+
+.sidebar-overlay:not(.active) {
+  display: none !important;
+  pointer-events: none !important;
+}
+.menu-burger {
+  position: relative !important;
+  z-index: 99999 !important;
+  pointer-events: auto !important;
+}

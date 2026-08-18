@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -816,6 +816,9 @@ function chargerBureauStudio() {
         <h4 class="nom-membre">${item.nom}</h4>
         <span class="role-membre">${item.poste}</span>
         <span class="badge-tag or" style="margin-top: 6px; font-size: 0.7rem;">${item.pole}</span>
+      </div>
+    `;
+    sectionBureau.prepend(carte);
   });
 }
 chargerBureauStudio();
@@ -859,6 +862,19 @@ function chargerSiteConfigFull() {
   }
 }
 chargerSiteConfigFull();
+
+function ouvrirSidebar() {
+  const panneau = document.getElementById('sidebarPanneau');
+  const overlay = document.getElementById('sidebarOverlay');
+  if (panneau) panneau.classList.add('active');
+  if (overlay) overlay.classList.add('active');
+}
+
+function fermerSidebar() {
+  const panneau = document.getElementById('sidebarPanneau');
+  const overlay = document.getElementById('sidebarOverlay');
+  if (panneau) panneau.classList.remove('active');
+  if (overlay) overlay.classList.remove('active');
 </script>
 
 <!-- MODALE AFFICHE HD -->
