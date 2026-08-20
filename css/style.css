@@ -2010,8 +2010,19 @@ h1, h2, h3, h4, h5, h6 {
   /* Footers */
   .grille-pied {
     grid-template-columns: 1fr !important;
-    gap: 24px !important;
+    gap: 36px !important;
     text-align: center !important;
+  }
+  .grille-pied > div {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  .pied-colonne ul {
+    align-items: center !important;
+  }
+  .pied-site .logo-marque {
+    justify-content: center !important;
   }
 
   .bas-pied-site {
