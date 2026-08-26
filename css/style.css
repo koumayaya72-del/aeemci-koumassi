@@ -1207,55 +1207,110 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 36px;
 }
 
-/* ---------- Pied de page / Footer ---------- */
+/* ---------- Pied de page / Footer (2026 EXECUTIVE LUXURY) ---------- */
 .pied-site {
-  background: #061A10;
-  color: rgba(255, 255, 255, 0.75);
-  padding: 70px 0 30px;
-  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  background: linear-gradient(180deg, #062215 0%, #03140A 100%) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  padding: 80px 0 35px !important;
+  border-top: 1px solid rgba(212, 175, 55, 0.35) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.pied-site::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.8), transparent);
 }
 
 .grille-pied {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
-  gap: 48px;
-  padding-bottom: 48px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: grid !important;
+  grid-template-columns: 1.4fr 1fr 1.2fr 1.1fr !important;
+  gap: 40px !important;
+  padding-bottom: 50px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 .pied-colonne h4 {
-  color: var(--or-clair);
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-bottom: 20px;
+  color: var(--or-clair) !important;
+  font-family: var(--font-titre) !important;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1.5px !important;
+  margin-bottom: 22px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.pied-colonne h4::after {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--or);
+  border-radius: 2px;
 }
 
 .pied-colonne ul {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
 }
 
 .pied-colonne ul a {
-  color: rgba(255, 255, 255, 0.75);
-  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.78) !important;
+  font-size: 0.94rem !important;
+  transition: var(--transition) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
 }
 
 .pied-colonne ul a:hover {
-  color: var(--or);
-  padding-left: 4px;
+  color: var(--or-clair) !important;
+  transform: translateX(5px) !important;
+}
+
+.bouton-admin-pied {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  padding: 12px 22px !important;
+  background: rgba(212, 175, 55, 0.12) !important;
+  color: var(--or-clair) !important;
+  border: 1px solid rgba(212, 175, 55, 0.4) !important;
+  border-radius: 50px !important;
+  font-family: var(--font-titre) !important;
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
+  transition: var(--transition) !important;
+  margin-top: 14px !important;
+}
+
+.bouton-admin-pied:hover {
+  background: linear-gradient(135deg, #FDE68A 0%, #D4AF37 100%) !important;
+  color: #062215 !important;
+  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.35) !important;
+  transform: translateY(-3px) !important;
 }
 
 .bas-pied-site {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 28px;
-  font-size: 0.84rem;
-  color: rgba(255, 255, 255, 0.5);
-  flex-wrap: wrap;
-  gap: 16px;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding-top: 30px !important;
+  font-size: 0.86rem !important;
+  color: rgba(255, 255, 255, 0.65) !important;
+  flex-wrap: wrap !important;
+  gap: 16px !important;
 }
 
 /* ---------- Responsive Styles ---------- */
