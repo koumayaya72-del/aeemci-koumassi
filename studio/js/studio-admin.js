@@ -20,7 +20,7 @@ const CMS_DEFAUTS = {
       date: "25-26 Août 2026",
       lieu: "Collège Moderne La Colombe",
       description: "Grand rassemblement spirituel et conférences sur la vie du Prophète (SWS). Interventions de plusieurs guides religieux.",
-      image: "../images/news1.jpg"
+      image: "images/logo.png"
     },
     {
       id: 102,
@@ -29,13 +29,10 @@ const CMS_DEFAUTS = {
       date: "01 Septembre 2026",
       lieu: "Siège AEEMCI Koumassi",
       description: "Cours de renforcement gratuits organisés par la commission académique pour tous les élèves du sous-comité.",
-      image: "../images/news2.jpg"
+      image: "images/logo.png"
     }
   ],
-  galerie: [
-    { id: 201, url: "../images/news1.jpg", titre: "Mahouloud 2026" },
-    { id: 202, url: "../images/news2.jpg", titre: "Soutien Scolaire" }
-  ]
+  galerie: [] // Pas de fausses images relatives par défaut pour préserver la galerie publique
 };
 
 document.addEventListener('DOMContentLoaded', async function() {
@@ -55,9 +52,11 @@ function initialiserDonneesCMS() {
   if (!localStorage.getItem('aeemci_cms_actualites')) {
     localStorage.setItem('aeemci_cms_actualites', JSON.stringify(CMS_DEFAUTS.actualites));
   }
-  if (!localStorage.getItem('aeemci_cms_galerie')) {
-    localStorage.setItem('aeemci_cms_galerie', JSON.stringify(CMS_DEFAUTS.galerie));
-  }
+  
+  // Nettoyer la galerie si elle contient des chemins relatifs cassés (ex: ../images/)
+  let galerieStockee = JSON.parse(localStorage.getItem('aeemci_cms_galerie')) || [];
+  galerieStockee = galerieStockee.filter(g => g && g.url && !g.url.includes('../images/'));
+  localStorage.setItem('aeemci_cms_galerie', JSON.stringify(galerieStockee));
 }
 
 // 1. GESTION DU BUREAU EXÉCUTIF & PHOTO DU PRÉSIDENT
@@ -206,7 +205,7 @@ window.ajouterActualiteCMS = function(e) {
       date: date || "Prochainement",
       lieu: lieu || "Koumassi",
       description: description,
-      image: "../images/logo.png"
+      image: "images/logo.png"
     };
     actualites.unshift(nouvelleActu);
   }
@@ -271,7 +270,7 @@ function initialiserDragAndDropGalerie() {
 }
 
 function traiterFichiersPhotos(files) {
-  let galerie = JSON.parse(localStorage.getItem('aeemci_cms_galerie')) || CMS_DEFAUTS.galerie;
+  let galerie = JSON.parse(localStorage.getItem('aeemci_cms_galerie')) || [];
   let compt = 0;
 
   Array.from(files).forEach(file => {
@@ -296,14 +295,14 @@ function traiterFichiersPhotos(files) {
 }
 
 function chargerGalerieCMS() {
-  const galerie = JSON.parse(localStorage.getItem('aeemci_cms_galerie')) || CMS_DEFAUTS.galerie;
+  const galerie = JSON.parse(localStorage.getItem('aeemci_cms_galerie')) || [];
   const grid = document.getElementById('gridGalerieCMS');
   if (!grid) return;
 
   grid.innerHTML = '';
 
   if (galerie.length === 0) {
-    grid.innerHTML = `<p style="color: var(--texte-secondaire); grid-column: 1 / -1;">Aucune photo dans la galerie. Téléversez-en de nouvelles ci-dessus.</p>`;
+    grid.innerHTML = `<p style="color: var(--texte-secondaire); grid-column: 1 / -1; padding: 10px;">Aucune nouvelle photo téléversée depuis le studio. Les photos d'archives s'affichent sur le site public.</p>`;
     return;
   }
 

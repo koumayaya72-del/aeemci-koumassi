@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
   synchroniserBureauPublic();
   synchroniserActualitesPublic();
   synchroniserStatistiquesPublic();
+  synchroniserGaleriePublic();
 });
 
 // 1. Synchronisation des Infos du Bureau & Photo du Président
@@ -45,7 +46,7 @@ function synchroniserActualitesPublic() {
         article.className = 'carte-actualite-moderne';
         article.innerHTML = `
           <div class="carte-actu-image">
-            <img src="${actu.image || 'images/logo.png'}" alt="${actu.titre}" loading="lazy">
+            <img src="${actu.image || 'images/logo.png'}" alt="${actu.titre}" loading="lazy" onerror="this.src='images/logo.png';">
             <span class="badge-categorie">${actu.categorie}</span>
           </div>
           <div class="carte-actu-contenu">
@@ -80,5 +81,36 @@ function synchroniserStatistiquesPublic() {
     }
   } catch (e) {
     console.warn("Mise à jour des statistiques ignorée.");
+  }
+}
+
+// 4. Synchronisation Dynamique des Photos de la Galerie Uploadées depuis le Studio
+function synchroniserGaleriePublic() {
+  const galerieRaw = localStorage.getItem('aeemci_cms_galerie');
+  if (!galerieRaw) return;
+
+  try {
+    const mefGalerie = JSON.parse(galerieRaw);
+    const container = document.querySelector('.grille-galerie-filtree');
+
+    if (container && mefGalerie && mefGalerie.length > 0) {
+      // Filtrer les éléments invalides ou relatifs cassés
+      const photosValides = mefGalerie.filter(item => item && item.url && !item.url.includes('../images/'));
+      
+      photosValides.reverse().forEach(photo => {
+        const item = document.createElement('div');
+        item.className = 'carte-galerie-item';
+        item.innerHTML = `
+          <img src="${photo.url}" alt="${photo.titre || 'Photo AEEMCI Koumassi'}" loading="lazy" onerror="this.src='images/logo.png';">
+          <div class="carte-galerie-overlay">
+            <span class="carte-galerie-cat">Nouveau • Studio Admin</span>
+            <h3 class="carte-galerie-titre">${photo.titre || 'Activité Koumassi'}</h3>
+          </div>
+        `;
+        container.insertBefore(item, container.firstChild);
+      });
+    }
+  } catch (e) {
+    console.warn("Mise à jour de la galerie ignorée.");
   }
 }
