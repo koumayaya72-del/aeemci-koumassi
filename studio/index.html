@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studio AEEMCI — Tableau de Bord d'Administration (Koumassi)</title>
+  <link rel="stylesheet" href="studio.css">
+  <link rel="icon" href="../images/logo.png" type="image/png">
+</head>
+<body>
+
+<div class="studio-container">
+
+  <!-- ==================== SIDEBAR LATÉRALE ==================== -->
+  <aside class="studio-sidebar" id="studioSidebar">
+    <div class="sidebar-header">
+      <img src="../images/logo.png" alt="Logo AEEMCI Koumassi" onerror="this.src='../logo.png'">
+      <div class="sidebar-titre-box">
+        <h2>STUDIO AEEMCI</h2>
+        <span>Koumassi Admin</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="nav-item actif" onclick="changerOngletStudio('tab-vue-ensemble', this)">
+        <span class="nav-icone">📊</span>
+        <span class="nav-texte">Vue d'ensemble</span>
+      </a>
+
+      <a class="nav-item" onclick="changerOngletStudio('tab-militants', this)">
+        <span class="nav-icone">📋</span>
+        <span class="nav-texte">Registre Militants</span>
+      </a>
+
+      <a class="nav-item" onclick="changerOngletStudio('tab-evenements', this)">
+        <span class="nav-icone">📅</span>
+        <span class="nav-texte">Événements &amp; Actus</span>
+      </a>
+
+      <a class="nav-item" onclick="changerOngletStudio('tab-formations', this)">
+        <span class="nav-icone">🎓</span>
+        <span class="nav-texte">Formations &amp; Inscr.</span>
+      </a>
+
+      <a class="nav-item" onclick="changerOngletStudio('tab-galerie', this)">
+        <span class="nav-icone">📸</span>
+        <span class="nav-texte">Galerie Média</span>
+      </a>
+
+      <a class="nav-item" onclick="changerOngletStudio('tab-parametres', this)">
+        <span class="nav-icone">⚙️</span>
+        <span class="nav-texte">Paramètres &amp; Rôles</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="bouton-toggle-sidebar" onclick="toggleSidebarStudio()">
+        <span>◀</span>
+        <span class="nav-texte">Réduire le menu</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==================== ZONE PRINCIPALE ==================== -->
+  <div class="studio-main">
+
+    <!-- TOPBAR SUPERIEURE -->
+    <header class="studio-topbar">
+      <div class="topbar-recherche">
+        <span>🔍</span>
+        <input type="text" id="inputRechercheTop" placeholder="Rechercher un militant, événement..." onkeyup="filtrerMilitants()">
+      </div>
+
+      <div class="topbar-actions">
+        <a href="../index.html" class="bouton-voir-site" target="_blank">
+          <span>🌐</span>
+          <span>Voir le site public</span>
+        </a>
+
+        <div class="profil-utilisateur">
+          <div class="avatar-admin">SM</div>
+          <div class="infos-admin">
+            <span class="nom-admin">Sow Mohamed</span>
+            <span class="role-admin">Président Exécutif</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENT BODY (ONGLETS DYNAMIQUES) -->
+    <main class="content-body">
+
+      <!-- ==================== TAB 1 : VUE D'ENSEMBLE ==================== -->
+      <section id="tab-vue-ensemble" class="onglet-contenu actif">
+        <div class="section-header-dashboard">
+          <div>
+            <h1>Tableau de Bord Général</h1>
+            <p>Aperçu en temps réel du Sous-Comité AEEMCI de Koumassi (Mandat 2025–2026).</p>
+          </div>
+          <button class="bouton-action-pro" onclick="ouvrirModalAjoutMilitant()">
+            <span>➕</span>
+            <span>Nouveau Militant</span>
+          </button>
+        </div>
+
+        <!-- KPI STATISTIQUES -->
+        <div class="grille-kpi">
+          <div class="carte-kpi">
+            <div class="kpi-infos">
+              <h3>Militants Inscrits</h3>
+              <div class="kpi-valeur" id="kpiTotalMilitants">524</div>
+              <div class="kpi-tendance">↗ +12% ce mois-ci</div>
+            </div>
+            <div class="kpi-icone-box">👥</div>
+          </div>
+
+          <div class="carte-kpi or">
+            <div class="kpi-infos">
+              <h3>Événements Prévus</h3>
+              <div class="kpi-valeur">04</div>
+              <div class="kpi-tendance" style="color: var(--or-sombre);">📅 Mahouloud 2026</div>
+            </div>
+            <div class="kpi-icone-box">🕌</div>
+          </div>
+
+          <div class="carte-kpi">
+            <div class="kpi-infos">
+              <h3>Adhésions en Attente</h3>
+              <div class="kpi-valeur" id="kpiAttentes">08</div>
+              <div class="kpi-tendance" style="color: #D97706;">⌛ À valider</div>
+            </div>
+            <div class="kpi-icone-box">📋</div>
+          </div>
+
+          <div class="carte-kpi or">
+            <div class="kpi-infos">
+              <h3>Modules de Formation</h3>
+              <div class="kpi-valeur">06</div>
+              <div class="kpi-tendance" style="color: var(--or-sombre);">🎓 100% Gratuits</div>
+            </div>
+            <div class="kpi-icone-box">📖</div>
+          </div>
+        </div>
+
+        <!-- RECAPITULATIF RECENT DES MILITANTS -->
+        <div class="carte-tableau">
+          <div class="tableau-header">
+            <div class="tableau-titre">
+              <h3>Dernières Demandes d'Adhésion (Koumassi)</h3>
+            </div>
+            <button class="bouton-action-contour" onclick="changerOngletStudio('tab-militants', document.querySelectorAll('.nav-item')[1])">
+              Voir tout le registre →
+            </button>
+          </div>
+
+          <div class="table-responsive">
+            <table class="studio-table">
+              <thead>
+                <tr>
+                  <th>Nom &amp; Prénoms</th>
+                  <th>Quartier</th>
+                  <th>Établissement</th>
+                  <th>Contact WhatsApp</th>
+                  <th>Statut</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="tbodyMilitants">
+                <!-- Généré dynamiquement en JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 2 : REGISTRE DES MILITANTS ==================== -->
+      <section id="tab-militants" class="onglet-contenu">
+        <div class="section-header-dashboard">
+          <div>
+            <h1>Registre des Militants &amp; Demandes d'Adhésion</h1>
+            <p>Gestion centrale des membres du Sous-Comité AEEMCI Koumassi.</p>
+          </div>
+
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <button class="bouton-action-contour" onclick="exporterMilitantsCSV()">
+              <span>📥</span>
+              <span>Exporter Excel/CSV</span>
+            </button>
+            <button class="bouton-action-pro" onclick="ouvrirModalAjoutMilitant()">
+              <span>➕</span>
+              <span>Inscrire un Militant</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- BARRE DE RECHERCHE ET FILTRES -->
+        <div class="carte-tableau" style="margin-bottom: 24px; padding: 18px 24px;">
+          <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+            <div style="flex-grow: 1; min-width: 240px;">
+              <input type="text" id="inputRechercheMilitant" placeholder="Rechercher par nom, quartier ou téléphone..." onkeyup="filtrerMilitants()" style="width: 100%; padding: 10px 16px; border: 1px solid var(--bordure-carte); border-radius: 10px;">
+            </div>
+
+            <div style="width: 200px;">
+              <select id="selectFiltreStatut" onchange="filtrerMilitants()" style="width: 100%; padding: 10px 16px; border: 1px solid var(--bordure-carte); border-radius: 10px;">
+                <option value="tous">Tous les statuts</option>
+                <option value="valide">🟢 Validés</option>
+                <option value="attente">🟡 En attente</option>
+                <option value="rejete">🔴 Rejetés</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- TABLEAU COMPLET DES MILITANTS -->
+        <div class="carte-tableau">
+          <div class="table-responsive">
+            <table class="studio-table">
+              <thead>
+                <tr>
+                  <th>Nom &amp; Prénoms</th>
+                  <th>Quartier (Koumassi)</th>
+                  <th>Lycée / Université</th>
+                  <th>Contact WhatsApp</th>
+                  <th>Statut</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="tbodyMilitantsComplet">
+                <!-- Reprend les mêmes données dynamiques -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 3 : ÉVÉNEMENTS & ACTUALITÉS ==================== -->
+      <section id="tab-evenements" class="onglet-contenu">
+        <div class="section-header-dashboard">
+          <div>
+            <h1>Gestion des Événements &amp; Actualités</h1>
+            <p>Publiez et éditez les conférences, Mahouloud, SECOFIS et activités de Koumassi.</p>
+          </div>
+          <button class="bouton-action-pro" onclick="alert('Formulaire d\'ajout d\'événement prêt !')">
+            <span>➕</span>
+            <span>Publier un Événement</span>
+          </button>
+        </div>
+
+        <div class="carte-tableau" style="padding: 28px;">
+          <h3 style="margin-bottom: 16px; color: var(--vert-institutionnel);">Événements à l'Affiche</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+            <div style="border: 1px solid var(--bordure-carte); border-radius: 14px; padding: 20px; background: #FFFFFF;">
+              <span class="badge-statut valide" style="margin-bottom: 10px;">En vedette</span>
+              <h4 style="font-size: 1.1rem; color: var(--vert-institutionnel); margin-bottom: 6px;">Nuit du Mahouloud 2026</h4>
+              <p style="font-size: 0.88rem; color: var(--texte-secondaire); margin-bottom: 12px;">Collège Moderne La Colombe • Nuit du 25 au 26 Août 2026 dès 20H.</p>
+              <button class="bouton-action-contour" style="width: 100%; justify-content: center;">✏️ Modifier l'Affiche &amp; Compte à rebours</button>
+            </div>
+
+            <div style="border: 1px solid var(--bordure-carte); border-radius: 14px; padding: 20px; background: #FFFFFF;">
+              <span class="badge-statut attente" style="margin-bottom: 10px;">Hebdomadaire</span>
+              <h4 style="font-size: 1.1rem; color: var(--vert-institutionnel); margin-bottom: 6px;">Réunion du Samedi</h4>
+              <p style="font-size: 0.88rem; color: var(--texte-secondaire); margin-bottom: 12px;">IST-ISG La Colombe • Chaque Samedi de 15h à 18h.</p>
+              <button class="bouton-action-contour" style="width: 100%; justify-content: center;">✏️ Modifier les détails</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 4 : FORMATIONS & INSCRIPTIONS ==================== -->
+      <section id="tab-formations" class="onglet-contenu">
+        <div class="section-header-dashboard">
+          <div>
+            <h1>Formations &amp; Modules d'Excellence</h1>
+            <p>Suivi des candidats inscrits aux formations en Leadership, Tajwid et Projets.</p>
+          </div>
+        </div>
+
+        <div class="grille-kpi">
+          <div class="carte-kpi">
+            <div class="kpi-infos">
+              <h3>Inscrits Tajwid &amp; Coran</h3>
+              <div class="kpi-valeur">84</div>
+            </div>
+            <div class="kpi-icone-box">📖</div>
+          </div>
+
+          <div class="carte-kpi or">
+            <div class="kpi-infos">
+              <h3>Inscrits Prise de Parole</h3>
+              <div class="kpi-valeur">120</div>
+            </div>
+            <div class="kpi-icone-box">🎙️</div>
+          </div>
+
+          <div class="carte-kpi">
+            <div class="kpi-infos">
+              <h3>Soutien BEPC &amp; BAC</h3>
+              <div class="kpi-valeur">195</div>
+            </div>
+            <div class="kpi-icone-box">🎓</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 5 : GALERIE & MÉDIATHÈQUE ==================== -->
+      <section id="tab-galerie" class="onglet-contenu">
+        <div class="section-header-dashboard">
+          <div>
+            <h1>Médiathèque &amp; Upload de Photos</h1>
+            <p>Ajoutez de nouvelles photos d'activités dans les albums de Koumassi.</p>
+          </div>
+        </div>
+
+        <div class="carte-tableau" style="padding: 40px; text-align: center; border: 2px dashed var(--or); background: var(--vert-tendre);">
+          <div style="font-size: 3rem; margin-bottom: 12px;">📸</div>
+          <h3 style="font-size: 1.2rem; color: var(--vert-institutionnel); margin-bottom: 6px;">Glissez-déposez vos photos ici</h3>
+          <p style="color: var(--texte-secondaire); font-size: 0.9rem; margin-bottom: 18px;">Formats supportés : JPG, PNG, WEBP (Max 10 Mo par photo)</p>
+          <button class="bouton-action-pro">Sélectionner des fichiers</button>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 6 : PARAMÈTRES & RÔLES ==================== -->
+      <section id="tab-parametres" class="onglet-contenu">
+        <div class="section-header-dashboard">
+          <div>
+            <h1>Gestion des Accès &amp; Rôles du Bureau</h1>
+            <p>Accès sécurisé réservé aux responsables du Sous-Comité de Koumassi.</p>
+          </div>
+        </div>
+
+        <div class="carte-tableau" style="padding: 28px;">
+          <h3 style="margin-bottom: 18px; color: var(--vert-institutionnel);">Membres du Bureau avec Accès Admin</h3>
+          <ul style="list-style: none;">
+            <li style="padding: 12px 0; border-bottom: 1px solid var(--bordure-carte); display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <strong>Sow Mohamed</strong> — <span style="color: var(--or-sombre); font-weight: 700;">Président</span>
+              </div>
+              <span class="badge-statut valide">Super Admin</span>
+            </li>
+            <li style="padding: 12px 0; border-bottom: 1px solid var(--bordure-carte); display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <strong>Diabaté Fodé</strong> — <span style="color: var(--or-sombre); font-weight: 700;">Secrétaire Général</span>
+              </div>
+              <span class="badge-statut valide">Admin Éditeur</span>
+            </li>
+            <li style="padding: 12px 0; display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <strong>Kokora Mohamed</strong> — <span style="color: var(--or-sombre); font-weight: 700;">Délégué Culturel</span>
+              </div>
+              <span class="badge-statut valide">Admin Éditeur</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+</div>
+
+<!-- ==================== MODALE AJOUT MILITANT ==================== -->
+<div class="studio-modal" id="modalAjoutMilitant">
+  <div class="modal-contenu">
+    <div class="modal-header">
+      <h3>➕ Inscrire un Nouveau Militant</h3>
+      <button class="modal-fermer" onclick="fermerModalAjoutMilitant()">&times;</button>
+    </div>
+    <form class="modal-body" onsubmit="enregistrerNouveauMilitant(event)">
+      <div class="form-groupe">
+        <label>Nom &amp; Prénoms du Militant *</label>
+        <input type="text" id="nomMilitant" placeholder="ex: Koné Amadou" required>
+      </div>
+
+      <div class="form-groupe">
+        <label>Quartier à Koumassi</label>
+        <input type="text" id="quartierMilitant" placeholder="ex: Prodomo, Remblais, Sicogi...">
+      </div>
+
+      <div class="form-groupe">
+        <label>Établissement / École / Université</label>
+        <input type="text" id="ecoleMilitant" placeholder="ex: Lycée Moderne de Koumassi">
+      </div>
+
+      <div class="form-groupe">
+        <label>Numéro Téléphone / WhatsApp *</label>
+        <input type="tel" id="telMilitant" placeholder="ex: 0707070707" required>
+      </div>
+
+      <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+        <button type="button" class="bouton-action-contour" onclick="fermerModalAjoutMilitant()">Annuler</button>
+        <button type="submit" class="bouton-action-pro">Enregistrer le Militant</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="studio.js"></script>
+<script>
+// Synchronisation initiale du second tableau s'il existe
+document.addEventListener('DOMContentLoaded', function() {
+  const tbody2 = document.getElementById('tbodyMilitantsComplet');
+  const tbody1 = document.getElementById('tbodyMilitants');
+  if (tbody2 && tbody1) {
+    tbody2.innerHTML = tbody1.innerHTML;
+  }
+});
+</script>
+</body>
+</html>

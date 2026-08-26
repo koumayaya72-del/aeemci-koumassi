@@ -1,0 +1,739 @@
+/* ==========================================================================
+   STUDIO AEEMCI KOUMASSI — DESIGN SYSTEM DASHBOARD ADMIN (2026 EXECUTIVE)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --vert-institutionnel : #0B3C26;
+  --vert-sombre        : #062215;
+  --vert-moyen         : #145E3D;
+  --vert-clair         : #10B981;
+  --vert-tendre        : #ECFDF5;
+  
+  --or                 : #D4AF37;
+  --or-sombre          : #B89230;
+  --or-clair           : #FDE68A;
+  --or-gradient        : linear-gradient(135deg, #FDE68A 0%, #D4AF37 50%, #B89230 100%);
+  
+  --fond-body          : #F8F9FA;
+  --fond-carte         : #FFFFFF;
+  --texte-principal    : #0F172A;
+  --texte-secondaire   : #475569;
+  --texte-muet         : #94A3B8;
+  --bordure-carte      : #E2E8F0;
+  
+  --ombre-carte        : 0 10px 25px -5px rgba(11, 60, 38, 0.05), 0 8px 10px -6px rgba(11, 60, 38, 0.03);
+  --ombre-survol       : 0 20px 35px -10px rgba(11, 60, 38, 0.12);
+  --transition         : all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --rayon-carte        : 16px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--fond-body);
+  color: var(--texte-principal);
+  line-height: 1.5;
+  overflow-x: hidden;
+  display: flex;
+  height: 100vh;
+}
+
+/* ---------- Layout Dashboard ---------- */
+.studio-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ---------- Sidebar (Barre Latérale) ---------- */
+.studio-sidebar {
+  width: 270px;
+  background: var(--vert-institutionnel);
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  z-index: 100;
+  flex-shrink: 0;
+  border-right: 1px solid rgba(212, 175, 55, 0.2);
+  position: relative;
+}
+
+.studio-sidebar.retractee {
+  width: 80px;
+}
+
+.sidebar-header {
+  height: 75px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--vert-sombre);
+}
+
+.sidebar-header img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--or);
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.sidebar-titre-box {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.sidebar-titre-box h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.3px;
+}
+
+.sidebar-titre-box span {
+  font-size: 0.72rem;
+  color: var(--or-clair);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.sidebar-nav {
+  padding: 24px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.78);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+}
+
+.nav-item.actif {
+  background: var(--or-gradient);
+  color: var(--vert-sombre);
+  font-weight: 800;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+}
+
+.nav-icone {
+  font-size: 1.25rem;
+  width: 24px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.studio-sidebar.retractee .nav-texte,
+.studio-sidebar.retractee .sidebar-titre-box,
+.studio-sidebar.retractee .badge-compteur {
+  display: none;
+}
+
+.sidebar-footer {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--vert-sombre);
+}
+
+.bouton-toggle-sidebar {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  transition: var(--transition);
+}
+
+.bouton-toggle-sidebar:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--or);
+}
+
+/* ---------- Main Content ---------- */
+.studio-main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--fond-body);
+}
+
+/* ---------- TopBar ---------- */
+.studio-topbar {
+  height: 75px;
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--bordure-carte);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+  flex-shrink: 0;
+}
+
+.topbar-recherche {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--fond-body);
+  border: 1px solid var(--bordure-carte);
+  padding: 9px 18px;
+  border-radius: 50px;
+  width: min(340px, 100%);
+  transition: var(--transition);
+}
+
+.topbar-recherche:focus-within {
+  border-color: var(--vert-institutionnel);
+  box-shadow: 0 0 0 3px rgba(11, 60, 38, 0.1);
+  background: #FFFFFF;
+}
+
+.topbar-recherche input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 0.9rem;
+  width: 100%;
+  color: var(--texte-principal);
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.bouton-voir-site {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  background: var(--vert-tendre);
+  color: var(--vert-institutionnel);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 50px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.86rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.bouton-voir-site:hover {
+  background: var(--vert-institutionnel);
+  color: #FFFFFF;
+  box-shadow: 0 6px 18px rgba(11, 60, 38, 0.2);
+}
+
+.profil-utilisateur {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: 16px;
+  border-left: 1px solid var(--bordure-carte);
+}
+
+.avatar-admin {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--vert-institutionnel);
+  color: var(--or-clair);
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--or);
+  font-size: 1.05rem;
+}
+
+.infos-admin {
+  display: flex;
+  flex-direction: column;
+}
+
+.infos-admin .nom-admin {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--texte-principal);
+}
+
+.infos-admin .role-admin {
+  font-size: 0.75rem;
+  color: var(--vert-institutionnel);
+  font-weight: 700;
+}
+
+/* ---------- Content Area & Tabs ---------- */
+.content-body {
+  padding: 32px;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.onglet-contenu {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+.onglet-contenu.actif {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Header de Section ---------- */
+.section-header-dashboard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.section-header-dashboard h1 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--vert-institutionnel);
+  letter-spacing: -0.5px;
+}
+
+.section-header-dashboard p {
+  color: var(--texte-secondaire);
+  font-size: 0.94rem;
+  margin-top: 4px;
+}
+
+/* ---------- Cartes Métriques (KPI) ---------- */
+.grille-kpi {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 22px;
+  margin-bottom: 32px;
+}
+
+.carte-kpi {
+  background: var(--fond-carte);
+  border-radius: var(--rayon-carte);
+  padding: 24px;
+  border: 1px solid var(--bordure-carte);
+  box-shadow: var(--ombre-carte);
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.carte-kpi::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--vert-institutionnel);
+}
+
+.carte-kpi.or::before {
+  background: var(--or);
+}
+
+.carte-kpi:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--ombre-survol);
+  border-color: rgba(212, 175, 55, 0.4);
+}
+
+.kpi-infos h3 {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--texte-secondaire);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.kpi-valeur {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--vert-institutionnel);
+  margin: 6px 0 2px;
+  line-height: 1;
+}
+
+.kpi-tendance {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--vert-clair);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.kpi-icone-box {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  background: var(--vert-tendre);
+  color: var(--vert-institutionnel);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.carte-kpi.or .kpi-icone-box {
+  background: rgba(212, 175, 55, 0.12);
+  color: var(--or-sombre);
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+/* ---------- Tableaux Interactifs ---------- */
+.carte-tableau {
+  background: var(--fond-carte);
+  border-radius: var(--rayon-carte);
+  border: 1px solid var(--bordure-carte);
+  box-shadow: var(--ombre-carte);
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.tableau-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--bordure-carte);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: #FFFFFF;
+}
+
+.tableau-titre h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--vert-institutionnel);
+}
+
+.tableau-actions-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.bouton-action-pro {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--vert-institutionnel);
+  color: #FFFFFF;
+  border-radius: 50px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 12px rgba(11, 60, 38, 0.2);
+}
+
+.bouton-action-pro:hover {
+  background: var(--vert-moyen);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(11, 60, 38, 0.3);
+}
+
+.bouton-action-contour {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  background: #FFFFFF;
+  color: var(--texte-principal);
+  border: 1px solid var(--bordure-carte);
+  border-radius: 50px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.bouton-action-contour:hover {
+  border-color: var(--vert-institutionnel);
+  color: var(--vert-institutionnel);
+  background: var(--vert-tendre);
+}
+
+/* Style de Table HTML */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table.studio-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.92rem;
+}
+
+table.studio-table th {
+  background: #F8F9FA;
+  color: var(--texte-secondaire);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--bordure-carte);
+}
+
+table.studio-table td {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--bordure-carte);
+  color: var(--texte-principal);
+  vertical-align: middle;
+}
+
+table.studio-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+table.studio-table tbody tr:hover {
+  background: var(--vert-tendre);
+}
+
+/* Badges de Statut */
+.badge-statut {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 50px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-statut.valide {
+  background: #D1FAE5;
+  color: #065F46;
+}
+
+.badge-statut.attente {
+  background: #FEF3C7;
+  color: #92400E;
+}
+
+.badge-statut.rejete {
+  background: #FEE2E2;
+  color: #991B1B;
+}
+
+/* Boutons d'Action Rapides dans le Tableau */
+.bouton-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: #25D366;
+  color: #FFFFFF;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.bouton-whatsapp:hover {
+  background: #1DA851;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
+
+.bouton-table-action {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 6px;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.bouton-table-action:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* ---------- Modales CRUD ---------- */
+.studio-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 60, 38, 0.6);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.studio-modal.active {
+  display: flex;
+}
+
+.modal-contenu {
+  background: #FFFFFF;
+  border-radius: 20px;
+  width: min(580px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--or);
+  animation: modalSlide 0.35s ease;
+}
+
+@keyframes modalSlide {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal-header {
+  padding: 20px 28px;
+  background: var(--vert-institutionnel);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top-left-radius: 19px;
+  border-top-right-radius: 19px;
+}
+
+.modal-header h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--or-clair);
+}
+
+.modal-fermer {
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 28px;
+}
+
+.form-groupe {
+  margin-bottom: 20px;
+}
+
+.form-groupe label {
+  display: block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--vert-institutionnel);
+  margin-bottom: 8px;
+}
+
+.form-groupe input,
+.form-groupe select,
+.form-groupe textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--bordure-carte);
+  border-radius: 10px;
+  outline: none;
+  font-size: 0.94rem;
+  font-family: 'Inter', sans-serif;
+  transition: var(--transition);
+}
+
+.form-groupe input:focus,
+.form-groupe select:focus,
+.form-groupe textarea:focus {
+  border-color: var(--vert-institutionnel);
+  box-shadow: 0 0 0 3px rgba(11, 60, 38, 0.1);
+}
+
+/* Responsive Phone */
+@media (max-width: 768px) {
+  .studio-sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+  }
+  .studio-sidebar.ouverte-mobile {
+    transform: translateX(0);
+  }
+  .studio-topbar {
+    padding: 0 16px;
+  }
+  .content-body {
+    padding: 20px 16px;
+  }
+}
