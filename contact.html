@@ -295,6 +295,8 @@
   </div>
 </a>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
 <script>
 function ouvrirSidebar() {
   var p = document.getElementById('sidebarPanneau');
@@ -312,6 +314,30 @@ function fermerSidebar() {
 }
 window.ouvrirSidebar = ouvrirSidebar;
 window.fermerSidebar = fermerSidebar;
+
+async function enregistrerAdhesionFormulaire(e) {
+  e.preventDefault();
+  const form = e.target;
+  const nom = form.querySelector('[name="nom"]').value.trim();
+  const statut = form.querySelector('[name="statut"]').value.trim();
+  const quartier = form.querySelector('[name="quartier"]').value.trim();
+  const telephone = form.querySelector('[name="telephone"]').value.trim();
+
+  if (!nom || !telephone) {
+    alert("Veuillez remplir au moins le nom et le téléphone.");
+    return;
+  }
+
+  const res = await window.soumettreAdhesionAEEMCI({
+    nom: nom,
+    ecole: statut,
+    quartier: quartier,
+    telephone: telephone
+  });
+
+  alert(res.message);
+  form.reset();
+}
 
 document.addEventListener('DOMContentLoaded', function() {
   var burgerBtns = document.querySelectorAll('.menu-burger');

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion — Studio AEEMCI Koumassi</title>
+  <link rel="stylesheet" href="studio.css">
+  <link rel="icon" href="../images/logo.png" type="image/png">
+  <style>
+    body {
+      background: radial-gradient(circle at 50% 20%, #0C3823 0%, #062215 60%, #02120A 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .login-card {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(16px);
+      border-radius: 24px;
+      width: min(450px, 100%);
+      padding: 40px 32px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(212, 175, 55, 0.3);
+      border-top: 4px solid var(--or);
+      position: relative;
+    }
+    .login-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .login-header img {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 3px solid var(--or);
+      margin-bottom: 16px;
+      object-fit: contain;
+    }
+    .login-header h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--vert-institutionnel);
+      letter-spacing: -0.5px;
+    }
+    .login-header p {
+      font-size: 0.88rem;
+      color: var(--texte-secondaire);
+      margin-top: 4px;
+    }
+    .input-wrapper {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .input-wrapper input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid var(--bordure-carte);
+      border-radius: 12px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: var(--transition);
+    }
+    .input-wrapper input:focus {
+      border-color: var(--vert-institutionnel);
+      box-shadow: 0 0 0 4px rgba(11, 60, 38, 0.12);
+    }
+    .toggle-pwd {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-size: 1.1rem;
+    }
+    .alert-erreur {
+      display: none;
+      background: #FEE2E2;
+      border: 1px solid #FCA5A5;
+      color: #991B1B;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .bouton-login {
+      width: 100%;
+      padding: 14px;
+      background: var(--or-gradient);
+      color: var(--vert-sombre);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+    }
+    .bouton-login:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(212, 175, 55, 0.4);
+    }
+    .lien-retour {
+      display: block;
+      text-align: center;
+      margin-top: 24px;
+      color: var(--vert-institutionnel);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+    .lien-retour:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-card">
+  <div class="login-header">
+    <img src="../images/logo.png" alt="Logo AEEMCI Koumassi" onerror="this.src='../logo.png'">
+    <h1>STUDIO AEEMCI</h1>
+    <p>Authentification Administration • Sous-Comité Koumassi</p>
+  </div>
+
+  <div class="alert-erreur" id="alertErreur">
+    ⚠️ Email ou mot de passe incorrect.
+  </div>
+
+  <form id="formLogin" onsubmit="handleLogin(event)">
+    <div class="form-groupe">
+      <label for="emailAdmin">Adresse Email Institutionnelle</label>
+      <div class="input-wrapper">
+        <input type="email" id="emailAdmin" placeholder="admin.koumassi@aeemci.ci" required autocomplete="email">
+      </div>
+    </div>
+
+    <div class="form-groupe">
+      <label for="passwordAdmin">Mot de passe</label>
+      <div class="input-wrapper">
+        <input type="password" id="passwordAdmin" placeholder="••••••••••••" required autocomplete="current-password">
+        <button type="button" class="toggle-pwd" onclick="togglePasswordVisibility()">👁️</button>
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; font-size: 0.85rem;">
+      <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: var(--texte-secondaire);">
+        <input type="checkbox" id="rememberMe" checked> Se souvenir de moi
+      </label>
+      <a href="#" onclick="alert('Veuillez contacter le Secrétaire Général ou le Présidence pour réinitialiser vos accès.')" style="color: var(--vert-institutionnel); text-decoration: none; font-weight: 700;">Mot de passe oublié ?</a>
+    </div>
+
+    <button type="submit" class="bouton-login" id="btnSubmitLogin">
+      <span>🔐 Se Connecter au Studio</span>
+    </button>
+  </form>
+
+  <a href="../index.html" class="lien-retour">← Retourner au site public AEEMCI</a>
+</div>
+
+<!-- SDK Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-client.js"></script>
+<script>
+  function togglePasswordVisibility() {
+    const input = document.getElementById('passwordAdmin');
+    input.type = input.type === 'password' ? 'text' : 'password';
+  }
+
+  async function handleLogin(e) {
+    e.preventDefault();
+    const alertEl = document.getElementById('alertErreur');
+    const btn = document.getElementById('btnSubmitLogin');
+    alertEl.style.display = 'none';
+
+    const email = document.getElementById('emailAdmin').value.trim();
+    const password = document.getElementById('passwordAdmin').value;
+
+    btn.disabled = true;
+    btn.innerHTML = '<span>⏳ Connexion en cours...</span>';
+
+    try {
+      const res = await window.studioAuth.login(email, password);
+      if (res.success) {
+        window.location.href = 'index.html';
+      } else {
+        alertEl.textContent = '⚠️ ' + (res.error || 'Identifiants invalides.');
+        alertEl.style.display = 'block';
+      }
+    } catch (err) {
+      alertEl.textContent = '⚠️ Erreur de connexion réseau.';
+      alertEl.style.display = 'block';
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = '<span>🔐 Se Connecter au Studio</span>';
+    }
+  }
+</script>
+</body>
+</html>

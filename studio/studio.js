@@ -1,32 +1,45 @@
 /* ==========================================================================
-   STUDIO AEEMCI KOUMASSI — LOGIQUE DASHBOARD ADMIN & CRUD (ES6+)
+   STUDIO AEEMCI KOUMASSI — LOGIQUE DASHBOARD ADMIN & DYNAMISATION CRUD
    ========================================================================== */
 
-// Base de données locale de démonstration (Prête pour connexion Supabase / Firebase)
-let militantsData = JSON.parse(localStorage.getItem('aeemci_militants_db')) || [
-  { id: 1, nom: "Kouamé Ibrahim", quartier: "Koumassi Prodomo", ecole: "Lycée Moderne de Koumassi", telephone: "0757477372", statut: "valide", date: "2026-08-20" },
-  { id: 2, nom: "Diallo Mariam", quartier: "Koumassi Remblais", ecole: "Université Felix Houphouët-Boigny", telephone: "0545305180", statut: "valide", date: "2026-08-21" },
-  { id: 3, nom: "Traoré Abdoulaye", quartier: "Koumassi Sicogi", ecole: "Collège Moderne La Colombe", telephone: "0102030405", statut: "attente", date: "2026-08-24" },
-  { id: 4, nom: "Zeba Samira", quartier: "Koumassi Sopim", ecole: "IST-ISG La Colombe", telephone: "0708091011", statut: "valide", date: "2026-08-25" },
-  { id: 5, nom: "Sow Mohamed", quartier: "Koumassi Camp Commando", ecole: "INPHB Yamoussoukro", telephone: "0506070809", statut: "valide", date: "2026-08-26" }
-];
+let militantsData = [];
 
-document.addEventListener('DOMContentLoaded', function() {
-  afficherMilitantsTable(militantsData);
-  mettreAJourKpi();
+document.addEventListener('DOMContentLoaded', async function() {
+  await chargerMilitantsDepuisBase();
 });
 
-// 1. Changement d'Onglet (Navigation Sidebar)
+// Charger la liste complète des militants depuis Supabase / LocalStorage
+async function chargerMilitantsDepuisBase() {
+  if (window.militantsDb && typeof window.militantsDb.fetchMilitants === 'function') {
+    militantsData = await window.militantsDb.fetchMilitants();
+  } else {
+    militantsData = JSON.parse(localStorage.getItem('aeemci_militants_db')) || [];
+  }
+
+  // Si la liste est vide, on initialise avec des données représentatives
+  if (!militantsData || militantsData.length === 0) {
+    militantsData = [
+      { id: 1, nom: "Kouamé Ibrahim", quartier: "Koumassi Prodomo", ecole: "Lycée Moderne de Koumassi", telephone: "0757477372", statut: "valide", date: "2026-08-20" },
+      { id: 2, nom: "Diallo Mariam", quartier: "Koumassi Remblais", ecole: "Université Felix Houphouët-Boigny", telephone: "0545305180", statut: "valide", date: "2026-08-21" },
+      { id: 3, nom: "Traoré Abdoulaye", quartier: "Koumassi Sicogi", ecole: "Collège Moderne La Colombe", telephone: "0102030405", statut: "attente", date: "2026-08-24" },
+      { id: 4, nom: "Zeba Samira", quartier: "Koumassi Sopim", ecole: "IST-ISG La Colombe", telephone: "0708091011", statut: "valide", date: "2026-08-25" },
+      { id: 5, nom: "Sow Mohamed", quartier: "Koumassi Camp Commando", ecole: "INPHB Yamoussoukro", telephone: "0506070809", statut: "valide", date: "2026-08-26" }
+    ];
+    localStorage.setItem('aeemci_militants_db', JSON.stringify(militantsData));
+  }
+
+  afficherMilitantsTable(militantsData);
+  mettreAJourKpi();
+}
+
+// 1. Navigation Onglets
 function changerOngletStudio(ongletId, element) {
-  // Masquer tous les onglets
   const onglets = document.querySelectorAll('.onglet-contenu');
   onglets.forEach(o => o.classList.remove('actif'));
 
-  // Retirer l'état actif de la nav
   const navItems = document.querySelectorAll('.nav-item');
   navItems.forEach(n => n.classList.remove('actif'));
 
-  // Activer l'onglet cible
   const cible = document.getElementById(ongletId);
   if (cible) cible.classList.add('actif');
   if (element) element.classList.add('actif');
@@ -40,57 +53,52 @@ function toggleSidebarStudio() {
   }
 }
 
-// 3. Affichage du Tableau des Militants
+// 3. Affichage Dynamique dans les Tableaux HTML
 function afficherMilitantsTable(liste) {
-  const tbody = document.getElementById('tbodyMilitants');
-  if (!tbody) return;
+  const tbody1 = document.getElementById('tbodyMilitants');
+  const tbody2 = document.getElementById('tbodyMilitantsComplet');
 
-  tbody.innerHTML = '';
-
-  if (liste.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--texte-muet); padding: 30px;">Aucun militant trouvé.</td></tr>`;
-    return;
-  }
-
-  liste.forEach(m => {
-    let badgeClass = 'attente';
-    let badgeText = 'En attente';
-
-    if (m.statut === 'valide') {
-      badgeClass = 'valide';
-      badgeText = 'Validé';
-    } else if (m.statut === 'rejete') {
-      badgeClass = 'rejete';
-      badgeText = 'Rejeté';
+  const genererHtml = (data) => {
+    if (!data || data.length === 0) {
+      return `<tr><td colspan="6" style="text-align: center; color: var(--texte-muet); padding: 30px;">Aucun militant trouvé.</td></tr>`;
     }
+    return data.map(m => {
+      let badgeClass = m.statut === 'valide' ? 'valide' : (m.statut === 'rejete' ? 'rejete' : 'attente');
+      let badgeText = m.statut === 'valide' ? 'Validé' : (m.statut === 'rejete' ? 'Rejeté' : 'En attente');
+      return `
+        <tr>
+          <td><strong>${m.nom}</strong></td>
+          <td>${m.quartier || 'Koumassi'}</td>
+          <td>${m.ecole || 'Établissement non renseigné'}</td>
+          <td>
+            <a href="https://wa.me/225${m.telephone}?text=Assalamu%20alaykum%20${encodeURIComponent(m.nom)},%20votre%20demande%20d'adh%C3%A9sion%20%C3%A0%20l'AEEMCI%20Koumassi%20a%20%C3%A9t%C3%A9%20trait%C3%A9e%20avec%20succ%C3%A8s !" target="_blank" class="bouton-whatsapp">
+              💬 ${m.telephone}
+            </a>
+          </td>
+          <td><span class="badge-statut ${badgeClass}">${badgeText}</span></td>
+          <td>
+            <button class="bouton-table-action" onclick="validerMilitant(${m.id})" title="Valider">✅</button>
+            <button class="bouton-table-action" onclick="supprimerMilitant(${m.id})" title="Supprimer">🗑️</button>
+          </td>
+        </tr>
+      `;
+    }).join('');
+  };
 
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td><strong>${m.nom}</strong></td>
-      <td>${m.quartier}</td>
-      <td>${m.ecole}</td>
-      <td>
-        <a href="https://wa.me/225${m.telephone}?text=Assalamu%20alaykum%20${encodeURIComponent(m.nom)},%20votre%20demande%20d'adh%C3%A9sion%20%C3%A0%20l'AEEMCI%20Koumassi%20a%20%C3%A9t%C3%A9%20trait%C3%A9e%20avec%20succ%C3%A8s !" target="_blank" class="bouton-whatsapp">
-          💬 ${m.telephone}
-        </a>
-      </td>
-      <td><span class="badge-statut ${badgeClass}">${badgeText}</span></td>
-      <td>
-        <button class="bouton-table-action" onclick="validerMilitant(${m.id})" title="Valider">✅</button>
-        <button class="bouton-table-action" onclick="supprimerMilitant(${m.id})" title="Supprimer">🗑️</button>
-      </td>
-    `;
-    tbody.appendChild(tr);
-  });
+  const html = genererHtml(liste);
+  if (tbody1) tbody1.innerHTML = html;
+  if (tbody2) tbody2.innerHTML = html;
 }
 
 // 4. Filtrage & Recherche Instantanée
 function filtrerMilitants() {
-  const recherche = document.getElementById('inputRechercheMilitant').value.toLowerCase();
-  const filtreStatut = document.getElementById('selectFiltreStatut').value;
+  const inputElem = document.getElementById('inputRechercheMilitant') || document.getElementById('inputRechercheTop');
+  const recherche = inputElem ? inputElem.value.toLowerCase() : '';
+  const selectElem = document.getElementById('selectFiltreStatut');
+  const filtreStatut = selectElem ? selectElem.value : 'tous';
 
   const resultats = militantsData.filter(m => {
-    const correspondNom = m.nom.toLowerCase().includes(recherche) || m.quartier.toLowerCase().includes(recherche) || m.telephone.includes(recherche);
+    const correspondNom = m.nom.toLowerCase().includes(recherche) || (m.quartier && m.quartier.toLowerCase().includes(recherche)) || (m.telephone && m.telephone.includes(recherche));
     const correspondStatut = (filtreStatut === 'tous') || (m.statut === filtreStatut);
     return correspondNom && correspondStatut;
   });
@@ -98,38 +106,44 @@ function filtrerMilitants() {
   afficherMilitantsTable(resultats);
 }
 
-// 5. Validation d'un Militant (CRUD Update)
-function validerMilitant(id) {
-  const m = militantsData.find(item => item.id === id);
-  if (m) {
-    m.statut = 'valide';
-    sauvegarderLocal();
-    filtrerMilitants();
-    mettreAJourKpi();
-    alert(`Le militant ${m.nom} a été validé avec succès !`);
+// 5. Action Valider (Met à jour la BD et les KPI)
+async function validerMilitant(id) {
+  if (window.militantsDb && typeof window.militantsDb.updateStatus === 'function') {
+    await window.militantsDb.updateStatus(id, 'valide');
   }
+  const item = militantsData.find(m => m.id === id);
+  if (item) item.statut = 'valide';
+
+  filtrerMilitants();
+  mettreAJourKpi();
+  alert(`La demande du militant a été validée avec succès !`);
 }
 
-// 6. Suppression d'un Militant (CRUD Delete)
-function supprimerMilitant(id) {
+// 6. Action Supprimer (Met à jour la BD et les KPI)
+async function supprimerMilitant(id) {
   if (confirm("Êtes-vous sûr de vouloir supprimer cette demande d'adhésion ?")) {
+    if (window.militantsDb && typeof window.militantsDb.deleteMilitant === 'function') {
+      await window.militantsDb.deleteMilitant(id);
+    }
     militantsData = militantsData.filter(m => m.id !== id);
-    sauvegarderLocal();
+
     filtrerMilitants();
     mettreAJourKpi();
   }
 }
 
-// 7. Modale Ajouter un Militant (CRUD Create)
+// 7. Modale Ajouter un Militant (Formulaire Admin)
 function ouvrirModalAjoutMilitant() {
-  document.getElementById('modalAjoutMilitant').classList.add('active');
+  const m = document.getElementById('modalAjoutMilitant');
+  if (m) m.classList.add('active');
 }
 
 function fermerModalAjoutMilitant() {
-  document.getElementById('modalAjoutMilitant').classList.remove('active');
+  const m = document.getElementById('modalAjoutMilitant');
+  if (m) m.classList.remove('active');
 }
 
-function enregistrerNouveauMilitant(e) {
+async function enregistrerNouveauMilitant(e) {
   e.preventDefault();
   const nom = document.getElementById('nomMilitant').value.trim();
   const quartier = document.getElementById('quartierMilitant').value.trim();
@@ -141,29 +155,33 @@ function enregistrerNouveauMilitant(e) {
     return;
   }
 
-  const nouveau = {
-    id: Date.now(),
+  const nouveauData = {
     nom: nom,
     quartier: quartier || "Koumassi",
     ecole: ecole || "Non spécifié",
     telephone: telephone,
-    statut: "valide",
-    date: new Date().toISOString().split('T')[0]
+    statut: "valide"
   };
 
-  militantsData.unshift(nouveau);
-  sauvegarderLocal();
-  filtrerMilitants();
-  mettreAJourKpi();
+  let enregistre = null;
+  if (window.militantsDb && typeof window.militantsDb.insertMilitant === 'function') {
+    enregistre = await window.militantsDb.insertMilitant(nouveauData);
+  } else {
+    enregistre = { id: Date.now(), ...nouveauData, date: new Date().toISOString().split('T')[0] };
+    militantsData.unshift(enregistre);
+    localStorage.setItem('aeemci_militants_db', JSON.stringify(militantsData));
+  }
+
+  await chargerMilitantsDepuisBase();
   fermerModalAjoutMilitant();
-  alert(`Le militant ${nom} a été ajouté avec succès !`);
+  alert(`Le militant ${nom} a été inscrit avec succès !`);
 }
 
-// 8. Export des Données (CSV / Excel)
+// 8. Exportation CSV / Excel
 function exporterMilitantsCSV() {
   let csvContent = "data:text/csv;charset=utf-8,Nom,Quartier,Etablissement,Telephone,Statut,Date\n";
   militantsData.forEach(m => {
-    csvContent += `"${m.nom}","${m.quartier}","${m.ecole}","${m.telephone}","${m.statut}","${m.date}"\n`;
+    csvContent += `"${m.nom}","${m.quartier || ''}","${m.ecole || ''}","${m.telephone || ''}","${m.statut || ''}","${m.date || ''}"\n`;
   });
 
   const encodedUri = encodeURI(csvContent);
@@ -175,25 +193,20 @@ function exporterMilitantsCSV() {
   document.body.removeChild(link);
 }
 
-// 9. Mise à Jour des KPI du Dashboard
+// 9. Mise à Jour Dynamique des Cartes Statistiques (KPI)
 function mettreAJourKpi() {
-  const total = militantsData.length;
-  const valides = militantsData.filter(m => m.statut === 'valide').length;
-  const attentes = militantsData.filter(m => m.statut === 'attente').length;
+  const totalValides = militantsData.filter(m => m.statut === 'valide').length;
+  const totalAttentes = militantsData.filter(m => m.statut === 'attente').length;
 
   const totalEl = document.getElementById('kpiTotalMilitants');
   const attentesEl = document.getElementById('kpiAttentes');
 
-  if (totalEl) totalEl.textContent = valides;
-  if (attentesEl) attentesEl.textContent = attentes;
+  if (totalEl) totalEl.textContent = totalValides || militantsData.length;
+  if (attentesEl) attentesEl.textContent = totalAttentes;
 }
 
-// 10. Helper LocalStorage
-function sauvegarderLocal() {
-  localStorage.setItem('aeemci_militants_db', JSON.stringify(militantsData));
-}
-
-// Export global pour la window
+// Multi-Exports globaux
+window.chargerMilitantsDepuisBase = chargerMilitantsDepuisBase;
 window.changerOngletStudio = changerOngletStudio;
 window.toggleSidebarStudio = toggleSidebarStudio;
 window.filtrerMilitants = filtrerMilitants;
