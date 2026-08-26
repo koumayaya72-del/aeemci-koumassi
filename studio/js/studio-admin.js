@@ -6,7 +6,7 @@ const CMS_DEFAUTS = {
   bureau: {
     presidentNom: "Sow Mohamed",
     presidentMot: "L'AEEMCI Koumassi s'engage résolument pour l'excellence académique, spirituelle et l'épanouissement de la jeunesse musulmane.",
-    presidentPhoto: "../images/president.jpg",
+    presidentPhoto: "images/president.jpg",
     sgNom: "Diabaté Fodé",
     contactTel1: "+225 05 45 30 51 80",
     contactTel2: "+225 07 57 47 73 72",
@@ -32,7 +32,15 @@ const CMS_DEFAUTS = {
       image: "images/logo.png"
     }
   ],
-  galerie: [] // Pas de fausses images relatives par défaut pour préserver la galerie publique
+  galerie: [],
+  contact: {
+    adresse: "Koumassi Sicogi, Collège La Colombe",
+    tel1: "+225 05 45 30 51 80",
+    tel2: "+225 07 57 47 73 72",
+    email: "aeemci.koumassi@gmail.com",
+    horaires: "Chaque Samedi à 15H00 (IST-ISG La Colombe)",
+    whatsappLink: "https://chat.whatsapp.com/KUd1Zmc2JEfBsIWdH5HPdm"
+  }
 };
 
 document.addEventListener('DOMContentLoaded', async function() {
@@ -41,6 +49,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   chargerActualitesCMS();
   chargerGalerieCMS();
   chargerMilitantsCMS();
+  chargerContactForm();
   attacherGestionnairesTactiles();
   initialiserDragAndDropGalerie();
 });
@@ -52,8 +61,10 @@ function initialiserDonneesCMS() {
   if (!localStorage.getItem('aeemci_cms_actualites')) {
     localStorage.setItem('aeemci_cms_actualites', JSON.stringify(CMS_DEFAUTS.actualites));
   }
+  if (!localStorage.getItem('aeemci_cms_contact')) {
+    localStorage.setItem('aeemci_cms_contact', JSON.stringify(CMS_DEFAUTS.contact));
+  }
   
-  // Nettoyer la galerie si elle contient des chemins relatifs cassés (ex: ../images/)
   let galerieStockee = JSON.parse(localStorage.getItem('aeemci_cms_galerie')) || [];
   galerieStockee = galerieStockee.filter(g => g && g.url && !g.url.includes('../images/'));
   localStorage.setItem('aeemci_cms_galerie', JSON.stringify(galerieStockee));
@@ -420,4 +431,32 @@ window.supprimerMilitantCMS = async function(id) {
     }
     chargerMilitantsCMS();
   }
+};
+
+// 7. GESTION DES COORDONNÉES & DU FOOTER DU SITE PUBLIC
+function chargerContactForm() {
+  const contact = JSON.parse(localStorage.getItem('aeemci_cms_contact')) || CMS_DEFAUTS.contact;
+
+  if (document.getElementById('cmsContactAdresse')) document.getElementById('cmsContactAdresse').value = contact.adresse || '';
+  if (document.getElementById('cmsContactTel1')) document.getElementById('cmsContactTel1').value = contact.tel1 || '';
+  if (document.getElementById('cmsContactTel2')) document.getElementById('cmsContactTel2').value = contact.tel2 || '';
+  if (document.getElementById('cmsContactEmail')) document.getElementById('cmsContactEmail').value = contact.email || '';
+  if (document.getElementById('cmsContactHoraires')) document.getElementById('cmsContactHoraires').value = contact.horaires || '';
+  if (document.getElementById('cmsContactWhatsappLink')) document.getElementById('cmsContactWhatsappLink').value = contact.whatsappLink || '';
+}
+
+window.enregistrerContactCMS = function(e) {
+  if (e) e.preventDefault();
+
+  const contact = {
+    adresse: document.getElementById('cmsContactAdresse')?.value.trim(),
+    tel1: document.getElementById('cmsContactTel1')?.value.trim(),
+    tel2: document.getElementById('cmsContactTel2')?.value.trim(),
+    email: document.getElementById('cmsContactEmail')?.value.trim(),
+    horaires: document.getElementById('cmsContactHoraires')?.value.trim(),
+    whatsappLink: document.getElementById('cmsContactWhatsappLink')?.value.trim()
+  };
+
+  localStorage.setItem('aeemci_cms_contact', JSON.stringify(contact));
+  alert("✅ Les coordonnées et liens du site public ont été mis à jour avec succès !");
 };

@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
   synchroniserActualitesPublic();
   synchroniserStatistiquesPublic();
   synchroniserGaleriePublic();
+  synchroniserContactPublic();
 });
 
 // 1. Synchronisation des Infos du Bureau & Photo du Président
@@ -94,7 +95,6 @@ function synchroniserGaleriePublic() {
     const container = document.querySelector('.grille-galerie-filtree');
 
     if (container && mefGalerie && mefGalerie.length > 0) {
-      // Filtrer les éléments invalides ou relatifs cassés
       const photosValides = mefGalerie.filter(item => item && item.url && !item.url.includes('../images/'));
       
       photosValides.reverse().forEach(photo => {
@@ -112,5 +112,31 @@ function synchroniserGaleriePublic() {
     }
   } catch (e) {
     console.warn("Mise à jour de la galerie ignorée.");
+  }
+}
+
+// 5. Synchronisation Dynamique des Coordonnées & Réseaux Sociaux du Footer sur Tout le Site
+function synchroniserContactPublic() {
+  const contactRaw = localStorage.getItem('aeemci_cms_contact');
+  if (!contactRaw) return;
+
+  try {
+    const contact = JSON.parse(contactRaw);
+
+    const adresseEls = document.querySelectorAll('#publicFooterAdresse, .contact-adresse-txt');
+    const tel1Els = document.querySelectorAll('#publicFooterTel, .contact-tel-txt');
+    const emailEls = document.querySelectorAll('#publicFooterEmail, .contact-email-txt');
+    const horairesEls = document.querySelectorAll('#publicFooterHoraires, .contact-horaires-txt');
+    const whatsappLinks = document.querySelectorAll('#publicSocialWhatsapp, a.btn-join-whatsapp');
+
+    adresseEls.forEach(el => el.textContent = contact.adresse || 'Koumassi, Abidjan');
+    tel1Els.forEach(el => el.textContent = (contact.tel1 ? contact.tel1 : '') + (contact.tel2 ? ' / ' + contact.tel2 : ''));
+    emailEls.forEach(el => el.textContent = contact.email || 'aeemci.koumassi@gmail.com');
+    horairesEls.forEach(el => el.textContent = contact.horaires || 'Chaque Samedi à 15H00');
+    if (contact.whatsappLink) {
+      whatsappLinks.forEach(a => a.href = contact.whatsappLink);
+    }
+  } catch (e) {
+    console.warn("Mise à jour des coordonnées du footer ignorée.");
   }
 }

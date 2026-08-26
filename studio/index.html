@@ -354,6 +354,46 @@
             </li>
           </ul>
         </div>
+
+        <!-- FORMULAIRE DE CONFIGURATION DES COORDONNÉES & FOOTER DU SITE PUBLIC -->
+        <div class="carte-tableau" style="padding: 28px; margin-top: 24px;">
+          <h3 style="margin-bottom: 18px; color: var(--vert-institutionnel);">⚙️ Coordonnées &amp; Liens du Site Public</h3>
+          <form onsubmit="enregistrerContactCMS(event)" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+            <div class="form-groupe">
+              <label>Adresse du Siège *</label>
+              <input type="text" id="cmsContactAdresse" placeholder="ex: Koumassi Sicogi, Collège La Colombe" required>
+            </div>
+
+            <div class="form-groupe">
+              <label>Téléphone Principal / WhatsApp *</label>
+              <input type="tel" id="cmsContactTel1" placeholder="ex: +225 05 45 30 51 80" required>
+            </div>
+
+            <div class="form-groupe">
+              <label>Téléphone Secondaire</label>
+              <input type="tel" id="cmsContactTel2" placeholder="ex: +225 07 57 47 73 72">
+            </div>
+
+            <div class="form-groupe">
+              <label>Email Officiel *</label>
+              <input type="email" id="cmsContactEmail" placeholder="ex: aeemci.koumassi@gmail.com" required>
+            </div>
+
+            <div class="form-groupe">
+              <label>Horaires des Réunions</label>
+              <input type="text" id="cmsContactHoraires" placeholder="ex: Chaque Samedi à 15H00">
+            </div>
+
+            <div class="form-groupe">
+              <label>Lien Groupe WhatsApp</label>
+              <input type="url" id="cmsContactWhatsappLink" placeholder="ex: https://chat.whatsapp.com/...">
+            </div>
+
+            <div style="grid-column: 1 / -1; display: flex; justify-content: flex-end; margin-top: 10px;">
+              <button type="submit" class="bouton-action-pro btn-touch-evt">Enregistrer les Coordonnées</button>
+            </div>
+          </form>
+        </div>
       </section>
 
     </main>
