@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -129,11 +129,11 @@
 <section class="section-piliers">
   <div class="conteneur">
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px;">
-      
+
       <!-- Infos de contact -->
       <div class="carte-pilier-moderne" style="height: fit-content;">
         <h3 style="font-size: 1.4rem; margin-bottom: 20px; color: var(--vert-emeraude);">Nos Coordonnées</h3>
-        
+
         <div style="margin-bottom: 20px;">
           <strong style="color: var(--or-sombre); display: block; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 1px;">Localisation</strong>
           <p style="color: var(--texte-doux); margin-top: 4px;">Commune de Koumassi, Abidjan, Côte d'Ivoire</p>
@@ -142,8 +142,8 @@
         <div style="margin-bottom: 20px;">
           <strong style="color: var(--or-sombre); display: block; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 1px;">Contacts Officiels</strong>
           <p style="color: var(--texte-doux); margin-top: 4px; line-height: 1.6;">
-            📞 <strong>Ligne 1 :</strong> +225 05 45 30 51 80<br>
-            📞 <strong>Ligne 2 :</strong> +225 07 57 47 73 72
+            📞 <strong style="font-weight: bold;">Ligne 1 :</strong> +225 05 45 30 51 80<br>
+            📞 <strong style="font-weight: bold;">Ligne 2 :</strong> +225 07 57 47 73 72
           </p>
         </div>
 
@@ -255,12 +255,11 @@
       </div>
 
       <div class="pied-colonne">
-        <h4>Si�ge &amp; Coordonn�es</h4>
+        <h4>Siège &amp; Coordonnées</h4>
         <ul>
           <li><span style="color: var(--or-clair);">Localisation :</span> Koumassi, Abidjan, Côte d'Ivoire</li>
           <li><span style="color: var(--or-clair);">Contact :</span> +225 05 45 30 51 80 / +225 07 57 47 73 72</li>
           <li><span style="color: var(--or-clair);">Email :</span> aeemci.koumassi@gmail.com</li>
-          
         </ul>
       </div>
     </div>
@@ -300,20 +299,18 @@ window.fermerSidebar = fermerSidebar;
 document.addEventListener('DOMContentLoaded', function() {
   var burgerBtns = document.querySelectorAll('.menu-burger');
   burgerBtns.forEach(function(btn) {
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
+    var declencherSidebar = function(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
       ouvrirSidebar();
-    });
+    };
+    btn.addEventListener('click', declencherSidebar);
+    btn.addEventListener('touchstart', declencherSidebar, { passive: false });
   });
 });
 </script>
 
 </body>
 </html>
-
-
-
-
-
-

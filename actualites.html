@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -6,7 +6,8 @@
 <title>Actualités & Activités — AEEMCI Sous-Comité de Koumassi</title>
 <meta name="description" content="Découvrez les 5 événements et activités majeurs du Sous-Comité AEEMCI de Koumassi : SECOFIS, SEFORES, Nuit de prière, Journée d'excellence et Iftar solidaire.">
 <link rel="icon" href="images/logo.png">
-<link rel="stylesheet" href="css/style.css">\n<script src="js/base_donnees.js" defer></script>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/base_donnees.js" defer></script>
 </head>
 <body>
 
@@ -253,7 +254,7 @@
 
     <div class="modal-media-corps">
       <img loading="lazy" id="modalMediaImage" src="images/secofis.jpg" alt="Couverture Médiatique" class="modal-media-image" onerror="this.src='images/logo.png'; this.style.objectFit='contain'; this.style.padding='20px';">
-      
+
       <p class="modal-media-communique" id="modalMediaCommunique">
         La couverture médiatique officielle retrace les temps forts de cet événement marquant du Sous-Comité AEEMCI de Koumassi, avec des reportages, allocutions et albums souvenirs.
       </p>
@@ -297,7 +298,7 @@
       </div>
 
       <div class="pied-colonne">
-        <h4>Si�ge &amp; Coordonn�es</h4>
+        <h4>Siège &amp; Coordonnées</h4>
         <ul>
           <li><span style="color: var(--or-clair);">Localisation :</span> Koumassi, Abidjan, Côte d'Ivoire</li>
           <li><span style="color: var(--or-clair);">Contact :</span> +225 05 45 30 51 80 / +225 07 57 47 73 72</li>
@@ -341,11 +342,15 @@ window.fermerSidebar = fermerSidebar;
 document.addEventListener('DOMContentLoaded', function() {
   var burgerBtns = document.querySelectorAll('.menu-burger');
   burgerBtns.forEach(function(btn) {
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
+    var declencherSidebar = function(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
       ouvrirSidebar();
-    });
+    };
+    btn.addEventListener('click', declencherSidebar);
+    btn.addEventListener('touchstart', declencherSidebar, { passive: false });
   });
 });
 
@@ -385,7 +390,7 @@ var donneesMedias = {
     titre: "Iftar Solidaire & Action Ramadan — Couverture Médiatique",
     date: "Ramadan 2026",
     img: "images/solidarite-ramadan.jpg",
-    communique: "Opération d'entraide et d'Iftar collectif : partage quotidien de repas et remises de kits alimentaires pour accompagner la communauté pendant le mois béni."
+    communique: "Opération d'entraide et d'Iftar collectif : partage quotidien de repas et remises de kits alimentaires d'urgence aux familles et étudiants dans le besoin à Koumassi."
   }
 };
 
@@ -395,7 +400,7 @@ function ouvrirCouvertureMedia(eventId) {
   document.getElementById('modalMediaDate').textContent = data.date;
   document.getElementById('modalMediaImage').src = data.img;
   document.getElementById('modalMediaCommunique').textContent = data.communique;
-  
+
   var modal = document.getElementById('modalCouvertureMedias');
   modal.classList.add('ouvert');
   document.body.style.overflow = 'hidden';
@@ -444,10 +449,3 @@ function fermerCouvertureMedia(e) {
 
 </body>
 </html>
-
-
-
-
-
-
-

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -158,7 +158,7 @@
     </div>
 
     <div class="frise-chronologique">
-      
+
       <!-- 1972 - 1979 -->
       <div class="etape-historique">
         <div class="etape-point"></div>
@@ -200,7 +200,7 @@
       </div>
 
     </div>
-    
+
     <div style="text-align: center; margin-top: 30px;">
       <a href="historique.html" class="bouton-cta-contour" style="border-color: var(--vert-emeraude); color: var(--vert-emeraude);">Découvrir l'Histoire Complète →</a>
     </div>
@@ -210,7 +210,7 @@
 <!-- ===== WIDGET PROCHAIN ÉVÉNEMENT & COMPTE À REBOURS (MAHOULOUD 2026) ===== -->
 <section style="padding: 40px 0 0 0; background: var(--fond-clair);">
   <div class="conteneur">
-    <div class="banniere-evenement-compteur" style="display: grid; grid-template-columns: 90px 1.4fr 0.9fr; gap: 24px; align-items: center;">
+    <div class="banniere-evenement-compteur">
       <!-- Vignette Affiche Officielle -->
       <div style="position: relative; cursor: pointer;" onclick="ouvrirAfficheModal('images/maouloud.jpg')">
         <img loading="lazy" src="images/maouloud.jpg" alt="Affiche Nuit du Mahouloud 2026" style="width: 85px; height: 115px; object-fit: cover; border-radius: 10px; border: 2px solid var(--or); box-shadow: 0 8px 20px rgba(0,0,0,0.3); transition: transform 0.3s ease;">
@@ -264,7 +264,7 @@
     </div>
 
     <div class="grille-chiffres-cles">
-      
+
       <!-- Carte 1 -->
       <div class="carte-chiffre-cle">
         <div class="nombre-chiffre-cle">+20</div>
@@ -553,7 +553,7 @@
     </div>
 
     <div class="grille-temoignages" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
-      
+
       <!-- Témoignage 1 : Sow Mohamed -->
       <div class="carte-temoignage">
         <p class="citation-texte">
@@ -704,7 +704,7 @@
       </div>
 
       <div class="pied-colonne">
-        <h4>Si�ge &amp; Coordonn�es</h4>
+        <h4>Siège &amp; Coordonnées</h4>
         <ul>
           <li><span style="color: var(--or-clair);">Localisation :</span> Koumassi, Abidjan, Côte d'Ivoire</li>
           <li><span style="color: var(--or-clair);">Contact :</span> +225 05 45 30 51 80 / +225 07 57 47 73 72</li>
@@ -715,7 +715,6 @@
 
     <div class="bas-pied-site" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
       <p>&copy; 2025 - 2026 AEEMCI Sous-Comité de Koumassi. Tous droits réservés.</p>
-      <a href="admin/index.html" class="bouton-cta-contour" style="padding: 6px 14px; font-size: 0.78rem; border-radius: 20px; border: 1px solid var(--or-sombre); color: var(--or-clair); text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">🔐 Connexion Admin Studio</a>
     </div>
   </div>
 </footer>
@@ -741,48 +740,17 @@ window.fermerSidebar = fermerSidebar;
 document.addEventListener('DOMContentLoaded', function() {
   var burgerBtns = document.querySelectorAll('.menu-burger');
   burgerBtns.forEach(function(btn) {
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
+    var declencherSidebar = function(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
       ouvrirSidebar();
-    });
+    };
+    btn.addEventListener('click', declencherSidebar);
+    btn.addEventListener('touchstart', declencherSidebar, { passive: false });
   });
 });
-
-// Fonction de basculement FAQ accordéon
-function toggleFaq(btn) {
-  var item = btn.parentElement;
-  item.classList.toggle('ouvert');
-}
-
-// Compte à rebours dynamique pour la Nuit du Maouloud 2026 (Nuit du 25 au 26 Août 2026)
-function demarrerCompteReboursMaouloud() {
-  var dateEvenement = new Date("August 25, 2026 20:00:00").getTime();
-  
-  function mettreAJourChronometre() {
-    var maintenant = new Date().getTime();
-    var ecart = dateEvenement - maintenant;
-
-    if (ecart <= 0) {
-      document.getElementById('compteurJours').textContent = "00";
-      document.getElementById('compteurHeures').textContent = "00";
-      document.getElementById('compteurMinutes').textContent = "00";
-      return;
-    }
-
-    var jours = Math.floor(ecart / (1000 * 60 * 60 * 24));
-    var heures = Math.floor((ecart % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((ecart % (1000 * 60 * 60)) / (1000 * 60));
-
-    document.getElementById('compteurJours').textContent = jours < 10 ? "0" + jours : jours;
-    document.getElementById('compteurHeures').textContent = heures < 10 ? "0" + heures : heures;
-    document.getElementById('compteurMinutes').textContent = minutes < 10 ? "0" + minutes : minutes;
-  }
-
-  mettreAJourChronometre();
-  setInterval(mettreAJourChronometre, 30000);
-}
-demarrerCompteReboursMaouloud();
 
 // Lightbox Affiche Officielle
 function ouvrirAfficheModal(src) {
@@ -798,81 +766,6 @@ function fermerAfficheModal() {
   modal.style.display = 'none';
   document.body.style.overflow = '';
 }
-
-// Injection dynamique des nouveaux membres du bureau ajoutés via AEEMCI Studio
-function chargerBureauStudio() {
-  var sectionBureau = document.querySelector('#bureau .groupe-bureau-bloc .grille-membres-bureau');
-  if (!sectionBureau) return;
-
-  var listeCustom = JSON.parse(localStorage.getItem('aeemci_bureau_custom') || '[]');
-  listeCustom.forEach(function(item) {
-    var carte = document.createElement('div');
-    carte.className = 'carte-membre-bureau';
-    carte.innerHTML = `
-      <div class="photo-membre-box">
-        <img src="${item.photo}" alt="${item.nom}" loading="lazy" onerror="this.src='images/logo.png'; this.style.objectFit='contain';">
-      </div>
-      <div class="infos-membre-box">
-        <h4 class="nom-membre">${item.nom}</h4>
-        <span class="role-membre">${item.poste}</span>
-        <span class="badge-tag or" style="margin-top: 6px; font-size: 0.7rem;">${item.pole}</span>
-  });
-}
-chargerBureauStudio();
-
-// Application dynamique de TOUTES les modifications du site enregistrées via AEEMCI Studio
-function chargerSiteConfigFull() {
-  var siteData = JSON.parse(localStorage.getItem('aeemci_site_config_full') || '{}');
-  if (!siteData.heroTitre) return;
-
-  var elHeroTitle = document.querySelector('.hero-moderne h1, .titre-hero');
-  if (elHeroTitle && siteData.heroTitre) elHeroTitle.textContent = siteData.heroTitre;
-
-  var elHeroSubtitle = document.querySelector('.hero-moderne p, .description-hero');
-  if (elHeroSubtitle && siteData.heroSousTitre) elHeroSubtitle.textContent = siteData.heroSousTitre;
-
-  var elHeroBadge = document.querySelector('.hero-moderne .slogan-majestueux-box span');
-  if (elHeroBadge && siteData.heroBadge) elHeroBadge.textContent = siteData.heroBadge;
-
-  var cartesChiffres = document.querySelectorAll('.grille-chiffres-cles .carte-chiffre-cle');
-  if (cartesChiffres.length >= 4) {
-    if (siteData.impact1Chiffre) {
-      cartesChiffres[0].querySelector('.nombre-chiffre').textContent = siteData.impact1Chiffre;
-      cartesChiffres[0].querySelector('.titre-chiffre').textContent = siteData.impact1Titre;
-      cartesChiffres[0].querySelector('.desc-chiffre').textContent = siteData.impact1Desc;
-    }
-    if (siteData.impact2Chiffre) {
-      cartesChiffres[1].querySelector('.nombre-chiffre').textContent = siteData.impact2Chiffre;
-      cartesChiffres[1].querySelector('.titre-chiffre').textContent = siteData.impact2Titre;
-      cartesChiffres[1].querySelector('.desc-chiffre').textContent = siteData.impact2Desc;
-    }
-    if (siteData.impact3Chiffre) {
-      cartesChiffres[2].querySelector('.nombre-chiffre').textContent = siteData.impact3Chiffre;
-      cartesChiffres[2].querySelector('.titre-chiffre').textContent = siteData.impact3Titre;
-      cartesChiffres[2].querySelector('.desc-chiffre').textContent = siteData.impact3Desc;
-    }
-    if (siteData.impact4Chiffre) {
-      cartesChiffres[3].querySelector('.nombre-chiffre').textContent = siteData.impact4Chiffre;
-      cartesChiffres[3].querySelector('.titre-chiffre').textContent = siteData.impact4Titre;
-      cartesChiffres[3].querySelector('.desc-chiffre').textContent = siteData.impact4Desc;
-    }
-  }
-}
-chargerSiteConfigFull();
-
-function ouvrirSidebar() {
-  const panneau = document.getElementById('sidebarPanneau');
-  const overlay = document.getElementById('sidebarOverlay');
-  if (panneau) panneau.classList.add('active');
-  if (overlay) overlay.classList.add('active');
-}
-
-function fermerSidebar() {
-  const panneau = document.getElementById('sidebarPanneau');
-  const overlay = document.getElementById('sidebarOverlay');
-  if (panneau) panneau.classList.remove('active');
-  if (overlay) overlay.classList.remove('active');
-}
 </script>
 
 <!-- MODALE AFFICHE HD -->
@@ -886,12 +779,5 @@ function fermerSidebar() {
   </div>
 </div>
 
-<script src="admin/visual_editor.js"></script>
 </body>
 </html>
-
-
-
-
-
-

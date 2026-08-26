@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -128,7 +128,7 @@
 <!-- ===== GALERIE PHOTO GLOBALE UNIFIÉE (TOUTES LES IMAGES) ===== -->
 <section class="section-piliers">
   <div class="conteneur">
-    
+
     <div style="margin-bottom: 30px;">
       <span class="badge-tag or">Archives Photos</span>
       <h2 style="font-size: 1.8rem; color: var(--vert-emeraude); margin-top: 6px;">Photothèque des Militants</h2>
@@ -419,8 +419,6 @@
 
     </div>
 
-
-
   </div>
 </section>
 
@@ -456,12 +454,11 @@
       </div>
 
       <div class="pied-colonne">
-        <h4>Si�ge &amp; Coordonn�es</h4>
+        <h4>Siège &amp; Coordonnées</h4>
         <ul>
           <li><span style="color: var(--or-clair);">Localisation :</span> Koumassi, Abidjan, Côte d'Ivoire</li>
           <li><span style="color: var(--or-clair);">Contact :</span> +225 05 45 30 51 80 / +225 07 57 47 73 72</li>
           <li><span style="color: var(--or-clair);">Email :</span> aeemci.koumassi@gmail.com</li>
-          
         </ul>
       </div>
     </div>
@@ -502,17 +499,21 @@ window.fermerSidebar = fermerSidebar;
 document.addEventListener('DOMContentLoaded', function() {
   var burgerBtns = document.querySelectorAll('.menu-burger');
   burgerBtns.forEach(function(btn) {
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
+    var declencherSidebar = function(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
       ouvrirSidebar();
-    });
+    };
+    btn.addEventListener('click', declencherSidebar);
+    btn.addEventListener('touchstart', declencherSidebar, { passive: false });
   });
 });
 
 // Injection dynamique des photos importees via AEEMCI Studio dans la Galerie Web
 function chargerGalerieStudio() {
-  var grille = document.querySelector('.grille-galerie');
+  var grille = document.querySelector('.grille-galerie-filtree');
   if (!grille) return;
 
   var listeGalerie = JSON.parse(localStorage.getItem('aeemci_galerie_custom') || '[]');
@@ -533,7 +534,3 @@ chargerGalerieStudio();
 
 </body>
 </html>
-
-
-
-
