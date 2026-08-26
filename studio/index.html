@@ -302,11 +302,23 @@
           </div>
         </div>
 
-        <div class="carte-tableau" style="padding: 40px; text-align: center; border: 2px dashed var(--or); background: var(--vert-tendre);">
+        <input type="file" id="inputUploadGalerie" multiple accept="image/*" style="display: none;" onchange="gererSelectionPhotos(event)">
+
+        <div id="dropZoneGalerie" class="carte-tableau" style="padding: 40px; text-align: center; border: 2px dashed var(--or); background: var(--vert-tendre); transition: border-color 0.3s ease;">
           <div style="font-size: 3rem; margin-bottom: 12px;">📸</div>
           <h3 style="font-size: 1.2rem; color: var(--vert-institutionnel); margin-bottom: 6px;">Glissez-déposez vos photos ici</h3>
           <p style="color: var(--texte-secondaire); font-size: 0.9rem; margin-bottom: 18px;">Formats supportés : JPG, PNG, WEBP (Max 10 Mo par photo)</p>
-          <button class="bouton-action-pro">Sélectionner des fichiers</button>
+          <button type="button" class="bouton-action-pro btn-touch-evt" onclick="declencherSelecteurPhotos()">
+            <span>📁</span>
+            <span>Sélectionner des fichiers</span>
+          </button>
+        </div>
+
+        <div class="carte-tableau" style="padding: 28px; margin-top: 24px;">
+          <h3 style="margin-bottom: 18px; color: var(--vert-institutionnel);">Photos de la Galerie &amp; Médiathèque</h3>
+          <div id="gridGalerieCMS" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px;">
+            <!-- Photos affichées dynamiquement avec bouton de suppression -->
+          </div>
         </div>
       </section>
 

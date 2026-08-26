@@ -31,6 +31,10 @@ const CMS_DEFAUTS = {
       description: "Cours de renforcement gratuits organisés par la commission académique pour tous les élèves du sous-comité.",
       image: "../images/news2.jpg"
     }
+  ],
+  galerie: [
+    { id: 201, url: "../images/news1.jpg", titre: "Mahouloud 2026" },
+    { id: 202, url: "../images/news2.jpg", titre: "Soutien Scolaire" }
   ]
 };
 
@@ -38,8 +42,10 @@ document.addEventListener('DOMContentLoaded', async function() {
   initialiserDonneesCMS();
   chargerProfilPresidentForm();
   chargerActualitesCMS();
+  chargerGalerieCMS();
   chargerMilitantsCMS();
   attacherGestionnairesTactiles();
+  initialiserDragAndDropGalerie();
 });
 
 function initialiserDonneesCMS() {
@@ -48,6 +54,9 @@ function initialiserDonneesCMS() {
   }
   if (!localStorage.getItem('aeemci_cms_actualites')) {
     localStorage.setItem('aeemci_cms_actualites', JSON.stringify(CMS_DEFAUTS.actualites));
+  }
+  if (!localStorage.getItem('aeemci_cms_galerie')) {
+    localStorage.setItem('aeemci_cms_galerie', JSON.stringify(CMS_DEFAUTS.galerie));
   }
 }
 
@@ -218,12 +227,111 @@ window.supprimerActualiteCMS = function(id) {
   }
 };
 
-// 4. SUPPOR TACTILE REHAUSSÉ (TOUCH-FRIENDLY RECTIFICATION)
+// 4. GESTION DÉDIÉE DU TÉLÉVERSEMENT & GALERIE (UPLOAD + DRAG AND DROP)
+window.declencherSelecteurPhotos = function() {
+  const input = document.getElementById('inputUploadGalerie');
+  if (input) input.click();
+};
+
+window.gererSelectionPhotos = function(event) {
+  const files = event.target.files;
+  if (files && files.length > 0) {
+    traiterFichiersPhotos(files);
+  }
+};
+
+function initialiserDragAndDropGalerie() {
+  const dropZone = document.getElementById('dropZoneGalerie');
+  if (!dropZone) return;
+
+  ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+    dropZone.addEventListener(eventName, preventDefaults, false);
+  });
+
+  function preventDefaults(e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+  ['dragenter', 'dragover'].forEach(eventName => {
+    dropZone.addEventListener(eventName, () => dropZone.style.borderColor = '#10B981', false);
+  });
+
+  ['dragleave', 'drop'].forEach(eventName => {
+    dropZone.addEventListener(eventName, () => dropZone.style.borderColor = 'var(--or)', false);
+  });
+
+  dropZone.addEventListener('drop', (e) => {
+    const dt = e.dataTransfer;
+    const files = dt.files;
+    if (files && files.length > 0) {
+      traiterFichiersPhotos(files);
+    }
+  }, false);
+}
+
+function traiterFichiersPhotos(files) {
+  let galerie = JSON.parse(localStorage.getItem('aeemci_cms_galerie')) || CMS_DEFAUTS.galerie;
+  let compt = 0;
+
+  Array.from(files).forEach(file => {
+    if (file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        galerie.unshift({
+          id: Date.now() + Math.random(),
+          url: evt.target.result,
+          titre: file.name
+        });
+        compt++;
+        if (compt === files.length) {
+          localStorage.setItem('aeemci_cms_galerie', JSON.stringify(galerie));
+          chargerGalerieCMS();
+          alert(`✅ ${compt} photo(s) ajoutée(s) avec succès à la galerie !`);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+}
+
+function chargerGalerieCMS() {
+  const galerie = JSON.parse(localStorage.getItem('aeemci_cms_galerie')) || CMS_DEFAUTS.galerie;
+  const grid = document.getElementById('gridGalerieCMS');
+  if (!grid) return;
+
+  grid.innerHTML = '';
+
+  if (galerie.length === 0) {
+    grid.innerHTML = `<p style="color: var(--texte-secondaire); grid-column: 1 / -1;">Aucune photo dans la galerie. Téléversez-en de nouvelles ci-dessus.</p>`;
+    return;
+  }
+
+  galerie.forEach(item => {
+    const box = document.createElement('div');
+    box.style.cssText = "position: relative; border-radius: 12px; overflow: hidden; border: 1px solid var(--bordure-carte); box-shadow: 0 4px 12px rgba(0,0,0,0.06); aspect-ratio: 1; background: #000;";
+    box.innerHTML = `
+      <img src="${item.url}" alt="${item.titre || 'Photo'}" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9;">
+      <button class="bouton-table-action" onclick="supprimerPhotoGalerie(${item.id})" style="position: absolute; top: 6px; right: 6px; background: rgba(239, 68, 68, 0.9); color: white; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; border: none; cursor: pointer;" title="Supprimer la photo">&times;</button>
+    `;
+    grid.appendChild(box);
+  });
+}
+
+window.supprimerPhotoGalerie = function(id) {
+  if (confirm("Supprimer cette photo de la galerie ?")) {
+    let galerie = JSON.parse(localStorage.getItem('aeemci_cms_galerie')) || [];
+    galerie = galerie.filter(g => g.id != id);
+    localStorage.setItem('aeemci_cms_galerie', JSON.stringify(galerie));
+    chargerGalerieCMS();
+  }
+};
+
+// 5. SUPPORT TACTILE REHAUSSÉ
 function attacherGestionnairesTactiles() {
   const boutonsTactiles = document.querySelectorAll('.bouton-action-pro, .bouton-action-contour, .modal-fermer, .btn-touch-evt');
   boutonsTactiles.forEach(btn => {
     btn.addEventListener('touchstart', function(e) {
-      // Prévenir le délai de 300ms sur mobile
       this.style.transform = 'scale(0.96)';
     }, { passive: true });
 
@@ -233,7 +341,7 @@ function attacherGestionnairesTactiles() {
   });
 }
 
-// 5. GESTION DES MILITANTS
+// 6. GESTION DES MILITANTS
 async function chargerMilitantsCMS() {
   let militants = [];
   if (window.militantsDb && typeof window.militantsDb.fetchMilitants === 'function') {
