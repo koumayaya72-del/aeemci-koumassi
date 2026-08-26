@@ -100,7 +100,7 @@
             <h1>Tableau de Bord Général</h1>
             <p>Aperçu en temps réel du Sous-Comité AEEMCI de Koumassi (Mandat 2025–2026).</p>
           </div>
-          <button class="bouton-action-pro" onclick="ouvrirModalAjoutMilitant()">
+          <button class="bouton-action-pro btn-touch-evt" onclick="ouvrirModalAjoutMilitant()">
             <span>➕</span>
             <span>Nouveau Militant</span>
           </button>
@@ -151,7 +151,7 @@
             <div class="tableau-titre">
               <h3>Dernières Demandes d'Adhésion (Koumassi)</h3>
             </div>
-            <button class="bouton-action-contour" onclick="changerOngletStudio('tab-militants', document.querySelectorAll('.nav-item')[1])">
+            <button class="bouton-action-contour btn-touch-evt" onclick="changerOngletStudio('tab-militants', document.querySelectorAll('.nav-item')[1])">
               Voir tout le registre →
             </button>
           </div>
@@ -185,11 +185,11 @@
           </div>
 
           <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-            <button class="bouton-action-contour" onclick="exporterMilitantsCSV()">
+            <button class="bouton-action-contour btn-touch-evt" onclick="exporterMilitantsCSV()">
               <span>📥</span>
               <span>Exporter Excel/CSV</span>
             </button>
-            <button class="bouton-action-pro" onclick="ouvrirModalAjoutMilitant()">
+            <button class="bouton-action-pro btn-touch-evt" onclick="ouvrirModalAjoutMilitant()">
               <span>➕</span>
               <span>Inscrire un Militant</span>
             </button>
@@ -243,28 +243,16 @@
             <h1>Gestion des Événements &amp; Actualités</h1>
             <p>Publiez et éditez les conférences, Mahouloud, SECOFIS et activités de Koumassi.</p>
           </div>
-          <button class="bouton-action-pro" onclick="alert('Formulaire d\'ajout d\'événement prêt !')">
+          <button class="bouton-action-pro btn-touch-evt" onclick="ouvrirModalAjoutEvenement()">
             <span>➕</span>
             <span>Publier un Événement</span>
           </button>
         </div>
 
         <div class="carte-tableau" style="padding: 28px;">
-          <h3 style="margin-bottom: 16px; color: var(--vert-institutionnel);">Événements à l'Affiche</h3>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-            <div style="border: 1px solid var(--bordure-carte); border-radius: 14px; padding: 20px; background: #FFFFFF;">
-              <span class="badge-statut valide" style="margin-bottom: 10px;">En vedette</span>
-              <h4 style="font-size: 1.1rem; color: var(--vert-institutionnel); margin-bottom: 6px;">Nuit du Mahouloud 2026</h4>
-              <p style="font-size: 0.88rem; color: var(--texte-secondaire); margin-bottom: 12px;">Collège Moderne La Colombe • Nuit du 25 au 26 Août 2026 dès 20H.</p>
-              <button class="bouton-action-contour" style="width: 100%; justify-content: center;">✏️ Modifier l'Affiche &amp; Compte à rebours</button>
-            </div>
-
-            <div style="border: 1px solid var(--bordure-carte); border-radius: 14px; padding: 20px; background: #FFFFFF;">
-              <span class="badge-statut attente" style="margin-bottom: 10px;">Hebdomadaire</span>
-              <h4 style="font-size: 1.1rem; color: var(--vert-institutionnel); margin-bottom: 6px;">Réunion du Samedi</h4>
-              <p style="font-size: 0.88rem; color: var(--texte-secondaire); margin-bottom: 12px;">IST-ISG La Colombe • Chaque Samedi de 15h à 18h.</p>
-              <button class="bouton-action-contour" style="width: 100%; justify-content: center;">✏️ Modifier les détails</button>
-            </div>
+          <h3 style="margin-bottom: 18px; color: var(--vert-institutionnel);">Événements &amp; Publications à l'Affiche</h3>
+          <div id="containerActualitesCMS" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+            <!-- Généré dynamiquement en JS avec boutons d'action 100% fonctionnels -->
           </div>
         </div>
       </section>
@@ -318,7 +306,7 @@
           <div style="font-size: 3rem; margin-bottom: 12px;">📸</div>
           <h3 style="font-size: 1.2rem; color: var(--vert-institutionnel); margin-bottom: 6px;">Glissez-déposez vos photos ici</h3>
           <p style="color: var(--texte-secondaire); font-size: 0.9rem; margin-bottom: 18px;">Formats supportés : JPG, PNG, WEBP (Max 10 Mo par photo)</p>
-          <button class="bouton-action-pro">Sélectionner des fichiers</button>
+          <button class="bouton-action-pro btn-touch-evt">Sélectionner des fichiers</button>
         </div>
       </section>
 
@@ -390,8 +378,56 @@
       </div>
 
       <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
-        <button type="button" class="bouton-action-contour" onclick="fermerModalAjoutMilitant()">Annuler</button>
-        <button type="submit" class="bouton-action-pro">Enregistrer le Militant</button>
+        <button type="button" class="bouton-action-contour btn-touch-evt" onclick="fermerModalAjoutMilitant()">Annuler</button>
+        <button type="submit" class="bouton-action-pro btn-touch-evt">Enregistrer le Militant</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ==================== MODALE PUBLIER / MODIFIER UN ÉVÉNEMENT ==================== -->
+<div class="studio-modal" id="modalAjoutEvenement">
+  <div class="modal-contenu">
+    <div class="modal-header">
+      <h3 id="modalEvenementTitreHeader">➕ Publier un Nouvel Événement</h3>
+      <button class="modal-fermer" onclick="fermerModalAjoutEvenement()">&times;</button>
+    </div>
+    <form class="modal-body" id="formAjoutActuCMS" onsubmit="ajouterActualiteCMS(event)">
+      <input type="hidden" id="cmsActuId">
+
+      <div class="form-groupe">
+        <label>Titre de l'Événement / Publication *</label>
+        <input type="text" id="cmsActuTitre" placeholder="ex: Nuit du Mahouloud 2026" required>
+      </div>
+
+      <div class="form-groupe">
+        <label>Catégorie</label>
+        <select id="cmsActuCategorie">
+          <option value="Événement Majeur">🕌 Événement Majeur</option>
+          <option value="Conférence">🎙️ Conférence</option>
+          <option value="Formations">🎓 Formations &amp; Soutien</option>
+          <option value="Assemblées">📜 Assises &amp; Réunions</option>
+        </select>
+      </div>
+
+      <div class="form-groupe">
+        <label>Date &amp; Heure de l'Événement</label>
+        <input type="text" id="cmsActuDate" placeholder="ex: Nuit du 25 au 26 Août 2026 dès 20H">
+      </div>
+
+      <div class="form-groupe">
+        <label>Lieu / Emplacement</label>
+        <input type="text" id="cmsActuLieu" placeholder="ex: Collège Moderne La Colombe, Koumassi">
+      </div>
+
+      <div class="form-groupe">
+        <label>Description &amp; Programme *</label>
+        <textarea id="cmsActuDesc" rows="4" placeholder="Détails du programme, intervenants..." required></textarea>
+      </div>
+
+      <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+        <button type="button" class="bouton-action-contour btn-touch-evt" onclick="fermerModalAjoutEvenement()">Annuler</button>
+        <button type="submit" class="bouton-action-pro btn-touch-evt">Enregistrer &amp; Publier sur le Site</button>
       </div>
     </form>
   </div>

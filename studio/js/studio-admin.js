@@ -2,7 +2,6 @@
    STUDIO AEEMCI KOUMASSI — MOTEUR D'ADMINISTRATION CMS COMPLET (STUDIO-ADMIN)
    ========================================================================== */
 
-// Structure de données initiale du CMS (Bureau, Actualités, Militants)
 const CMS_DEFAUTS = {
   bureau: {
     presidentNom: "Sow Mohamed",
@@ -35,15 +34,14 @@ const CMS_DEFAUTS = {
   ]
 };
 
-// Initialisation au chargement
 document.addEventListener('DOMContentLoaded', async function() {
   initialiserDonneesCMS();
   chargerProfilPresidentForm();
   chargerActualitesCMS();
   chargerMilitantsCMS();
+  attacherGestionnairesTactiles();
 });
 
-// 1. Initialiser le LocalStorage si première utilisation
 function initialiserDonneesCMS() {
   if (!localStorage.getItem('aeemci_cms_bureau')) {
     localStorage.setItem('aeemci_cms_bureau', JSON.stringify(CMS_DEFAUTS.bureau));
@@ -53,7 +51,7 @@ function initialiserDonneesCMS() {
   }
 }
 
-// 2. GESTION DU BUREAU EXÉCUTIF & PHOTO DU PRÉSIDENT
+// 1. GESTION DU BUREAU EXÉCUTIF & PHOTO DU PRÉSIDENT
 function chargerProfilPresidentForm() {
   const bureau = JSON.parse(localStorage.getItem('aeemci_cms_bureau')) || CMS_DEFAUTS.bureau;
   
@@ -82,7 +80,6 @@ window.enregistrerBureauCMS = function(e) {
   if (mot) bureau.presidentMot = mot;
   if (tel1) bureau.contactTel1 = tel1;
 
-  // Traitement de l'upload d'image (Support du Glisser-Déposer & File Reader)
   if (fileInput && fileInput.files && fileInput.files[0]) {
     const reader = new FileReader();
     reader.onload = function(evt) {
@@ -98,6 +95,41 @@ window.enregistrerBureauCMS = function(e) {
   }
 };
 
+// 2. MODALES ÉVÉNEMENTS
+window.ouvrirModalAjoutEvenement = function(id = null) {
+  const modal = document.getElementById('modalAjoutEvenement');
+  if (!modal) return;
+
+  const titleEl = document.getElementById('modalEvenementTitreHeader');
+  const idInput = document.getElementById('cmsActuId');
+
+  if (id) {
+    const actualites = JSON.parse(localStorage.getItem('aeemci_cms_actualites')) || [];
+    const actu = actualites.find(a => a.id === id);
+    if (actu) {
+      if (titleEl) titleEl.textContent = "✏️ Modifier l'Événement";
+      if (idInput) idInput.value = actu.id;
+      document.getElementById('cmsActuTitre').value = actu.titre || '';
+      document.getElementById('cmsActuCategorie').value = actu.categorie || 'Événement';
+      document.getElementById('cmsActuDate').value = actu.date || '';
+      document.getElementById('cmsActuLieu').value = actu.lieu || '';
+      document.getElementById('cmsActuDesc').value = actu.description || '';
+    }
+  } else {
+    if (titleEl) titleEl.textContent = "➕ Publier un Nouvel Événement";
+    if (idInput) idInput.value = '';
+    const form = document.getElementById('formAjoutActuCMS');
+    if (form) form.reset();
+  }
+
+  modal.classList.add('active');
+};
+
+window.fermerModalAjoutEvenement = function() {
+  const modal = document.getElementById('modalAjoutEvenement');
+  if (modal) modal.classList.remove('active');
+};
+
 // 3. GESTION DES ACTUALITÉS & ÉVÉNEMENTS (CRUD)
 function chargerActualitesCMS() {
   const actualites = JSON.parse(localStorage.getItem('aeemci_cms_actualites')) || CMS_DEFAUTS.actualites;
@@ -107,20 +139,23 @@ function chargerActualitesCMS() {
   container.innerHTML = '';
 
   if (actualites.length === 0) {
-    container.innerHTML = `<p style="color: var(--texte-secondaire);">Aucune actualité publiée pour le moment.</p>`;
+    container.innerHTML = `<p style="color: var(--texte-secondaire); padding: 20px;">Aucun événement publié pour le moment. Cliquez sur "Publier un Événement" pour commencer.</p>`;
     return;
   }
 
   actualites.forEach(actu => {
     const card = document.createElement('div');
-    card.style.cssText = "border: 1px solid var(--bordure-carte); border-radius: 14px; padding: 20px; background: #FFFFFF; position: relative;";
+    card.style.cssText = "border: 1px solid var(--bordure-carte); border-radius: 14px; padding: 20px; background: #FFFFFF; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--ombre-carte);";
     card.innerHTML = `
-      <span class="badge-statut valide" style="margin-bottom: 8px;">${actu.categorie}</span>
-      <h4 style="font-size: 1.1rem; color: var(--vert-institutionnel); margin-bottom: 6px;">${actu.titre}</h4>
-      <p style="font-size: 0.85rem; color: var(--or-sombre); font-weight: 700; margin-bottom: 8px;">📅 ${actu.date} • 📍 ${actu.lieu}</p>
-      <p style="font-size: 0.88rem; color: var(--texte-secondaire); margin-bottom: 16px;">${actu.description}</p>
-      <div style="display: flex; gap: 10px;">
-        <button class="bouton-action-contour" onclick="supprimerActualiteCMS(${actu.id})" style="border-color: #EF4444; color: #EF4444; width: 100%; justify-content: center;">🗑️ Supprimer</button>
+      <div>
+        <span class="badge-statut valide" style="margin-bottom: 10px; display: inline-block;">${actu.categorie}</span>
+        <h4 style="font-size: 1.15rem; color: var(--vert-institutionnel); font-weight: 800; margin-bottom: 6px;">${actu.titre}</h4>
+        <p style="font-size: 0.85rem; color: var(--or-sombre); font-weight: 700; margin-bottom: 10px;">📅 ${actu.date} • 📍 ${actu.lieu}</p>
+        <p style="font-size: 0.88rem; color: var(--texte-secondaire); margin-bottom: 18px; line-height: 1.5;">${actu.description}</p>
+      </div>
+      <div style="display: flex; gap: 10px; margin-top: 10px;">
+        <button class="bouton-action-contour btn-touch-evt" onclick="ouvrirModalAjoutEvenement(${actu.id})" style="flex: 1; justify-content: center;">✏️ Modifier</button>
+        <button class="bouton-action-contour btn-touch-evt" onclick="supprimerActualiteCMS(${actu.id})" style="border-color: #EF4444; color: #EF4444; flex: 1; justify-content: center;">🗑️ Supprimer</button>
       </div>
     `;
     container.appendChild(card);
@@ -130,6 +165,8 @@ function chargerActualitesCMS() {
 window.ajouterActualiteCMS = function(e) {
   if (e) e.preventDefault();
 
+  const idInput = document.getElementById('cmsActuId');
+  const idEdit = idInput ? idInput.value : '';
   const titre = document.getElementById('cmsActuTitre')?.value.trim();
   const categorie = document.getElementById('cmsActuCategorie')?.value || "Événement";
   const date = document.getElementById('cmsActuDate')?.value.trim();
@@ -143,23 +180,33 @@ window.ajouterActualiteCMS = function(e) {
 
   let actualites = JSON.parse(localStorage.getItem('aeemci_cms_actualites')) || CMS_DEFAUTS.actualites;
 
-  const nouvelleActu = {
-    id: Date.now(),
-    titre: titre,
-    categorie: categorie,
-    date: date || "Prochainement",
-    lieu: lieu || "Koumassi",
-    description: description,
-    image: "../images/logo.png"
-  };
+  if (idEdit) {
+    const idx = actualites.findIndex(a => a.id == idEdit);
+    if (idx !== -1) {
+      actualites[idx].titre = titre;
+      actualites[idx].categorie = categorie;
+      actualites[idx].date = date || "Prochainement";
+      actualites[idx].lieu = lieu || "Koumassi";
+      actualites[idx].description = description;
+    }
+  } else {
+    const nouvelleActu = {
+      id: Date.now(),
+      titre: titre,
+      categorie: categorie,
+      date: date || "Prochainement",
+      lieu: lieu || "Koumassi",
+      description: description,
+      image: "../images/logo.png"
+    };
+    actualites.unshift(nouvelleActu);
+  }
 
-  actualites.unshift(nouvelleActu);
   localStorage.setItem('aeemci_cms_actualites', JSON.stringify(actualites));
   chargerActualitesCMS();
+  fermerModalAjoutEvenement();
 
-  // Reinitialiser le formulaire
-  document.getElementById('formAjoutActuCMS')?.reset();
-  alert("✅ L'événement a été publié avec succès sur le site public !");
+  alert("✅ L'événement a été publié et mis à jour en temps réel sur le site public !");
 };
 
 window.supprimerActualiteCMS = function(id) {
@@ -171,7 +218,22 @@ window.supprimerActualiteCMS = function(id) {
   }
 };
 
-// 4. GESTION DU REGISTRE DES MILITANTS & ADHÉSIONS
+// 4. SUPPOR TACTILE REHAUSSÉ (TOUCH-FRIENDLY RECTIFICATION)
+function attacherGestionnairesTactiles() {
+  const boutonsTactiles = document.querySelectorAll('.bouton-action-pro, .bouton-action-contour, .modal-fermer, .btn-touch-evt');
+  boutonsTactiles.forEach(btn => {
+    btn.addEventListener('touchstart', function(e) {
+      // Prévenir le délai de 300ms sur mobile
+      this.style.transform = 'scale(0.96)';
+    }, { passive: true });
+
+    btn.addEventListener('touchend', function(e) {
+      this.style.transform = 'scale(1)';
+    }, { passive: true });
+  });
+}
+
+// 5. GESTION DES MILITANTS
 async function chargerMilitantsCMS() {
   let militants = [];
   if (window.militantsDb && typeof window.militantsDb.fetchMilitants === 'function') {
@@ -209,7 +271,6 @@ async function chargerMilitantsCMS() {
   if (tbody1) tbody1.innerHTML = html;
   if (tbody2) tbody2.innerHTML = html;
 
-  // Mise à jour des compteurs statistiques KPI
   const kpiTotal = document.getElementById('kpiTotalMilitants');
   const kpiAttentes = document.getElementById('kpiAttentes');
 
