@@ -51,34 +51,50 @@ function synchroniserBureauPublic() {
 
 // 2. Synchronisation Dynamique des Événements & Actualités
 function synchroniserActualitesPublic() {
-  const actualitesRaw = localStorage.getItem('aeemci_cms_actualites');
-  if (!actualitesRaw) return;
+  const cmsRaw = localStorage.getItem('aeemci_cms_actualites');
+  const customRaw = localStorage.getItem('aeemci_evenements_custom');
 
+  let actualites = [];
+  try { if (cmsRaw) actualites = JSON.parse(cmsRaw); } catch(e){}
   try {
-    const actualites = JSON.parse(actualitesRaw);
-    const container = document.getElementById('container-actualites') || document.getElementById('publicNewsContainer') || document.querySelector('.grille-actualites-cartes');
-
-    if (container && actualites && actualites.length > 0) {
-      container.innerHTML = '';
-      actualites.forEach(actu => {
-        const article = document.createElement('article');
-        article.className = 'carte-actualite-moderne';
-        article.innerHTML = `
-          <div class="carte-actu-image">
-            <span class="carte-actu-badge or">${actu.categorie || 'ÉVÉNEMENT'}</span>
-            <img src="${actu.image || 'images/logo.png'}" alt="${actu.titre}" loading="lazy" onerror="this.src='images/logo.png';">
-          </div>
-          <div class="carte-actu-corps">
-            <span class="carte-actu-date">📅 ${actu.date} ${actu.lieu ? '• 📍 ' + actu.lieu : ''}</span>
-            <h3 class="carte-actu-titre">${actu.titre}</h3>
-            <p class="carte-actu-desc">${actu.description}</p>
-          </div>
-        `;
-        container.appendChild(article);
+    if (customRaw) {
+      const customList = JSON.parse(customRaw);
+      customList.forEach(c => {
+        if (!actualites.some(a => a.titre === c.titre)) {
+          actualites.unshift({
+            id: Date.now(),
+            titre: c.titre,
+            categorie: c.badge || 'ÉVÉNEMENT',
+            date: c.date || 'Prochainement',
+            lieu: c.lieu || 'Koumassi',
+            description: c.desc || c.description,
+            image: c.image || 'images/maouloud.jpg'
+          });
+        }
       });
     }
-  } catch (e) {
-    console.warn("Mise à jour des actualités ignorée:", e);
+  } catch(e){}
+
+  const container = document.getElementById('container-actualites') || document.getElementById('publicNewsContainer') || document.querySelector('.grille-actualites-cartes');
+
+  if (container && actualites.length > 0) {
+    container.innerHTML = '';
+    actualites.forEach(actu => {
+      const article = document.createElement('article');
+      article.className = 'carte-actualite-moderne';
+      article.innerHTML = `
+        <div class="carte-actu-image">
+          <span class="carte-actu-badge or">${actu.categorie || 'ÉVÉNEMENT'}</span>
+          <img src="${actu.image || 'images/logo.png'}" alt="${actu.titre}" loading="lazy" onerror="this.src='images/logo.png';">
+        </div>
+        <div class="carte-actu-corps">
+          <span class="carte-actu-date">📅 ${actu.date} ${actu.lieu ? '• 📍 ' + actu.lieu : ''}</span>
+          <h3 class="carte-actu-titre">${actu.titre}</h3>
+          <p class="carte-actu-desc">${actu.description}</p>
+        </div>
+      `;
+      container.appendChild(article);
+    });
   }
 }
 
@@ -137,35 +153,43 @@ function synchroniserStatistiquesPublic() {
 
 // 5. Synchronisation des Photos de la Galerie Uploadées depuis le Studio
 function synchroniserGaleriePublic() {
-  const galerieRaw = localStorage.getItem('aeemci_cms_galerie');
-  if (!galerieRaw) return;
-
-  try {
-    const mefGalerie = JSON.parse(galerieRaw);
-    const container = document.getElementById('container-galerie') || document.querySelector('.grille-galerie-filtree');
-
-    if (container && mefGalerie && mefGalerie.length > 0) {
-      // Nettoyer les éléments dynamiques précédents pour éviter l'accumulation au rafraîchissement
-      container.querySelectorAll('.carte-galerie-dynamique-studio').forEach(el => el.remove());
-
-      const photosValides = mefGalerie.filter(item => item && item.url && !item.url.includes('../images/'));
-      
-      // Inverser pour insérer du plus ancien au plus récent afin que le plus récent se retrouve tout en haut (firstChild)
-      [...photosValides].reverse().forEach(photo => {
-        const item = document.createElement('div');
-        item.className = 'carte-galerie-item carte-galerie-dynamique-studio';
-        item.innerHTML = `
-          <img src="${photo.url}" alt="${photo.titre || 'Photo AEEMCI Koumassi'}" loading="lazy" onerror="this.src='images/logo.png';">
-          <div class="carte-galerie-overlay">
-            <span class="carte-galerie-cat">Nouveau • Studio Admin</span>
-            <h3 class="carte-galerie-titre">${photo.titre || 'Activité Koumassi'}</h3>
-          </div>
-        `;
-        container.insertBefore(item, container.firstChild);
-      });
+  const cmsRaw = localStorage.getItem('aeemci_cms_galerie');
+  const customRaw = localStorage.getItem('aeemci_galerie_custom');
+  
+  let listCMS = [];
+  let listCustom = [];
+  
+  try { if (cmsRaw) listCMS = JSON.parse(cmsRaw); } catch(e){}
+  try { if (customRaw) listCustom = JSON.parse(customRaw); } catch(e){}
+  
+  const combinees = [...listCMS];
+  listCustom.forEach(c => {
+    const url = c.photo || c.url;
+    if (url && !combinees.some(item => (item.url || item.photo) === url)) {
+      combinees.push({ id: Date.now() + Math.random(), url: url, titre: c.titre || 'Photo Studio' });
     }
-  } catch (e) {
-    console.warn("Mise à jour de la galerie ignorée:", e);
+  });
+
+  const container = document.getElementById('container-galerie') || document.querySelector('.grille-galerie-filtree');
+
+  if (container && combinees.length > 0) {
+    container.querySelectorAll('.carte-galerie-dynamique-studio').forEach(el => el.remove());
+
+    const photosValides = combinees.filter(item => item && (item.url || item.photo) && !(item.url || item.photo).includes('../images/'));
+
+    [...photosValides].reverse().forEach(photo => {
+      const src = photo.url || photo.photo;
+      const item = document.createElement('div');
+      item.className = 'carte-galerie-item carte-galerie-dynamique-studio';
+      item.innerHTML = `
+        <img src="${src}" alt="${photo.titre || 'Photo AEEMCI Koumassi'}" loading="lazy" onerror="this.src='images/logo.png';">
+        <div class="carte-galerie-overlay">
+          <span class="carte-galerie-cat">Nouveau • Studio Admin</span>
+          <h3 class="carte-galerie-titre">${photo.titre || 'Activité Koumassi'}</h3>
+        </div>
+      `;
+      container.insertBefore(item, container.firstChild);
+    });
   }
 }
 

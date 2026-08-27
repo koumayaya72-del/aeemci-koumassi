@@ -301,6 +301,15 @@ window.ajouterActualiteCMS = function(e) {
 
     try {
       localStorage.setItem('aeemci_cms_actualites', JSON.stringify(actualites));
+      let customEvts = actualites.map(a => ({
+        badge: a.categorie,
+        titre: a.titre,
+        date: a.date,
+        lieu: a.lieu,
+        desc: a.description,
+        image: a.image
+      }));
+      localStorage.setItem('aeemci_evenements_custom', JSON.stringify(customEvts));
     } catch (err) {
       console.error("Quota localStorage dépassé:", err);
     }
@@ -479,6 +488,7 @@ function compresserImageCanvas(base64Str, maxDimension, quality, callback) {
 
 function traiterFichiersPhotos(files) {
   let galerie = JSON.parse(localStorage.getItem('aeemci_cms_galerie')) || [];
+  let custom = JSON.parse(localStorage.getItem('aeemci_galerie_custom') || '[]');
   let compt = 0;
 
   Array.from(files).forEach(file => {
@@ -491,10 +501,18 @@ function traiterFichiersPhotos(files) {
             url: urlCompressee,
             titre: file.name
           });
+
+          custom.unshift({
+            photo: urlCompressee,
+            titre: file.name,
+            categorie: 'Photos'
+          });
+
           compt++;
           if (compt === files.length) {
             try {
               localStorage.setItem('aeemci_cms_galerie', JSON.stringify(galerie));
+              localStorage.setItem('aeemci_galerie_custom', JSON.stringify(custom));
             } catch (err) {
               console.error("Erreur de sauvegarde LocalStorage:", err);
             }
@@ -534,8 +552,16 @@ function chargerGalerieCMS() {
 window.supprimerPhotoGalerie = function(id) {
   if (confirm("Supprimer cette photo de la galerie ?")) {
     let galerie = JSON.parse(localStorage.getItem('aeemci_cms_galerie')) || [];
+    const target = galerie.find(g => g.id == id);
     galerie = galerie.filter(g => g.id != id);
     localStorage.setItem('aeemci_cms_galerie', JSON.stringify(galerie));
+
+    if (target) {
+      let custom = JSON.parse(localStorage.getItem('aeemci_galerie_custom') || '[]');
+      custom = custom.filter(c => (c.photo || c.url) !== target.url);
+      localStorage.setItem('aeemci_galerie_custom', JSON.stringify(custom));
+    }
+
     chargerGalerieCMS();
   }
 };
