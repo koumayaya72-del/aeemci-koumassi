@@ -391,6 +391,37 @@ function initialiserDragAndDropGalerie() {
   }, false);
 }
 
+function compresserImageCanvas(base64Str, maxDimension, quality, callback) {
+  const img = new Image();
+  img.onload = function() {
+    let width = img.width;
+    let height = img.height;
+
+    if (width > maxDimension || height > maxDimension) {
+      if (width > height) {
+        height = Math.round((height * maxDimension) / width);
+        width = maxDimension;
+      } else {
+        width = Math.round((width * maxDimension) / height);
+        height = maxDimension;
+      }
+    }
+
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0, width, height);
+
+    const compressedUrl = canvas.toDataURL('image/jpeg', quality || 0.8);
+    callback(compressedUrl);
+  };
+  img.onerror = function() {
+    callback(base64Str);
+  };
+  img.src = base64Str;
+}
+
 function traiterFichiersPhotos(files) {
   let galerie = JSON.parse(localStorage.getItem('aeemci_cms_galerie')) || [];
   let compt = 0;
@@ -399,17 +430,23 @@ function traiterFichiersPhotos(files) {
     if (file.type.startsWith('image/')) {
       const reader = new FileReader();
       reader.onload = function(evt) {
-        galerie.unshift({
-          id: Date.now() + Math.random(),
-          url: evt.target.result,
-          titre: file.name
+        compresserImageCanvas(evt.target.result, 1000, 0.8, function(urlCompressee) {
+          galerie.unshift({
+            id: Date.now() + Math.random(),
+            url: urlCompressee,
+            titre: file.name
+          });
+          compt++;
+          if (compt === files.length) {
+            try {
+              localStorage.setItem('aeemci_cms_galerie', JSON.stringify(galerie));
+            } catch (err) {
+              console.error("Erreur de sauvegarde LocalStorage:", err);
+            }
+            chargerGalerieCMS();
+            alert(`✅ ${compt} photo(s) ajoutée(s) avec succès à la galerie !`);
+          }
         });
-        compt++;
-        if (compt === files.length) {
-          localStorage.setItem('aeemci_cms_galerie', JSON.stringify(galerie));
-          chargerGalerieCMS();
-          alert(`✅ ${compt} photo(s) ajoutée(s) avec succès à la galerie !`);
-        }
       };
       reader.readAsDataURL(file);
     }

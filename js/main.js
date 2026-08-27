@@ -148,11 +148,15 @@ function synchroniserGaleriePublic() {
     const container = document.getElementById('container-galerie') || document.querySelector('.grille-galerie-filtree');
 
     if (container && mefGalerie && mefGalerie.length > 0) {
+      // Nettoyer les éléments dynamiques précédents pour éviter l'accumulation au rafraîchissement
+      container.querySelectorAll('.carte-galerie-dynamique-studio').forEach(el => el.remove());
+
       const photosValides = mefGalerie.filter(item => item && item.url && !item.url.includes('../images/'));
       
-      photosValides.reverse().forEach(photo => {
+      // Inverser pour insérer du plus ancien au plus récent afin que le plus récent se retrouve tout en haut (firstChild)
+      [...photosValides].reverse().forEach(photo => {
         const item = document.createElement('div');
-        item.className = 'carte-galerie-item';
+        item.className = 'carte-galerie-item carte-galerie-dynamique-studio';
         item.innerHTML = `
           <img src="${photo.url}" alt="${photo.titre || 'Photo AEEMCI Koumassi'}" loading="lazy" onerror="this.src='images/logo.png';">
           <div class="carte-galerie-overlay">
@@ -164,7 +168,7 @@ function synchroniserGaleriePublic() {
       });
     }
   } catch (e) {
-    console.warn("Mise à jour de la galerie ignorée.");
+    console.warn("Mise à jour de la galerie ignorée:", e);
   }
 }
 
