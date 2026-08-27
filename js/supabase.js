@@ -35,10 +35,41 @@ window.soumettreAdhesionAEEMCI = async function(donneesFormulaire) {
     }
   }
 
-  // Stockage local synchronisé avec le Studio Admin
-  let liste = JSON.parse(localStorage.getItem('aeemci_militants_db')) || [];
-  liste.unshift(nouvelleAdhesion);
-  localStorage.setItem('aeemci_militants_db', JSON.stringify(liste));
+// Module de Lecture du CMS via Supabase
+window.cmsRead = {
+  fetchSection: async function(section) {
+    if (supabasePublic) {
+      try {
+        const { data, error } = await supabasePublic
+          .from('cms_settings')
+          .select('content')
+          .eq('section', section)
+          .single();
+        if (!error && data) return data.content;
+      } catch (e) {
+        console.warn(`Erreur lecture Supabase (${section}):`, e);
+      }
+    }
+    return null;
+  },
+
+  fetchMilitants: async function() {
+    if (supabasePublic) {
+      try {
+        const { data, error } = await supabasePublic
+          .from('militants')
+          .select('*')
+          .order('created_at', { ascending: false });
+        if (!error && data) return data;
+      } catch (e) {
+        console.warn("Erreur lecture militants Supabase.");
+      }
+    }
+    return null;
+  }
+};
+
+
 
   return { success: true, message: "Votre demande d'adhésion a été transmise au Bureau Exécutif de Koumassi !" };
 };

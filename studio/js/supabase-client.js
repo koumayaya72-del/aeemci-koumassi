@@ -83,7 +83,77 @@ window.studioAuth = {
   }
 };
 
-// Module de Gestion de la Base de Données Militants (CRUD Supabase + LocalStorage)
+// Module de Gestion du Stockage (Images) via Supabase Storage
+window.storageDb = {
+  uploadImage: async function(file, folder = 'uploads') {
+    if (!supabaseClient) return null;
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+      const filePath = `${folder}/${fileName}`;
+
+      const { data, error } = await supabaseClient.storage
+        .from('aeemci-assets')
+        .upload(filePath, file);
+
+      if (error) throw error;
+
+      const { data: { publicUrl } } = supabaseClient.storage
+        .from('aeemci-assets')
+        .getPublicUrl(filePath);
+
+      return publicUrl;
+    } catch (e) {
+      console.error("Erreur upload Storage:", e);
+      return null;
+    }
+  },
+
+  deleteImage: async function(url) {
+    if (!supabaseClient || !url) return;
+    try {
+      const path = url.split('/aeemci-assets/')[1];
+      if (!path) return;
+      await supabaseClient.storage.from('aeemci-assets').remove([path]);
+    } catch (e) {
+      console.warn("Erreur suppression Storage:", e);
+    }
+  }
+};
+
+// Module de Gestion du CMS (Bureau, Actualités, Formations, Contact) via Supabase
+window.cmsDb = {
+  saveSection: async function(section, data) {
+    if (supabaseClient) {
+      try {
+        const { error } = await supabaseClient
+          .from('cms_settings')
+          .upsert({ section: section, content: data });
+        if (!error) return { success: true };
+      } catch (e) {
+        console.warn(`Erreur sauvegarde Supabase (${section}):`, e);
+      }
+    }
+    return { success: false };
+  },
+
+  fetchSection: async function(section) {
+    if (supabaseClient) {
+      try {
+        const { data, error } = await supabaseClient
+          .from('cms_settings')
+          .select('content')
+          .eq('section', section)
+          .single();
+        if (!error && data) return data.content;
+      } catch (e) {
+        console.warn(`Erreur lecture Supabase (${section}):`, e);
+      }
+    }
+    return null;
+  }
+};
+
 window.militantsDb = {
   fetchMilitants: async function() {
     if (supabaseClient) {

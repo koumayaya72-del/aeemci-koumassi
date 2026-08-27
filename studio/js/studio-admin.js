@@ -3,13 +3,78 @@
    ========================================================================== */
 
 const CMS_DEFAUTS = {
+  config: {
+    siteTitre: "AEEMCI Sous-Comité de Koumassi — Pour une identité islamique !",
+    siteDescription: "Site officiel du Sous-Comité AEEMCI de Koumassi : activités, éducation, solidarité et vie associative des élèves et étudiants musulmans de Koumassi.",
+    logoUrl: "images/logo.png",
+    maouloudDate: "2026-08-25T20:00:00",
+    footerCopyright: "© 2025 - 2026 AEEMCI Sous-Comité de Koumassi. Tous droits réservés.",
+    mandatLabel: "🟢 Mandat Exécutif 2025–2026",
+  },
+  hero: {
+    slogan1: "AEEMCI, Pour une identité islamique !",
+    slogan2: "« Ensemble nous sommes plus forts »",
+    titre: "Sous-Comité AEEMCI de Koumassi",
+    accentKoumassi: "Koumassi",
+    description: "Cultiver la foi, bâtir la réussite scolaire et promouvoir la solidarité parmi les élèves et étudiants musulmans de la commune de Koumassi.",
+    ctaPrimaireTexte: "Découvrir nos activités",
+    ctaPrimaireLien: "activites.html",
+    ctaSecondaireTexte: "Devenir membre",
+    ctaSecondaireLien: "contact.html#adhesion",
+    medaillonNom: "AEEMCI Koumassi",
+    medaillonDevise: "« Il n'y a de divinité qu'Allah et Mouhammad est Son Messager »",
+  },
+  historique: {
+    badge: "Notre Histoire & Vision",
+    titre: "De 1972 à Aujourd'hui",
+    description: "Découvrez les origines nationales de l'AEEMCI et l'ancrage territorial du Sous-Comité de Koumassi.",
+    etapes: [
+      { annee: "1972 – 1979", titre: "Fondation & Reconnaissance Nationale", desc: "Création à l'Université de Cocody en 1972, tenue du Congrès constitutif historique en 1975 et reconnaissance officielle par l'État de Côte d'Ivoire le 12 avril 1979." },
+      { annee: "1980 – 1990", titre: "Implantation à Koumassi", desc: "Naissance et structuration du Sous-Comité Koumassi pour encadrer les élèves et étudiants des collèges et lycées à travers des cours de soutien et la formation spirituelle." },
+      { annee: "2000 – 2010", titre: "Ancrage Communal & Projets Sociaux", desc: "Affinement des organes de base, consolidation des cours de révision et ancrage social fort au service de la jeunesse de Koumassi." },
+      { annee: "Mandat 2025 – 2026", titre: "Initiatives Clés & « Ensemble nous sommes plus forts »", desc: "Organisation de la Journée Culturelle d'Excellence de Koumassi (Collège Moderne La Colombe), Assises de la Jeunesse et dynamique d'excellence sous la présidence de Sow Mohamed." },
+    ]
+  },
+  impact: {
+    badge: "RÉSULTATS & CHIFFRES CLÉS",
+    titre: "L'Impact de l'AEEMCI Koumassi",
+    description: "Des résultats concrets qui témoignent du dynamisme, de la rigueur et de l'engagement de notre sous-comité.",
+    stats: [
+      { valeur: "+20", titre: "Sections Actives", desc: "Établissements secondaires et supérieurs encadrés à Koumassi." },
+      { valeur: "+500", titre: "Militants Encadrés", desc: "Élèves et étudiants suivis et formés chaque année." },
+      { valeur: "95%", titre: "Taux de Réussite", desc: "Succès aux examens officiels (BEPC, BAC) des membres suivis." },
+      { valeur: "+50 Ans", titre: "D'Engagement & d'Histoire", desc: "Plus d'un demi-siècle de leadership (Fondée en 1975, agréée en 1979)." },
+    ]
+  },
+  piliers: {
+    badge: "Nos Missions",
+    titre: "Un Engagement à Quatre Dimensions",
+    description: "Chaque projet du Sous-Comité de Koumassi est guidé par nos piliers fondamentaux.",
+    items: [
+      { icone: "📖", titre: "Formation Religieuse", desc: "Cours de Coran, apprentissage du Tajwid, séances de Tafsir et causeries pour ancrer les membres dans une foi vive et éclairée.", points: ["Cours de Tajwid & Mémorisation", "Causeries morales du Vendredi", "Nuit du Mahouloud & Retraites spirituelles"] },
+      { icone: "🎓", titre: "Réussite Académique", desc: "Groupes de révision collective, tutorat entre étudiants et parrainage des candidats aux examens officiels (BEPC, BAC).", points: ["Cours de renforcement gratuits", "Préparation intensive aux examens", "Orientation & Mentorat universitaire"] },
+      { icone: "🌟", titre: "Leadership & Développement Personnel", desc: "Ateliers pratiques de prise de parole en public, rédaction administrative, montage de Termes de Référence (TDR), gestion de projets associatifs et éthique du jeune dirigeant.", points: ["Ateliers de prise de parole en public", "Rédaction administrative & TDR", "Gestion de projets & Éthique associative"] },
+      { icone: "🤝", titre: "Cohésion Sociale, Sport & Solidarité", desc: "Tournois sportifs inter-sections, journées récréatives, sorties d'intégration et caravanes sociales de dons et d'entraide auprès des familles et militants de la commune de Koumassi.", points: ["Tournois de Maracana inter-sections", "Sorties d'intégration & Pique-niques", "Actions caritatives & Entraide communautaire"] },
+    ]
+  },
+  temoignages: {
+    badge: "Témoignages & Récits d'Impact",
+    titre: "Paroles de Militants & Alumni",
+    description: "Découvrez l'expérience de ceux qui vivent et ont vécu l'encadrement formateur de l'AEEMCI Koumassi.",
+    list: [
+      { texte: "L'AEEMCI Koumassi a été pour moi une véritable école du leadership, de l'humilité et du service de la communauté. J'y ai appris à structurer des projets, à m'exprimer sans aucun trac et à concilier la foi et l'excellence dans les études.", auteur: "Sow Mohamed", role: "Président du Mandat 2025 – 2026", photo: "images/membres/sow-mohamed.jpg" },
+      { texte: "Les séances de révision collective et les modules de formation en prise de parole ont énormément renforcé ma confiance grâce aux précieux conseils et à la bienveillance des aînés du sous-comité !", auteur: "Konate Mariam", role: "Vice-Présidente & Étudiante", photo: "images/membres/konate-mariam.jpg" },
+      { texte: "Rejoindre le Sous-Comité de Koumassi, c'est intégrer une famille soudée. Les formations gratuites en rédaction administrative et TDR m'apportent aujourd'hui des compétences très concrètes pour ma carrière.", auteur: "Diabate Fode", role: "Secrétaire Général", photo: "images/membres/diabate-fode.jpg" },
+    ]
+  },
   bureau: {
-    presidentNom: "Sow Mohamed",
-    presidentTitre: "Président Exécutif",
-    presidentMandat: "Mandat 2025 – 2026",
-    presidentMot: "L'AEEMCI Koumassi s'engage résolument pour l'excellence académique, spirituelle et l'épanouissement de la jeunesse musulmane.",
-    presidentPhoto: "images/membres/sow-mohamed.jpg",
-    sgNom: "Diabaté Fodé",
+    mandat: "Mandat 2025 – 2026",
+    motDuPresident: "L'AEEMCI Koumassi s'engage résolument pour l'excellence académique, spirituelle et l'épanouissement de la jeunesse musulmane.",
+    membres: [
+      { id: 1, nom: "Sow Mohamed", titre: "Président Exécutif", photo: "images/membres/sow-mohamed.jpg", ordre: 1 },
+      { id: 2, nom: "Diabaté Fodé", titre: "Secrétaire Général", photo: "images/membres/diabate-fode.jpg", ordre: 2 },
+      { id: 3, nom: "Kokora Mohamed", titre: "Chargé de Communication", photo: "images/membres/kokora-mohamed.jpg", ordre: 3 }
+    ],
     contactTel1: "+225 05 45 30 51 80",
     contactTel2: "+225 07 57 47 73 72",
     adresseSiège: "Koumassi Sicogi, Collège La Colombe"
@@ -104,9 +169,28 @@ const CMS_DEFAUTS = {
   }
 };
 
+// Système de Notifications Toast pour une meilleure UX
+window.showToast = function(message, type = 'success') {
+  const container = document.getElementById('toast-container');
+  if (!container) return;
+
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+
+  const icon = type === 'success' ? '✅' : (type === 'error' ? '❌' : 'ℹ️');
+  toast.innerHTML = `<span class="toast-icon">${icon}</span> <span class="toast-msg">${message}</span>`;
+
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.classList.add('fade-out');
+    setTimeout(() => toast.remove(), 300);
+  }, 4000);
+};
+
 document.addEventListener('DOMContentLoaded', async function() {
   initialiserDonneesCMS();
-  chargerProfilPresidentForm();
+  chargerBureauCMS();
   chargerActualitesCMS();
   chargerFormationsCMS();
   chargerGalerieCMS();
@@ -134,60 +218,173 @@ function initialiserDonneesCMS() {
   }
 }
 
-// 1. GESTION DU BUREAU EXÉCUTIF & PRÉSIDENCE
-function chargerProfilPresidentForm() {
+// 1. GESTION DU BUREAU EXÉCUTIF (Dynamique)
+function chargerBureauCMS() {
   const bureau = JSON.parse(localStorage.getItem('aeemci_cms_bureau')) || CMS_DEFAUTS.bureau;
-  
-  const inputNom = document.getElementById('cmsPresidentNom');
-  const inputTitre = document.getElementById('cmsPresidentTitre');
-  const inputMandat = document.getElementById('cmsPresidentMandat');
-  const inputMot = document.getElementById('cmsPresidentMot');
-  const inputTel1 = document.getElementById('cmsContactTel1');
-  const previewPhoto = document.getElementById('cmsPresidentPhotoPreview');
+  const container = document.getElementById('containerBureauCMS');
+  if (!container) return;
 
-  if (inputNom) inputNom.value = bureau.presidentNom || '';
-  if (inputTitre) inputTitre.value = bureau.presidentTitre || 'Président Exécutif';
-  if (inputMandat) inputMandat.value = bureau.presidentMandat || 'Mandat 2025 – 2026';
-  if (inputMot) inputMot.value = bureau.presidentMot || '';
-  if (inputTel1) inputTel1.value = bureau.contactTel1 || '';
-  if (previewPhoto && bureau.presidentPhoto) previewPhoto.src = bureau.presidentPhoto;
+  container.innerHTML = '';
+
+  // Section Mot du Président & Mandat
+  const headerDiv = document.createElement('div');
+  headerDiv.style.cssText = "background: #FFF; padding: 20px; border-radius: 14px; border: 1px solid var(--bordure-carte); margin-bottom: 20px; box-shadow: var(--ombre-carte);";
+  headerDiv.innerHTML = `
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+      <div class="form-groupe">
+        <label>Mandat Officiel</label>
+        <input type="text" id="cmsBureauMandat" value="${bureau.mandat || ''}" onchange="enregistrerInfosGeneralesBureau()">
+      </div>
+      <div class="form-groupe">
+        <label>Mot du Président / Vision</label>
+        <textarea id="cmsBureauMot" rows="3" onchange="enregistrerInfosGeneralesBureau()">${bureau.motDuPresident || ''}</textarea>
+      </div>
+    </div>
+  `;
+  container.appendChild(headerDiv);
+
+  // Tableau des membres
+  const tableDiv = document.createElement('div');
+  tableDiv.className = 'carte-tableau';
+  tableDiv.innerHTML = `
+    <div class="tableau-header">
+      <div class="tableau-titre"><h3>Membres du Bureau Exécutif</h3></div>
+      <button class="bouton-action-pro btn-touch-evt" onclick="ouvrirModalMembreBureau()">➕ Ajouter un Membre</button>
+    </div>
+    <div class="table-responsive">
+      <table class="studio-table">
+        <thead>
+          <tr>
+            <th>Photo</th>
+            <th>Nom & Prénoms</th>
+            <th>Poste / Titre</th>
+            <th>Ordre</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="tbodyBureauCMS"></tbody>
+      </table>
+    </div>
+  `;
+  container.appendChild(tableDiv);
+
+  const tbody = document.getElementById('tbodyBureauCMS');
+  if (!tbody) return;
+
+  bureau.membres.forEach(m => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><img src="${m.photo}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid var(--or);"></td>
+      <td><strong>${m.nom}</strong></td>
+      <td>${m.titre}</td>
+      <td>${m.ordre}</td>
+      <td>
+        <button class="bouton-table-action" onclick="ouvrirModalMembreBureau(${m.id})" title="Modifier">✏️</button>
+        <button class="bouton-table-action" onclick="supprimerMembreBureau(${m.id})" title="Supprimer" style="color: #EF4444;">🗑️</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
 }
 
-window.enregistrerBureauCMS = function(e) {
-  if (e) e.preventDefault();
-  
+window.enregistrerInfosGeneralesBureau = async function() {
   let bureau = JSON.parse(localStorage.getItem('aeemci_cms_bureau')) || CMS_DEFAUTS.bureau;
+  bureau.mandat = document.getElementById('cmsBureauMandat')?.value.trim();
+  bureau.motDuPresident = document.getElementById('cmsBureauMot')?.value.trim();
 
-  const nom = document.getElementById('cmsPresidentNom')?.value.trim();
-  const titre = document.getElementById('cmsPresidentTitre')?.value.trim();
-  const mandat = document.getElementById('cmsPresidentMandat')?.value.trim();
-  const mot = document.getElementById('cmsPresidentMot')?.value.trim();
-  const tel1 = document.getElementById('cmsContactTel1')?.value.trim();
-  const fileInput = document.getElementById('cmsPresidentPhotoFile');
+  localStorage.setItem('aeemci_cms_bureau', JSON.stringify(bureau));
+  await window.cmsDb.saveSection('bureau', bureau);
+  showToast("Informations générales du bureau mises à jour !");
+};
 
-  if (nom) bureau.presidentNom = nom;
-  if (titre) bureau.presidentTitre = titre;
-  if (mandat) bureau.presidentMandat = mandat;
-  if (mot) bureau.presidentMot = mot;
-  if (tel1) bureau.contactTel1 = tel1;
+window.ouvrirModalMembreBureau = function(id = null) {
+  const modal = document.getElementById('modalMembreBureau');
+  if (!modal) return;
 
-  const sauvegarderEtNotifier = () => {
+  const titleEl = document.getElementById('modalMembreTitre');
+  const idInput = document.getElementById('cmsMembreId');
+
+  if (id) {
+    const bureau = JSON.parse(localStorage.getItem('aeemci_cms_bureau')) || CMS_DEFAUTS.bureau;
+    const m = bureau.membres.find(mem => mem.id === id);
+    if (m) {
+      if (titleEl) titleEl.textContent = "✏️ Modifier le Membre";
+      if (idInput) idInput.value = m.id;
+      document.getElementById('cmsMembreNom').value = m.nom || '';
+      document.getElementById('cmsMembreTitre').value = m.titre || '';
+      document.getElementById('cmsMembreOrdre').value = m.ordre || '';
+    }
+  } else {
+    if (titleEl) titleEl.textContent = "➕ Ajouter un Membre au Bureau";
+    if (idInput) idInput.value = '';
+    document.getElementById('cmsMembreNom').value = '';
+    document.getElementById('cmsMembreTitre').value = '';
+    document.getElementById('cmsMembreOrdre').value = (JSON.parse(localStorage.getItem('aeemci_cms_bureau'))?.membres.length || 0) + 1;
+  }
+  modal.classList.add('active');
+};
+
+window.fermerModalMembreBureau = function() {
+  document.getElementById('modalMembreBureau')?.classList.remove('active');
+};
+
+window.enregistrerMembreBureau = async function(e) {
+  if (e) e.preventDefault();
+
+  const idEdit = document.getElementById('cmsMembreId')?.value;
+  const nom = document.getElementById('cmsMembreNom')?.value.trim();
+  const titre = document.getElementById('cmsMembreTitre')?.value.trim();
+  const ordre = parseInt(document.getElementById('cmsMembreOrdre')?.value) || 0;
+  const fileInput = document.getElementById('cmsMembrePhotoFile');
+
+  if (!nom || !titre) {
+    showToast("Veuillez saisir le nom et le titre du membre.", "error");
+    return;
+  }
+
+  const sauvegarder = async (photoUrl) => {
+    let bureau = JSON.parse(localStorage.getItem('aeemci_cms_bureau')) || CMS_DEFAUTS.bureau;
+    if (idEdit) {
+      const idx = bureau.membres.findIndex(m => m.id == idEdit);
+      if (idx !== -1) {
+        bureau.membres[idx].nom = nom;
+        bureau.membres[idx].titre = titre;
+        bureau.membres[idx].ordre = ordre;
+        if (photoUrl) bureau.membres[idx].photo = photoUrl;
+      }
+    } else {
+      bureau.membres.push({
+        id: Date.now(),
+        nom, titre, ordre,
+        photo: photoUrl || "images/logo.png"
+      });
+    }
     localStorage.setItem('aeemci_cms_bureau', JSON.stringify(bureau));
-    chargerProfilPresidentForm();
-    alert("✅ Les informations de la Présidence ont été sauvegardées et mises à jour sur le site public !");
+    await window.cmsDb.saveSection('bureau', bureau);
+    chargerBureauCMS();
+    fermerModalMembreBureau();
+    showToast("Membre du bureau mis à jour avec succès !");
   };
 
   if (fileInput && fileInput.files && fileInput.files[0]) {
-    const reader = new FileReader();
-    reader.onload = function(evt) {
-      bureau.presidentPhoto = evt.target.result;
-      sauvegarderEtNotifier();
-    };
-    reader.readAsDataURL(fileInput.files[0]);
+    const url = await window.storageDb.uploadImage(fileInput.files[0], 'bureau');
+    await sauvegarder(url);
   } else {
-    sauvegarderEtNotifier();
+    await sauvegarder(null);
   }
 };
+
+window.supprimerMembreBureau = function(id) {
+  if (confirm("Supprimer ce membre du bureau ?")) {
+    let bureau = JSON.parse(localStorage.getItem('aeemci_cms_bureau')) || CMS_DEFAUTS.bureau;
+    bureau.membres = bureau.membres.filter(m => m.id !== id);
+    localStorage.setItem('aeemci_cms_bureau', JSON.stringify(bureau));
+    window.cmsDb.saveSection('bureau', bureau);
+    chargerBureauCMS();
+    showToast("Membre supprimé.");
+  }
+};
+
 
 // 2. MODALES ÉVÉNEMENTS
 window.ouvrirModalAjoutEvenement = function(id = null) {
@@ -215,7 +412,6 @@ window.ouvrirModalAjoutEvenement = function(id = null) {
     const form = document.getElementById('formAjoutActuCMS');
     if (form) form.reset();
   }
-
   modal.classList.add('active');
 };
 
@@ -269,11 +465,11 @@ window.ajouterActualiteCMS = function(e) {
   const fileInput = document.getElementById('cmsActuImageFile');
 
   if (!titre || !description) {
-    alert("Veuillez saisir au moins le titre et la description de l'événement.");
+    showToast("Veuillez saisir au moins le titre et la description de l'événement.", "error");
     return;
   }
 
-  const enregistrer = (imageUrl) => {
+  const enregistrer = async (imageUrl) => {
     let actualites = JSON.parse(localStorage.getItem('aeemci_cms_actualites')) || CMS_DEFAUTS.actualites;
 
     if (idEdit) {
@@ -301,6 +497,7 @@ window.ajouterActualiteCMS = function(e) {
 
     try {
       localStorage.setItem('aeemci_cms_actualites', JSON.stringify(actualites));
+      await window.cmsDb.saveSection('actualites', actualites);
       let customEvts = actualites.map(a => ({
         badge: a.categorie,
         titre: a.titre,
@@ -316,19 +513,19 @@ window.ajouterActualiteCMS = function(e) {
 
     chargerActualitesCMS();
     fermerModalAjoutEvenement();
-    alert("✅ L'événement a été publié et mis à jour en temps réel sur le site public !");
+    showToast("L'événement a été publié et mis à jour en temps réel sur le site public !");
   };
 
   if (fileInput && fileInput.files && fileInput.files[0]) {
-    const reader = new FileReader();
-    reader.onload = function(evt) {
-      compresserImageCanvas(evt.target.result, 800, 0.8, function(imgCompressee) {
-        enregistrer(imgCompressee);
-      });
-    };
-    reader.readAsDataURL(fileInput.files[0]);
+    const file = fileInput.files[0];
+    const imageUrl = await window.storageDb.uploadImage(file, 'actualites');
+    if (imageUrl) {
+      await enregistrer(imageUrl);
+    } else {
+      showToast("Erreur lors du téléversement de l'image. Veuillez réessayer.", "error");
+    }
   } else {
-    enregistrer(null);
+    await enregistrer(null);
   }
 };
 
@@ -371,7 +568,7 @@ function chargerFormationsCMS() {
   });
 }
 
-window.enregistrerFormationCMS = function(e) {
+window.enregistrerFormationCMS = async function(e) {
   if (e) e.preventDefault();
 
   const intitule = document.getElementById('cmsFormationIntitule')?.value.trim();
@@ -379,7 +576,7 @@ window.enregistrerFormationCMS = function(e) {
   const lien = document.getElementById('cmsFormationLien')?.value.trim();
 
   if (!intitule || !description) {
-    alert("Veuillez renseigner au moins l'intitulé et la description de la formation.");
+    showToast("Veuillez renseigner au moins l'intitulé et la description de la formation.", "error");
     return;
   }
 
@@ -395,12 +592,13 @@ window.enregistrerFormationCMS = function(e) {
 
   formations.push(nouvelleFormation);
   localStorage.setItem('aeemci_cms_formations', JSON.stringify(formations));
+  await window.cmsDb.saveSection('formations', formations);
   chargerFormationsCMS();
 
   const form = document.getElementById('formAjoutFormationCMS');
   if (form) form.reset();
 
-  alert("✅ Le module de formation a été ajouté et publié sur le site public !");
+        showToast("Le module de formation a été ajouté et publié sur le site public !");
 };
 
 window.supprimerFormationCMS = function(id) {
@@ -486,44 +684,40 @@ function compresserImageCanvas(base64Str, maxDimension, quality, callback) {
   img.src = base64Str;
 }
 
-function traiterFichiersPhotos(files) {
+async function traiterFichiersPhotos(files) {
   let galerie = JSON.parse(localStorage.getItem('aeemci_cms_galerie')) || [];
   let custom = JSON.parse(localStorage.getItem('aeemci_galerie_custom') || '[]');
   let compt = 0;
 
-  Array.from(files).forEach(file => {
+  for (const file of files) {
     if (file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = function(evt) {
-        compresserImageCanvas(evt.target.result, 1000, 0.8, function(urlCompressee) {
-          galerie.unshift({
-            id: Date.now() + Math.random(),
-            url: urlCompressee,
-            titre: file.name
-          });
-
-          custom.unshift({
-            photo: urlCompressee,
-            titre: file.name,
-            categorie: 'Photos'
-          });
-
-          compt++;
-          if (compt === files.length) {
-            try {
-              localStorage.setItem('aeemci_cms_galerie', JSON.stringify(galerie));
-              localStorage.setItem('aeemci_galerie_custom', JSON.stringify(custom));
-            } catch (err) {
-              console.error("Erreur de sauvegarde LocalStorage:", err);
-            }
-            chargerGalerieCMS();
-            alert(`✅ ${compt} photo(s) ajoutée(s) avec succès à la galerie !`);
-          }
+      const url = await window.storageDb.uploadImage(file, 'galerie');
+      if (url) {
+        galerie.unshift({
+          id: Date.now() + Math.random(),
+          url: url,
+          titre: file.name
         });
-      };
-      reader.readAsDataURL(file);
+
+        custom.unshift({
+          photo: url,
+          titre: file.name,
+          categorie: 'Photos'
+        });
+        compt++;
+      }
     }
-  });
+  }
+
+  try {
+    localStorage.setItem('aeemci_cms_galerie', JSON.stringify(galerie));
+    localStorage.setItem('aeemci_galerie_custom', JSON.stringify(custom));
+    await window.cmsDb.saveSection('galerie', galerie);
+  } catch (err) {
+    console.error("Erreur de sauvegarde LocalStorage:", err);
+  }
+  chargerGalerieCMS();
+  showToast(`✅ ${compt} photo(s) ajoutée(s) avec succès et synchronisées sur le Cloud !`);
 }
 
 function chargerGalerieCMS() {
@@ -674,7 +868,7 @@ function chargerContactForm() {
   if (document.getElementById('cmsContactWhatsappLink')) document.getElementById('cmsContactWhatsappLink').value = contact.whatsappLink || '';
 }
 
-window.enregistrerContactCMS = function(e) {
+window.enregistrerContactCMS = async function(e) {
   if (e) e.preventDefault();
 
   const contact = {
@@ -687,5 +881,6 @@ window.enregistrerContactCMS = function(e) {
   };
 
   localStorage.setItem('aeemci_cms_contact', JSON.stringify(contact));
-  alert("✅ Les coordonnées et liens du site public ont été mis à jour avec succès !");
+  await window.cmsDb.saveSection('contact', contact);
+  showToast("Les coordonnées et liens du site public ont été mis à jour avec succès et synchronisés sur le Cloud !");
 };

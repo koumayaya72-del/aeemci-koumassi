@@ -106,7 +106,6 @@
           </button>
         </div>
 
-        <!-- KPI STATISTIQUES -->
         <div class="grille-kpi">
           <div class="carte-kpi">
             <div class="kpi-infos">
@@ -120,7 +119,7 @@
           <div class="carte-kpi or">
             <div class="kpi-infos">
               <h3>Événements Prévus</h3>
-              <div class="kpi-valeur">04</div>
+              <div class="kpi-valeur" id="kpiTotalEvenements">04</div>
               <div class="kpi-tendance" style="color: var(--or-sombre);">📅 Mahouloud 2026</div>
             </div>
             <div class="kpi-icone-box">🕌</div>
@@ -138,14 +137,13 @@
           <div class="carte-kpi or">
             <div class="kpi-infos">
               <h3>Modules de Formation</h3>
-              <div class="kpi-valeur">06</div>
+              <div class="kpi-valeur" id="kpiTotalFormations">06</div>
               <div class="kpi-tendance" style="color: var(--or-sombre);">🎓 100% Gratuits</div>
             </div>
             <div class="kpi-icone-box">📖</div>
           </div>
         </div>
 
-        <!-- RECAPITULATIF RECENT DES MILITANTS -->
         <div class="carte-tableau">
           <div class="tableau-header">
             <div class="tableau-titre">
@@ -326,68 +324,54 @@
       <section id="tab-parametres" class="onglet-contenu">
         <div class="section-header-dashboard">
           <div>
-            <h1>Gestion des Accès &amp; Rôles du Bureau</h1>
-            <p>Accès sécurisé réservé aux responsables du Sous-Comité de Koumassi.</p>
+            <h1>Gestion du Bureau &amp; Accès</h1>
+            <p>Modifiez la composition du Bureau Exécutif et les coordonnées officielles.</p>
           </div>
         </div>
 
-        <div class="carte-tableau" style="padding: 28px;">
-          <h3 style="margin-bottom: 18px; color: var(--vert-institutionnel);">Membres du Bureau avec Accès Admin</h3>
-          <ul style="list-style: none;">
-            <li style="padding: 12px 0; border-bottom: 1px solid var(--bordure-carte); display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <strong>Sow Mohamed</strong> — <span style="color: var(--or-sombre); font-weight: 700;">Président</span>
-              </div>
-              <span class="badge-statut valide">Super Admin</span>
-            </li>
-            <li style="padding: 12px 0; border-bottom: 1px solid var(--bordure-carte); display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <strong>Diabaté Fodé</strong> — <span style="color: var(--or-sombre); font-weight: 700;">Secrétaire Général</span>
-              </div>
-              <span class="badge-statut valide">Admin Éditeur</span>
-            </li>
-            <li style="padding: 12px 0; display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <strong>Kokora Mohamed</strong> — <span style="color: var(--or-sombre); font-weight: 700;">Délégué Culturel</span>
-              </div>
-              <span class="badge-statut valide">Admin Éditeur</span>
-            </li>
-          </ul>
+        <div id="containerBureauCMS">
+          <!-- Généré dynamiquement par studio-admin.js -->
         </div>
 
-        <!-- FORMULAIRE DE CONFIGURATION DES COORDONNÉES & FOOTER DU SITE PUBLIC -->
         <div class="carte-tableau" style="padding: 28px; margin-top: 24px;">
           <h3 style="margin-bottom: 18px; color: var(--vert-institutionnel);">⚙️ Coordonnées &amp; Liens du Site Public</h3>
           <form onsubmit="enregistrerContactCMS(event)" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
-            <div class="form-groupe">
-              <label>Adresse du Siège *</label>
-              <input type="text" id="cmsContactAdresse" placeholder="ex: Koumassi Sicogi, Collège La Colombe" required>
-            </div>
 
-            <div class="form-groupe">
-              <label>Téléphone Principal / WhatsApp *</label>
-              <input type="tel" id="cmsContactTel1" placeholder="ex: +225 05 45 30 51 80" required>
-            </div>
+    <div class="form-groupe">
+      <label>Adresse du Siège *</label>
+      <span class="helper-text">Exemple : Koumassi Sicogi, Collège La Colombe</span>
+      <input type="text" id="cmsContactAdresse" placeholder="ex: Koumassi Sicogi, Collège La Colombe" required>
+    </div>
 
-            <div class="form-groupe">
-              <label>Téléphone Secondaire</label>
-              <input type="tel" id="cmsContactTel2" placeholder="ex: +225 07 57 47 73 72">
-            </div>
+    <div class="form-groupe">
+      <label>Téléphone Principal / WhatsApp *</label>
+      <span class="helper-text">Exemple : +225 05 45 30 51 80</span>
+      <input type="tel" id="cmsContactTel1" placeholder="ex: +225 05 45 30 51 80" required>
+    </div>
 
-            <div class="form-groupe">
-              <label>Email Officiel *</label>
-              <input type="email" id="cmsContactEmail" placeholder="ex: aeemci.koumassi@gmail.com" required>
-            </div>
+    <div class="form-groupe">
+      <label>Téléphone Secondaire</label>
+      <span class="helper-text">Un deuxième numéro si nécessaire</span>
+      <input type="tel" id="cmsContactTel2" placeholder="ex: +225 07 57 47 73 72">
+    </div>
 
-            <div class="form-groupe">
-              <label>Horaires des Réunions</label>
-              <input type="text" id="cmsContactHoraires" placeholder="ex: Chaque Samedi à 15H00">
-            </div>
+    <div class="form-groupe">
+      <label>Email Officiel *</label>
+      <span class="helper-text">Exemple : aeemci.koumassi@gmail.com</span>
+      <input type="email" id="cmsContactEmail" placeholder="ex: aeemci.koumassi@gmail.com" required>
+    </div>
 
-            <div class="form-groupe">
-              <label>Lien Groupe WhatsApp</label>
-              <input type="url" id="cmsContactWhatsappLink" placeholder="ex: https://chat.whatsapp.com/...">
-            </div>
+    <div class="form-groupe">
+      <label>Horaires des Réunions</label>
+      <span class="helper-text">Exemple : Chaque Samedi à 15H00</span>
+      <input type="text" id="cmsContactHoraires" placeholder="ex: Chaque Samedi à 15H00">
+    </div>
+
+    <div class="form-groupe">
+      <label>Lien Groupe WhatsApp</label>
+      <span class="helper-text">Lien d'invitation du groupe officiel</span>
+      <input type="url" id="cmsContactWhatsappLink" placeholder="ex: https://chat.whatsapp.com/...">
+    </div>
 
             <div style="grid-column: 1 / -1; display: flex; justify-content: flex-end; margin-top: 10px;">
               <button type="submit" class="bouton-action-pro btn-touch-evt">Enregistrer les Coordonnées</button>
@@ -409,25 +393,29 @@
       <button class="modal-fermer" onclick="fermerModalAjoutMilitant()">&times;</button>
     </div>
     <form class="modal-body" onsubmit="enregistrerNouveauMilitant(event)">
-      <div class="form-groupe">
-        <label>Nom &amp; Prénoms du Militant *</label>
-        <input type="text" id="nomMilitant" placeholder="ex: Koné Amadou" required>
-      </div>
+    <div class="form-groupe">
+      <label>Nom &amp; Prénoms du Militant *</label>
+      <span class="helper-text">Exemple : Koné Amadou</span>
+      <input type="text" id="nomMilitant" placeholder="ex: Koné Amadou" required>
+    </div>
 
-      <div class="form-groupe">
-        <label>Quartier à Koumassi</label>
-        <input type="text" id="quartierMilitant" placeholder="ex: Prodomo, Remblais, Sicogi...">
-      </div>
+    <div class="form-groupe">
+      <label>Quartier à Koumassi</label>
+      <span class="helper-text">Exemple : Prodomo, Remblais, Sicogi...</span>
+      <input type="text" id="quartierMilitant" placeholder="ex: Prodomo, Remblais, Sicogi...">
+    </div>
 
-      <div class="form-groupe">
-        <label>Établissement / École / Université</label>
-        <input type="text" id="ecoleMilitant" placeholder="ex: Lycée Moderne de Koumassi">
-      </div>
+    <div class="form-groupe">
+      <label>Établissement / École / Université</label>
+      <span class="helper-text">Exemple : Lycée Moderne de Koumassi</span>
+      <input type="text" id="ecoleMilitant" placeholder="ex: Lycée Moderne de Koumassi">
+    </div>
 
-      <div class="form-groupe">
-        <label>Numéro Téléphone / WhatsApp *</label>
-        <input type="tel" id="telMilitant" placeholder="ex: 0707070707" required>
-      </div>
+    <div class="form-groupe">
+      <label>Numéro Téléphone / WhatsApp *</label>
+      <span class="helper-text">Format recommandé : 0707070707</span>
+      <input type="tel" id="telMilitant" placeholder="ex: 0707070707" required>
+    </div>
 
       <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
         <button type="button" class="bouton-action-contour btn-touch-evt" onclick="fermerModalAjoutMilitant()">Annuler</button>
@@ -449,11 +437,13 @@
 
       <div class="form-groupe">
         <label>Titre de l'Événement / Publication *</label>
+        <span class="helper-text">Exemple : Nuit du Mahouloud 2026</span>
         <input type="text" id="cmsActuTitre" placeholder="ex: Nuit du Mahouloud 2026" required>
       </div>
 
       <div class="form-groupe">
         <label>Catégorie</label>
+        <span class="helper-text">Choisissez le type de publication</span>
         <select id="cmsActuCategorie">
           <option value="Événement Majeur">🕌 Événement Majeur</option>
           <option value="Conférence">🎙️ Conférence</option>
@@ -464,16 +454,19 @@
 
       <div class="form-groupe">
         <label>Date &amp; Heure de l'Événement</label>
+        <span class="helper-text">Exemple : Nuit du 25 au 26 Août 2026 dès 20H</span>
         <input type="text" id="cmsActuDate" placeholder="ex: Nuit du 25 au 26 Août 2026 dès 20H">
       </div>
 
       <div class="form-groupe">
         <label>Lieu / Emplacement</label>
+        <span class="helper-text">Exemple : Collège Moderne La Colombe, Koumassi</span>
         <input type="text" id="cmsActuLieu" placeholder="ex: Collège Moderne La Colombe, Koumassi">
       </div>
 
       <div class="form-groupe">
         <label>Description &amp; Programme *</label>
+        <span class="helper-text">Détaillez le programme pour les visiteurs</span>
         <textarea id="cmsActuDesc" rows="4" placeholder="Détails du programme, intervenants..." required></textarea>
       </div>
 
@@ -487,5 +480,6 @@
 
 <script src="js/studio.js"></script>
 <script src="js/studio-admin.js"></script>
+    <div id="toast-container" class="toast-container"></div>
 </body>
 </html>

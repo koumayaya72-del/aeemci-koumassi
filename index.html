@@ -207,25 +207,25 @@
   </div>
 </section>
 
-<!-- ===== WIDGET PROCHAIN ÉVÉNEMENT & COMPTE À REBOURS (MAHOULOUD 2026) ===== -->
+<!-- ===== WIDGET PROCHAIN ÉVÉNEMENT & COMPTE À REBOURS (SOUTIEN SCOLAIRE 2026) ===== -->
 <section style="padding: 40px 0 0 0; background: var(--fond-clair);">
   <div class="conteneur">
     <div class="banniere-evenement-compteur">
       <!-- Vignette Affiche Officielle -->
-      <div style="position: relative; cursor: pointer;" onclick="ouvrirAfficheModal('images/maouloud.jpg')">
-        <img loading="lazy" src="images/maouloud.jpg" alt="Affiche Nuit du Mahouloud 2026" style="width: 85px; height: 115px; object-fit: cover; border-radius: 10px; border: 2px solid var(--or); box-shadow: 0 8px 20px rgba(0,0,0,0.3); transition: transform 0.3s ease;">
+      <div style="position: relative; cursor: pointer;" onclick="ouvrirAfficheModal(document.getElementById('hero-actu-image').src)">
+        <img id="hero-actu-image" loading="lazy" src="images/secofis.jpg" alt="Affiche Prochain Événement" style="width: 85px; height: 115px; object-fit: cover; border-radius: 10px; border: 2px solid var(--or); box-shadow: 0 8px 20px rgba(0,0,0,0.3); transition: transform 0.3s ease;">
         <span style="position: absolute; bottom: 4px; right: 4px; background: rgba(0,0,0,0.7); color: #FFF; font-size: 0.65rem; padding: 2px 5px; border-radius: 4px;">🔍 Zoom</span>
       </div>
 
       <!-- Informations Événement -->
       <div>
         <span class="badge-tag or" style="margin-bottom: 8px;">Prochain Grand Rendez-vous</span>
-        <h3 style="font-size: 1.5rem; color: #FFFFFF; font-family: var(--font-titre); margin-bottom: 4px;">Nuit Du MAHOULOUD 2026</h3>
-        <div style="font-size: 0.92rem; color: var(--or-clair); font-weight: 700; margin-bottom: 6px;">
-          Thème : « Le Sermon d'Adieu : enseignements et leçons pour le musulman »
+        <h3 id="hero-actu-titre" style="font-size: 1.5rem; color: #FFFFFF; font-family: var(--font-titre); margin-bottom: 4px;">Programme de Soutien Scolaire BEPC &amp; BAC 2026</h3>
+        <div id="hero-actu-theme" style="font-size: 0.92rem; color: var(--or-clair); font-weight: 700; margin-bottom: 6px;">
+          Thème : « Excellence académique et révisions intensives gratuites »
         </div>
-        <p style="color: rgba(255,255,255,0.85); font-size: 0.88rem; margin: 0;">
-          📍 Collège Moderne La Colombe • Dans la nuit du 25 au 26 Août 2026 à partir de 20H
+        <p id="hero-actu-details" style="color: rgba(255,255,255,0.85); font-size: 0.88rem; margin: 0;">
+          📍 Siège AEEMCI Koumassi • Lancement officiel le 01 Septembre 2026 à 08H00
         </p>
       </div>
 
@@ -233,21 +233,21 @@
       <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 12px;">
         <div class="compte-rebours-box">
           <div class="chronometre-unite">
-            <div class="chronometre-valeur" id="compteurJours">07</div>
+            <div class="chronometre-valeur" id="compteurJours">05</div>
             <div class="chronometre-label">Jours</div>
           </div>
           <div class="chronometre-unite">
-            <div class="chronometre-valeur" id="compteurHeures">09</div>
+            <div class="chronometre-valeur" id="compteurHeures">14</div>
             <div class="chronometre-label">Heures</div>
           </div>
           <div class="chronometre-unite">
-            <div class="chronometre-valeur" id="compteurMinutes">15</div>
+            <div class="chronometre-valeur" id="compteurMinutes">55</div>
             <div class="chronometre-label">Min</div>
           </div>
         </div>
 
-        <a href="https://chat.whatsapp.com/KUd1Zmc2JEfBsIWdH5HPdm" target="_blank" rel="noopener" class="bouton-cta-primaire" style="background: var(--or-gradient); color: #000000; border: none; padding: 10px 20px; font-size: 0.88rem;">
-          Réserver ma place sur WhatsApp →
+        <a href="https://wa.me/2250545305180?text=Assalamu%20alaykum,%20je%20souhaite%20m'inscrire%20au%20programme%20de%20Soutien%20Scolaire%20BEPC%20%26%20BAC" target="_blank" rel="noopener" class="bouton-cta-primaire" style="background: var(--or-gradient); color: #000000; border: none; padding: 10px 20px; font-size: 0.88rem;">
+          S'inscrire gratuitement sur WhatsApp →
         </a>
       </div>
     </div>

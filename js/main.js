@@ -4,7 +4,9 @@
 
 document.addEventListener('DOMContentLoaded', function() {
   lancerSynchronisationGlobale();
+  initialiserAnimationsScroll();
 });
+
 
 // Écouteurs d'événements temps réel pour mise à jour instantanée sans rechargement de page
 window.addEventListener('storage', function() {
@@ -15,22 +17,46 @@ window.addEventListener('focus', function() {
   lancerSynchronisationGlobale();
 });
 
-function lancerSynchronisationGlobale() {
-  synchroniserBureauPublic();
-  synchroniserActualitesPublic();
-  synchroniserFormationsPublic();
-  synchroniserStatistiquesPublic();
-  synchroniserGaleriePublic();
-  synchroniserContactPublic();
+// Gestion du cache pour éviter les appels API excessifs
+const CMS_CACHE = {
+  lastFetch: 0,
+  ttl: 5 * 60 * 1000, // 5 minutes
+  isExpired: function() {
+    return Date.now() - this.lastFetch > this.ttl;
+  },
+  updateTimestamp: function() {
+    this.lastFetch = Date.now();
+  }
+};
+
+async function lancerSynchronisationGlobale() {
+  if (!CMS_CACHE.isExpired()) {
+    console.log("Données CMS encore fraîches, synchronisation légère...");
+    // On synchronise quand même les stats qui peuvent changer souvent
+    await synchroniserStatistiquesPublic();
+    return;
+  }
+
+  await synchroniserBureauPublic();
+  await synchroniserActualitesPublic();
+  await synchroniserFormationsPublic();
+  await synchroniserStatistiquesPublic();
+  await synchroniserGaleriePublic();
+  await synchroniserContactPublic();
+  CMS_CACHE.updateTimestamp();
 }
 
 // 1. Synchronisation de la Présidence & Mot du Président
-function synchroniserBureauPublic() {
-  const bureauRaw = localStorage.getItem('aeemci_cms_bureau');
-  if (!bureauRaw) return;
+async function synchroniserBureauPublic() {
+  let bureau = await window.cmsRead.fetchSection('bureau');
+  if (!bureau) {
+    const bureauRaw = localStorage.getItem('aeemci_cms_bureau');
+    if (!bureauRaw) return;
+    try { bureau = JSON.parse(bureauRaw); } catch(e) {}
+  }
+  if (!bureau) return;
 
   try {
-    const bureau = JSON.parse(bureauRaw);
 
     const nomEls = document.querySelectorAll('#site-nom-president, #publicPresidentNom, .carte-president .nom-president');
     const titreEls = document.querySelectorAll('#site-titre-president, #publicPresidentTitre');
@@ -50,12 +76,16 @@ function synchroniserBureauPublic() {
 }
 
 // 2. Synchronisation Dynamique des Événements & Actualités
-function synchroniserActualitesPublic() {
+async function synchroniserActualitesPublic() {
+  let actualites = await window.cmsRead.fetchSection('actualites');
   const cmsRaw = localStorage.getItem('aeemci_cms_actualites');
   const customRaw = localStorage.getItem('aeemci_evenements_custom');
 
-  let actualites = [];
-  try { if (cmsRaw) actualites = JSON.parse(cmsRaw); } catch(e){}
+  if (!actualites) {
+    try { if (cmsRaw) actualites = JSON.parse(cmsRaw); } catch(e){}
+  }
+  if (!actualites) actualites = [];
+
   try {
     if (customRaw) {
       const customList = JSON.parse(customRaw);
@@ -74,6 +104,19 @@ function synchroniserActualitesPublic() {
       });
     }
   } catch(e){}
+
+  const prochainActu = actualites.find(a => (a.categorie && a.categorie.toUpperCase().includes('PROCHAIN')) || (a.badge && a.badge.toUpperCase().includes('PROCHAIN')));
+  if (prochainActu) {
+    const heroImg = document.getElementById('hero-actu-image');
+    const heroTitre = document.getElementById('hero-actu-titre');
+    const heroTheme = document.getElementById('hero-actu-theme');
+    const heroDetails = document.getElementById('hero-actu-details');
+
+    if (heroImg && prochainActu.image) heroImg.src = prochainActu.image;
+    if (heroTitre && prochainActu.titre) heroTitre.textContent = prochainActu.titre;
+    if (heroTheme && prochainActu.description) heroTheme.textContent = "Thème : « " + prochainActu.description + " »";
+    if (heroDetails) heroDetails.textContent = `📍 ${prochainActu.lieu || 'Koumassi'} • ${prochainActu.date || 'Prochainement'}`;
+  }
 
   const container = document.getElementById('container-actualites') || document.getElementById('publicNewsContainer') || document.querySelector('.grille-actualites-cartes');
 
@@ -99,13 +142,17 @@ function synchroniserActualitesPublic() {
 }
 
 // 3. Synchronisation Dynamique des Modules de Formation
-function synchroniserFormationsPublic() {
+async function synchroniserFormationsPublic() {
+  let formations = await window.cmsRead.fetchSection('formations');
   const formationsRaw = localStorage.getItem('aeemci_cms_formations');
-  if (!formationsRaw) return;
+  if (!formations) {
+    try { if (formationsRaw) formations = JSON.parse(formationsRaw); } catch(e){}
+  }
+  if (!formations) return;
 
   try {
-    const formations = JSON.parse(formationsRaw);
     const container = document.getElementById('container-formations') || document.getElementById('publicFormationsContainer') || document.querySelector('.grille-formations');
+
 
     if (container && formations && formations.length > 0) {
       container.innerHTML = '';
@@ -134,12 +181,15 @@ function synchroniserFormationsPublic() {
 }
 
 // 4. Synchronisation des Compteurs Statistiques
-function synchroniserStatistiquesPublic() {
-  const militantsRaw = localStorage.getItem('aeemci_militants_db');
-  if (!militantsRaw) return;
+async function synchroniserStatistiquesPublic() {
+  let militants = await window.cmsRead.fetchMilitants();
+  if (!militants) {
+    const militantsRaw = localStorage.getItem('aeemci_militants_db');
+    try { if (militantsRaw) militants = JSON.parse(militantsRaw); } catch(e){}
+  }
+  if (!militants) return;
 
   try {
-    const militants = JSON.parse(militantsRaw);
     const totalValides = militants.filter(m => m.statut === 'valide').length || militants.length;
 
     const statMilitants = document.getElementById('publicStatMilitants') || document.querySelector('.carte-chiffre-cle:nth-child(1) .chiffre-cle');
@@ -152,14 +202,16 @@ function synchroniserStatistiquesPublic() {
 }
 
 // 5. Synchronisation des Photos de la Galerie Uploadées depuis le Studio
-function synchroniserGaleriePublic() {
+async function synchroniserGaleriePublic() {
+  let listCMS = await window.cmsRead.fetchSection('galerie');
   const cmsRaw = localStorage.getItem('aeemci_cms_galerie');
   const customRaw = localStorage.getItem('aeemci_galerie_custom');
-  
-  let listCMS = [];
+
+  if (!listCMS) {
+    try { if (cmsRaw) listCMS = JSON.parse(cmsRaw); } catch(e){}
+  }
+  if (!listCMS) listCMS = [];
   let listCustom = [];
-  
-  try { if (cmsRaw) listCMS = JSON.parse(cmsRaw); } catch(e){}
   try { if (customRaw) listCustom = JSON.parse(customRaw); } catch(e){}
   
   const combinees = [...listCMS];
@@ -194,12 +246,15 @@ function synchroniserGaleriePublic() {
 }
 
 // 6. Synchronisation des Coordonnées Officielles & Footer
-function synchroniserContactPublic() {
+async function synchroniserContactPublic() {
+  let contact = await window.cmsRead.fetchSection('contact');
   const contactRaw = localStorage.getItem('aeemci_cms_contact');
-  if (!contactRaw) return;
+  if (!contact) {
+    try { if (contactRaw) contact = JSON.parse(contactRaw); } catch(e){}
+  }
+  if (!contact) return;
 
   try {
-    const contact = JSON.parse(contactRaw);
 
     const adresseEls = document.querySelectorAll('#site-contact-adresse, #publicFooterAdresse, .contact-adresse-txt');
     const tel1Els = document.querySelectorAll('#site-contact-phone, #publicFooterTel, .contact-tel-txt');
@@ -217,4 +272,25 @@ function synchroniserContactPublic() {
   } catch (e) {
     console.warn("Mise à jour des coordonnées du footer ignorée.");
   }
+}
+
+// 7. Initialisation des Animations de Révélation au Défilement (Premium Polish)
+function initialiserAnimationsScroll() {
+  const observerOptions = {
+    threshold: 0.15 // Déclenche quand 15% de l'élément est visible
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('section, .carte-pilier-moderne, .etape-carte').forEach(el => {
+    el.classList.add('reveal');
+    observer.observe(el);
+  });
 }

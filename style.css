@@ -29,8 +29,10 @@
   
   --rayon-carte    : 20px;
   --rayon-bouton   : 50px;
-  --ombre-douce    : 0 12px 35px -10px rgba(12, 56, 35, 0.08);
-  --ombre-survol   : 0 24px 50px -12px rgba(12, 56, 35, 0.18);
+  --ombre-douce    : 0 1px 2px rgba(12, 56, 35, 0.05), 0 4px 8px rgba(12, 56, 35, 0.05), 0 12px 24px rgba(12, 56, 35, 0.05);
+  --ombre-survol   : 0 2px 4px rgba(12, 56, 35, 0.07), 0 10px 20px rgba(12, 56, 35, 0.1), 0 20px 40px rgba(12, 56, 35, 0.15);
+  --pattern-geometric: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%230C3823' fill-opacity='0.05'%3E%3Cpath d='M0 0h80v80H0z'/%3E%3Cpath d='M40 0l10 30 30 10-30 10-10 30-30-10 30-10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+
   --transition     : all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -49,13 +51,24 @@ body {
   font-family: var(--font-corps);
   color: var(--texte-sombre);
   background-color: var(--fond-clair);
-  background-image: 
+  background-image:
     radial-gradient(circle at 10% 20%, rgba(12, 56, 35, 0.03) 0%, transparent 40%),
     radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.04) 0%, transparent 40%);
   line-height: 1.65;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: var(--pattern-geometric);
+  background-size: 100px 100px;
+  z-index: -1;
+  pointer-events: none;
+}
+
 
 img {
   max-width: 100%;
@@ -152,17 +165,23 @@ h1, h2, h3, h4, h5, h6 {
 .bouton-cta-primaire::after {
   content: "";
   position: absolute;
-  top: -50%;
-  left: -60%;
-  width: 40%;
-  height: 200%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transform: rotate(25deg);
-  transition: left 0.75s ease;
+  top: 0;
+  left: -150%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: none;
 }
 
 .bouton-cta-primaire:hover::after {
-  left: 140%;
+  left: 150%;
+  transition: left 0.8s ease-in-out;
 }
 
 .bouton-cta-primaire:hover {
@@ -223,11 +242,13 @@ h1, h2, h3, h4, h5, h6 {
   width: min(1240px, 94%);
   margin: 12px auto 0 auto;
   border-radius: 50px;
-  background: rgba(255, 255, 255, 0.88) !important;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-  border: 1px solid rgba(212, 175, 55, 0.3) !important;
-  box-shadow: 0 12px 35px rgba(12, 56, 35, 0.08) !important;
+  background: rgba(255, 255, 255, 0.75) !important;
+  backdrop-filter: blur(15px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(15px) saturate(160%) !important;
+  border: 1px solid rgba(212, 175, 55, 0.2) !important;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.4),
+    0 10px 30px rgba(12, 56, 35, 0.06) !important;
   padding: 4px 24px;
   transition: var(--transition);
 }
@@ -338,8 +359,30 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ---------- Hero Section (2026 EXECUTIVE LUXURY BANNER) ---------- */
+@keyframes heroEntrance {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-moderne .slogan-majestueux-box,
+.hero-moderne .hero-titre,
+.hero-moderne .hero-description,
+.hero-moderne .hero-actions,
+.hero-moderne .hero-carte-visuelle {
+  opacity: 0;
+  animation: heroEntrance 0.8s ease forwards;
+}
+
+/* Staggered delays for a professional sequence */
+.hero-moderne .slogan-majestueux-box { animation-delay: 0.1s; }
+.hero-moderne .hero-titre { animation-delay: 0.3s; }
+.hero-moderne .hero-description { animation-delay: 0.5s; }
+.hero-moderne .hero-actions { animation-delay: 0.7s; }
+.hero-moderne .hero-carte-visuelle { animation-delay: 0.9s; }
+
 .hero-moderne {
   position: relative;
+
   padding: 100px 0 90px;
   background: linear-gradient(135deg, #062215 0%, #0C3823 55%, #03140A 100%) !important;
   color: #FFFFFF !important;
@@ -1185,6 +1228,19 @@ h1, h2, h3, h4, h5, h6 {
   .menu-burger {
     display: flex;
   }
+}
+
+/* ---------- Animations de Révélation au Défilement ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  will-change: opacity, transform;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* =========================================================

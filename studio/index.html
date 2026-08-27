@@ -25,7 +25,11 @@
     </div>
 
     <nav class="sidebar-nav">
-      <a class="nav-item actif" onclick="changerOngletStudio('tab-vue-ensemble', this)">
+      <a class="nav-item actif" onclick="changerOngletStudio('tab-config', this)">
+        <span class="nav-icone">⚙️</span>
+        <span class="nav-texte">Configuration Site</span>
+      </a>
+      <a class="nav-item" onclick="changerOngletStudio('tab-vue-ensemble', this)">
         <span class="nav-icone">📊</span>
         <span class="nav-texte">Vue d'ensemble</span>
       </a>
@@ -93,8 +97,206 @@
     <!-- CONTENT BODY (ONGLETS DYNAMIQUES) -->
     <main class="content-body">
 
+      <!-- ==================== TAB 0 : CONFIGURATION GLOBALE DU SITE ==================== -->
+      <section id="tab-config" class="onglet-contenu actif">
+        <div class="section-header-dashboard">
+          <div>
+            <h1>Configuration Générale du Site</h1>
+            <p>Modifiez l'identité visuelle et textuelle de la page d'accueil en temps réel.</p>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 24px;">
+
+          <!-- CARTE 1 : PARAMÈTRES GÉNÉRAUX -->
+          <div class="carte-tableau" style="padding: 24px;">
+            <h3 style="margin-bottom: 18px; color: var(--vert-institutionnel);">🌐 Identité & Footer</h3>
+            <form onsubmit="enregistrerConfigCMS(event)" style="display: grid; gap: 16px;">
+              <div class="form-groupe">
+                <label>Titre du Site (Balise Title)</label>
+                <input type="text" id="cmsConfigTitre">
+              </div>
+              <div class="form-groupe">
+                <label>Description SEO</label>
+                <textarea id="cmsConfigDesc" rows="2"></textarea>
+              </div>
+              <div class="form-groupe">
+                <label>URL Logo Officiel</label>
+                <input type="text" id="cmsConfigLogo">
+              </div>
+              <div class="form-groupe">
+                <label>Date du Mahouloud (Pour le compte à rebours)</label>
+                <input type="datetime-local" id="cmsConfigMaouloudDate">
+              </div>
+              <div class="form-groupe">
+                <label>Copyright Footer</label>
+                <input type="text" id="cmsConfigCopyright">
+              </div>
+              <div class="form-groupe">
+                <label>Label Mandat (ex: 🟢 Mandat 2025-2026)</label>
+                <input type="text" id="cmsConfigMandat">
+              </div>
+              <button type="submit" class="bouton-action-pro">Enregistrer la Configuration</button>
+            </form>
+          </div>
+
+          <!-- CARTE 2 : SECTION HERO -->
+          <div class="carte-tableau" style="padding: 24px;">
+            <h3 style="margin-bottom: 18px; color: var(--vert-institutionnel);">🚀 Section Hero (Accueil)</h3>
+            <form onsubmit="enregistrerHeroCMS(event)" style="display: grid; gap: 16px;">
+              <div class="form-groupe">
+                <label>Slogan Principal</label>
+                <input type="text" id="cmsHeroSlogan1">
+              </div>
+              <div class="form-groupe">
+                <label>Sous-Slogan (Devise)</label>
+                <input type="text" id="cmsHeroSlogan2">
+              </div>
+              <div class="form-groupe">
+                <label>Titre Principal (Texte)</label>
+                <input type="text" id="cmsHeroTitre">
+              </div>
+              <div class="form-groupe">
+                <label>Mot en Accent (ex: Koumassi)</label>
+                <input type="text" id="cmsHeroAccent">
+              </div>
+              <div class="form-groupe">
+                <label>Description Hero</label>
+                <textarea id="cmsHeroDesc" rows="2"></textarea>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div class="form-groupe">
+                  <label>CTA 1 Texte</label>
+                  <input type="text" id="cmsHeroCta1T">
+                </div>
+                <div class="form-groupe">
+                  <label>CTA 1 Lien</label>
+                  <input type="text" id="cmsHeroCta1L">
+                </div>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div class="form-groupe">
+                  <label>CTA 2 Texte</label>
+                  <input type="text" id="cmsHeroCta2T">
+                </div>
+                <div class="form-groupe">
+                  <label>CTA 2 Lien</label>
+                  <input type="text" id="cmsHeroCta2L">
+                </div>
+              </div>
+              <div class="form-groupe">
+                <label>Nom Médaillon</label>
+                <input type="text" id="cmsHeroMedNom">
+              </div>
+              <div class="form-groupe">
+                <label>Devise Médaillon</label>
+                <input type="text" id="cmsHeroMedDev">
+              </div>
+              <button type="submit" class="bouton-action-pro">Mettre à jour le Hero</button>
+            </form>
+          </div>
+
+          <!-- CARTE 3 : HISTORIQUE / TIMELINE -->
+          <div class="carte-tableau" style="padding: 24px;">
+            <h3 style="margin-bottom: 18px; color: var(--vert-institutionnel);">⏳ Frise Chronologique</h3>
+            <form onsubmit="enregistrerHistoriqueCMS(event)" style="display: grid; gap: 16px;">
+              <div class="form-groupe">
+                <label>Badge Section</label>
+                <input type="text" id="cmsHistBadge">
+              </div>
+              <div class="form-groupe">
+                <label>Titre Section</label>
+                <input type="text" id="cmsHistTitre">
+              </div>
+              <div class="form-groupe">
+                <label>Description Section</label>
+                <textarea id="cmsHistDesc" rows="2"></textarea>
+              </div>
+              <div id="containerEtapesCMS" style="display: flex; flex-direction: column; gap: 12px;">
+                <!-- Les étapes sont générées dynamiquement -->
+              </div>
+              <button type="button" class="bouton-action-contour" onclick="ajouterEtapeCMS()">➕ Ajouter une étape</button>
+              <button type="submit" class="bouton-action-pro">Enregistrer l'Historique</button>
+            </form>
+          </div>
+
+          <!-- CARTE 4 : IMPACT / CHIFFRES CLÉS -->
+          <div class="carte-tableau" style="padding: 24px;">
+            <h3 style="margin-bottom: 18px; color: var(--vert-institutionnel);">📊 Chiffres Clés (Impact)</h3>
+            <form onsubmit="enregistrerImpactCMS(event)" style="display: grid; gap: 16px;">
+              <div class="form-groupe">
+                <label>Badge Section</label>
+                <input type="text" id="cmsImpactBadge">
+              </div>
+              <div class="form-groupe">
+                <label>Titre Section</label>
+                <input type="text" id="cmsImpactTitre">
+              </div>
+              <div class="form-groupe">
+                <label>Description Section</label>
+                <textarea id="cmsImpactDesc" rows="2"></textarea>
+              </div>
+              <div id="containerStatsCMS" style="display: flex; flex-direction: column; gap: 12px;">
+                <!-- Les stats sont générées dynamiquement -->
+              </div>
+              <button type="button" class="bouton-action-contour" onclick="ajouterStatCMS()">➕ Ajouter une stat</button>
+              <button type="submit" class="bouton-action-pro">Enregistrer l'Impact</button>
+            </form>
+          </div>
+
+          <!-- CARTE 5 : PILIERS / MISSIONS -->
+          <div class="carte-tableau" style="padding: 24px;">
+            <h3 style="margin-bottom: 18px; color: var(--vert-institutionnel);">🌟 Missions & Piliers</h3>
+            <form onsubmit="enregistrerPiliersCMS(event)" style="display: grid; gap: 16px;">
+              <div class="form-groupe">
+                <label>Badge Section</label>
+                <input type="text" id="cmsPiliersBadge">
+              </div>
+              <div class="form-groupe">
+                <label>Titre Section</label>
+                <input type="text" id="cmsPiliersTitre">
+              </div>
+              <div class="form-groupe">
+                <label>Description Section</label>
+                <textarea id="cmsPiliersDesc" rows="2"></textarea>
+              </div>
+              <div id="containerPiliersCMS" style="display: flex; flex-direction: column; gap: 12px;">
+                <!-- Les piliers sont générés dynamiquement -->
+              </div>
+              <button type="button" class="bouton-action-contour" onclick="ajouterPilierCMS()">➕ Ajouter un pilier</button>
+              <button type="submit" class="bouton-action-pro">Enregistrer les Piliers</button>
+            </form>
+          </div>
+
+          <!-- CARTE 6 : TÉMOIGNAGES -->
+          <div class="carte-tableau" style="padding: 24px;">
+            <h3 style="margin-bottom: 18px; color: var(--vert-institutionnel);">💬 Témoignages</h3>
+            <form onsubmit="enregistrerTemosCMS(event)" style="display: grid; gap: 16px;">
+              <div class="form-groupe">
+                <label>Badge Section</label>
+                <input type="text" id="cmsTemosBadge">
+              </div>
+              <div class="form-groupe">
+                <label>Titre Section</label>
+                <input type="text" id="cmsTemosTitre">
+              </div>
+              <div class="form-groupe">
+                <label>Description Section</label>
+                <textarea id="cmsTemosDesc" rows="2"></textarea>
+              </div>
+              <div id="containerTemosCMS" style="display: flex; flex-direction: column; gap: 12px;">
+                <!-- Les témoignages sont générés dynamiquement -->
+              </div>
+              <button type="button" class="bouton-action-contour" onclick="ajouterTemoCMS()">➕ Ajouter un témoignage</button>
+              <button type="submit" class="bouton-action-pro">Enregistrer les Témoignages</button>
+            </form>
+          </div>
+
+        </div>
+      </section>
+
       <!-- ==================== TAB 1 : VUE D'ENSEMBLE ==================== -->
-      <section id="tab-vue-ensemble" class="onglet-contenu actif">
+      <section id="tab-vue-ensemble" class="onglet-contenu">
         <div class="section-header-dashboard">
           <div>
             <h1>Tableau de Bord Général</h1>
