@@ -3,12 +3,25 @@
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', function() {
+  lancerSynchronisationGlobale();
+});
+
+// Écouteur en temps réel : Réactualise automatiquement le site public si le Studio enregistre des modifications dans un autre onglet
+window.addEventListener('storage', function() {
+  lancerSynchronisationGlobale();
+});
+
+window.addEventListener('focus', function() {
+  lancerSynchronisationGlobale();
+});
+
+function lancerSynchronisationGlobale() {
   synchroniserBureauPublic();
   synchroniserActualitesPublic();
   synchroniserStatistiquesPublic();
   synchroniserGaleriePublic();
   synchroniserContactPublic();
-});
+}
 
 // 1. Synchronisation des Infos du Bureau & Photo du Président
 function synchroniserBureauPublic() {
