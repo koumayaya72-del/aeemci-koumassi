@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', async function() {
   await chargerMilitantsDepuisBase();
 });
 
-// Charger la liste complète des militants depuis Supabase / LocalStorage
 async function chargerMilitantsDepuisBase() {
   if (window.militantsDb && typeof window.militantsDb.fetchMilitants === 'function') {
     militantsData = await window.militantsDb.fetchMilitants();
@@ -16,7 +15,6 @@ async function chargerMilitantsDepuisBase() {
     militantsData = JSON.parse(localStorage.getItem('aeemci_militants_db')) || [];
   }
 
-  // Si la liste est vide, on initialise avec des données représentatives
   if (!militantsData || militantsData.length === 0) {
     militantsData = [
       { id: 1, nom: "Kouamé Ibrahim", quartier: "Koumassi Prodomo", ecole: "Lycée Moderne de Koumassi", telephone: "0757477372", statut: "valide", date: "2026-08-20" },
@@ -32,7 +30,6 @@ async function chargerMilitantsDepuisBase() {
   mettreAJourKpi();
 }
 
-// 1. Navigation Onglets
 function changerOngletStudio(ongletId, element) {
   const onglets = document.querySelectorAll('.onglet-contenu');
   onglets.forEach(o => o.classList.remove('actif'));
@@ -45,7 +42,6 @@ function changerOngletStudio(ongletId, element) {
   if (element) element.classList.add('actif');
 }
 
-// 2. Barre Latérale Rétractable
 function toggleSidebarStudio() {
   const sidebar = document.getElementById('studioSidebar');
   if (sidebar) {
@@ -53,7 +49,6 @@ function toggleSidebarStudio() {
   }
 }
 
-// 3. Affichage Dynamique dans les Tableaux HTML
 function afficherMilitantsTable(liste) {
   const tbody1 = document.getElementById('tbodyMilitants');
   const tbody2 = document.getElementById('tbodyMilitantsComplet');
@@ -90,7 +85,6 @@ function afficherMilitantsTable(liste) {
   if (tbody2) tbody2.innerHTML = html;
 }
 
-// 4. Filtrage & Recherche Instantanée
 function filtrerMilitants() {
   const inputElem = document.getElementById('inputRechercheMilitant') || document.getElementById('inputRechercheTop');
   const recherche = inputElem ? inputElem.value.toLowerCase() : '';
@@ -106,7 +100,6 @@ function filtrerMilitants() {
   afficherMilitantsTable(resultats);
 }
 
-// 5. Action Valider (Met à jour la BD et les KPI)
 async function validerMilitant(id) {
   if (window.militantsDb && typeof window.militantsDb.updateStatus === 'function') {
     await window.militantsDb.updateStatus(id, 'valide');
@@ -119,7 +112,6 @@ async function validerMilitant(id) {
   alert(`La demande du militant a été validée avec succès !`);
 }
 
-// 6. Action Supprimer (Met à jour la BD et les KPI)
 async function supprimerMilitant(id) {
   if (confirm("Êtes-vous sûr de vouloir supprimer cette demande d'adhésion ?")) {
     if (window.militantsDb && typeof window.militantsDb.deleteMilitant === 'function') {
@@ -132,7 +124,6 @@ async function supprimerMilitant(id) {
   }
 }
 
-// 7. Modale Ajouter un Militant (Formulaire Admin)
 function ouvrirModalAjoutMilitant() {
   const m = document.getElementById('modalAjoutMilitant');
   if (m) m.classList.add('active');
@@ -177,7 +168,6 @@ async function enregistrerNouveauMilitant(e) {
   alert(`Le militant ${nom} a été inscrit avec succès !`);
 }
 
-// 8. Exportation CSV / Excel
 function exporterMilitantsCSV() {
   let csvContent = "data:text/csv;charset=utf-8,Nom,Quartier,Etablissement,Telephone,Statut,Date\n";
   militantsData.forEach(m => {
@@ -193,7 +183,6 @@ function exporterMilitantsCSV() {
   document.body.removeChild(link);
 }
 
-// 9. Mise à Jour Dynamique des Cartes Statistiques (KPI)
 function mettreAJourKpi() {
   const totalValides = militantsData.filter(m => m.statut === 'valide').length;
   const totalAttentes = militantsData.filter(m => m.statut === 'attente').length;
@@ -205,14 +194,7 @@ function mettreAJourKpi() {
   if (attentesEl) attentesEl.textContent = totalAttentes;
 }
 
-// Multi-Exports globaux
 window.chargerMilitantsDepuisBase = chargerMilitantsDepuisBase;
 window.changerOngletStudio = changerOngletStudio;
 window.toggleSidebarStudio = toggleSidebarStudio;
 window.filtrerMilitants = filtrerMilitants;
-window.validerMilitant = validerMilitant;
-window.supprimerMilitant = supprimerMilitant;
-window.ouvrirModalAjoutMilitant = ouvrirModalAjoutMilitant;
-window.fermerModalAjoutMilitant = fermerModalAjoutMilitant;
-window.enregistrerNouveauMilitant = enregistrerNouveauMilitant;
-window.exporterMilitantsCSV = exporterMilitantsCSV;

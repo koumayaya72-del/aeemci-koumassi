@@ -18,7 +18,6 @@ if (typeof supabase !== 'undefined' && supabase.createClient) {
 // Module d'Authentification Administrateur
 window.studioAuth = {
   login: async function(email, password) {
-    // 1. Essai d'authentification Supabase si disponible
     if (supabaseClient) {
       try {
         const { data, error } = await supabaseClient.auth.signInWithPassword({
@@ -44,8 +43,6 @@ window.studioAuth = {
       }
     }
 
-    // 2. Mode d'Authentification Intégré (Comité Exécutif Koumassi)
-    // Comptes de démonstration prédéfinis pour le bureau AEEMCI Koumassi
     const comptesAutorises = [
       { email: "admin.koumassi@aeemci.ci", pass: "Aeemci2026!", nom: "Sow Mohamed", role: "Président Exécutif", initiales: "SM" },
       { email: "sg.koumassi@aeemci.ci", pass: "Koumassi2026!", nom: "Diabaté Fodé", role: "Secrétaire Général", initiales: "DF" },
@@ -54,7 +51,6 @@ window.studioAuth = {
 
     const match = comptesAutorises.find(c => c.email.toLowerCase() === email.toLowerCase());
     
-    // Si l'utilisateur saisit n'importe quel email valide avec au moins 6 caractères de mot de passe en mode démo
     if (match && match.pass === password) {
       const userSession = {
         token: "token_executif_" + Date.now(),
@@ -64,7 +60,6 @@ window.studioAuth = {
       localStorage.setItem('studio_aeemci_session', JSON.stringify(userSession));
       return { success: true };
     } else if (!match && email.includes('@') && password.length >= 6) {
-      // Démo universelle pour le bureau
       const userSession = {
         token: "token_demo_" + Date.now(),
         expiresAt: Date.now() + (24 * 60 * 60 * 1000),
@@ -90,7 +85,6 @@ window.studioAuth = {
 
 // Module de Gestion de la Base de Données Militants (CRUD Supabase + LocalStorage)
 window.militantsDb = {
-  // Récupérer les militants
   fetchMilitants: async function() {
     if (supabaseClient) {
       try {
@@ -98,68 +92,50 @@ window.militantsDb = {
           .from('militants')
           .select('*')
           .order('created_at', { ascending: false });
-
-        if (!error && data && data.length > 0) {
-          localStorage.setItem('aeemci_militants_db', JSON.stringify(data));
-          return data;
-        }
+        if (!error && data) return data;
       } catch (e) {
-        console.warn("Utilisation de la base de données locale.");
+        console.warn("Erreur Supabase, basculement en local.");
       }
     }
     return JSON.parse(localStorage.getItem('aeemci_militants_db')) || [];
   },
 
-  // Ajouter un militant (Public & Admin)
   insertMilitant: async function(militantData) {
-    const nouveauMilitant = {
-      id: Date.now(),
-      nom: militantData.nom,
-      quartier: militantData.quartier || "Koumassi Prodomo",
-      ecole: militantData.ecole || "Lycée / Université",
-      telephone: militantData.telephone,
-      statut: militantData.statut || "attente",
-      date: new Date().toISOString().split('T')[0]
-    };
-
     if (supabaseClient) {
       try {
-        await supabaseClient.from('militants').insert([nouveauMilitant]);
+        const { data, error } = await supabaseClient
+          .from('militants')
+          .insert([militantData])
+          .select();
+        if (!error && data && data.length > 0) return data[0];
       } catch (e) {
-        console.warn("Sauvegarde dans la base locale.");
+        console.warn("Échec insertion Supabase, sauvegarde en local.");
       }
     }
-
-    let liste = JSON.parse(localStorage.getItem('aeemci_militants_db')) || [];
-    liste.unshift(nouveauMilitant);
-    localStorage.setItem('aeemci_militants_db', JSON.stringify(liste));
-
-    return nouveauMilitant;
+    const list = JSON.parse(localStorage.getItem('aeemci_militants_db')) || [];
+    const item = { id: Date.now(), ...militantData, date: new Date().toISOString().split('T')[0] };
+    list.unshift(item);
+    localStorage.setItem('aeemci_militants_db', JSON.stringify(list));
+    return item;
   },
 
-  // Mettre à jour le statut (Valider / Rejeter)
-  updateStatus: async function(id, nouveauStatut) {
+  updateStatus: async function(id, status) {
     if (supabaseClient) {
       try {
         await supabaseClient
           .from('militants')
-          .update({ statut: nouveauStatut })
+          .update({ statut: status })
           .eq('id', id);
       } catch (e) {
-        console.warn("Mise à jour locale.");
+        console.warn("Échec mise à jour Supabase.");
       }
     }
-
-    let liste = JSON.parse(localStorage.getItem('aeemci_militants_db')) || [];
-    const item = liste.find(m => m.id === id);
-    if (item) {
-      item.statut = nouveauStatut;
-      localStorage.setItem('aeemci_militants_db', JSON.stringify(liste));
-    }
-    return liste;
+    let list = JSON.parse(localStorage.getItem('aeemci_militants_db')) || [];
+    const item = list.find(m => m.id === id);
+    if (item) item.statut = status;
+    localStorage.setItem('aeemci_militants_db', JSON.stringify(list));
   },
 
-  // Supprimer un militant
   deleteMilitant: async function(id) {
     if (supabaseClient) {
       try {
@@ -168,13 +144,11 @@ window.militantsDb = {
           .delete()
           .eq('id', id);
       } catch (e) {
-        console.warn("Suppression locale.");
+        console.warn("Échec suppression Supabase.");
       }
     }
-
-    let liste = JSON.parse(localStorage.getItem('aeemci_militants_db')) || [];
-    liste = liste.filter(m => m.id !== id);
-    localStorage.setItem('aeemci_militants_db', JSON.stringify(liste));
-    return liste;
+    let list = JSON.parse(localStorage.getItem('aeemci_militants_db')) || [];
+    list = list.filter(m => m.id !== id);
+    localStorage.setItem('aeemci_militants_db', JSON.stringify(list));
   }
 };
