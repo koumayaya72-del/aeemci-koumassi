@@ -17,21 +17,57 @@ const CMS_DEFAUTS = {
   actualites: [
     {
       id: 101,
-      titre: "Nuit du Mahouloud 2026 à Koumassi",
-      categorie: "Événement Majeur",
-      date: "25-26 Août 2026",
-      lieu: "Collège Moderne La Colombe",
-      description: "Grand rassemblement spirituel et conférences sur la vie du Prophète (SWS). Interventions de plusieurs guides religieux.",
+      titre: "Nuit Du MAHOULOUD 2026",
+      categorie: "PROCHAIN ÉVÉNEMENT",
+      date: "Nuit du 25 au 26 Août 2026 • Dès 20H",
+      lieu: "Collège Moderne La Colombe (Koumassi)",
+      description: "Thème : « Le Sermon d'Adieu : enseignements et leçons pour le musulman ». Célébration spirituelle & veillée d'invocations.",
       image: "images/maouloud.jpg"
     },
     {
       id: 102,
-      titre: "Lancement du Programme de Soutien BEPC & BAC",
-      categorie: "Formations",
-      date: "01 Septembre 2026",
-      lieu: "Siège AEEMCI Koumassi",
-      description: "Cours de renforcement gratuits organisés par la commission académique pour tous les élèves du sous-comité.",
+      titre: "SECOFIS 2026",
+      categorie: "FORMATION",
+      date: "22 au 28 juillet 2026",
+      lieu: "Koumassi",
+      description: "Séminaire d'orientation et de formation axé sur le renforcement des capacités, l'initiation professionnelle et le développement personnel.",
       image: "images/secofis.jpg"
+    },
+    {
+      id: 103,
+      titre: "SEFORES & Rentrée Solennelle",
+      categorie: "ÉVÉNEMENT",
+      date: "18 janvier 2026",
+      lieu: "Koumassi",
+      description: "Cérémonie officielle marquant le lancement des activités de l'année et le déploiement de la feuille de route du bureau sous le thème « Ensemble nous sommes plus forts ».",
+      image: "images/rentree-solennelle.jpg"
+    },
+    {
+      id: 104,
+      titre: "Nuit de Prière & Veillée Spirituelle",
+      categorie: "SPIRITUALITÉ",
+      date: "23 Mai 2026",
+      lieu: "Koumassi",
+      description: "Veillée spirituelle de recueillement, d'invocations, de lecture coranique et de rappels religieux pour raffermir les cœurs.",
+      image: "images/nuit-priere.jpg"
+    },
+    {
+      id: 105,
+      titre: "Journée de l'Excellence & de la Culture",
+      categorie: "EXCELLENCE",
+      date: "10 Mai 2026",
+      lieu: "Koumassi",
+      description: "Grand rassemblement annuel récompensant les meilleurs candidats et lauréats aux examens scolaires et concours coraniques de la commune de Koumassi.",
+      image: "images/journee-excellence.jpg"
+    },
+    {
+      id: 106,
+      titre: "Iftar Solidaire & Partage Fraternel",
+      categorie: "ACTION SOCIALE",
+      date: "18 Mars 2026",
+      lieu: "Koumassi",
+      description: "Organisation de repas collectifs de rupture du jeûne et distribution de kits alimentaires d'urgence aux familles et étudiants dans le besoin.",
+      image: "images/solidarite-ramadan.jpg"
     }
   ],
   formations: [
@@ -93,10 +129,9 @@ function initialiserDonneesCMS() {
   if (!localStorage.getItem('aeemci_cms_contact')) {
     localStorage.setItem('aeemci_cms_contact', JSON.stringify(CMS_DEFAUTS.contact));
   }
-  
-  let galerieStockee = JSON.parse(localStorage.getItem('aeemci_cms_galerie')) || [];
-  galerieStockee = galerieStockee.filter(g => g && g.url && !g.url.includes('../images/'));
-  localStorage.setItem('aeemci_cms_galerie', JSON.stringify(galerieStockee));
+  if (!localStorage.getItem('aeemci_cms_galerie')) {
+    localStorage.setItem('aeemci_cms_galerie', JSON.stringify([]));
+  }
 }
 
 // 1. GESTION DU BUREAU EXÉCUTIF & PRÉSIDENCE
@@ -231,41 +266,61 @@ window.ajouterActualiteCMS = function(e) {
   const date = document.getElementById('cmsActuDate')?.value.trim();
   const lieu = document.getElementById('cmsActuLieu')?.value.trim();
   const description = document.getElementById('cmsActuDesc')?.value.trim();
+  const fileInput = document.getElementById('cmsActuImageFile');
 
   if (!titre || !description) {
     alert("Veuillez saisir au moins le titre et la description de l'événement.");
     return;
   }
 
-  let actualites = JSON.parse(localStorage.getItem('aeemci_cms_actualites')) || CMS_DEFAUTS.actualites;
+  const enregistrer = (imageUrl) => {
+    let actualites = JSON.parse(localStorage.getItem('aeemci_cms_actualites')) || CMS_DEFAUTS.actualites;
 
-  if (idEdit) {
-    const idx = actualites.findIndex(a => a.id == idEdit);
-    if (idx !== -1) {
-      actualites[idx].titre = titre;
-      actualites[idx].categorie = categorie;
-      actualites[idx].date = date || "Prochainement";
-      actualites[idx].lieu = lieu || "Koumassi";
-      actualites[idx].description = description;
+    if (idEdit) {
+      const idx = actualites.findIndex(a => a.id == idEdit);
+      if (idx !== -1) {
+        actualites[idx].titre = titre;
+        actualites[idx].categorie = categorie;
+        actualites[idx].date = date || "Prochainement";
+        actualites[idx].lieu = lieu || "Koumassi";
+        actualites[idx].description = description;
+        if (imageUrl) actualites[idx].image = imageUrl;
+      }
+    } else {
+      const nouvelleActu = {
+        id: Date.now(),
+        titre: titre,
+        categorie: categorie,
+        date: date || "Prochainement",
+        lieu: lieu || "Koumassi",
+        description: description,
+        image: imageUrl || "images/maouloud.jpg"
+      };
+      actualites.unshift(nouvelleActu);
     }
-  } else {
-    const nouvelleActu = {
-      id: Date.now(),
-      titre: titre,
-      categorie: categorie,
-      date: date || "Prochainement",
-      lieu: lieu || "Koumassi",
-      description: description,
-      image: "images/maouloud.jpg"
+
+    try {
+      localStorage.setItem('aeemci_cms_actualites', JSON.stringify(actualites));
+    } catch (err) {
+      console.error("Quota localStorage dépassé:", err);
+    }
+
+    chargerActualitesCMS();
+    fermerModalAjoutEvenement();
+    alert("✅ L'événement a été publié et mis à jour en temps réel sur le site public !");
+  };
+
+  if (fileInput && fileInput.files && fileInput.files[0]) {
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+      compresserImageCanvas(evt.target.result, 800, 0.8, function(imgCompressee) {
+        enregistrer(imgCompressee);
+      });
     };
-    actualites.unshift(nouvelleActu);
+    reader.readAsDataURL(fileInput.files[0]);
+  } else {
+    enregistrer(null);
   }
-
-  localStorage.setItem('aeemci_cms_actualites', JSON.stringify(actualites));
-  chargerActualitesCMS();
-  fermerModalAjoutEvenement();
-
-  alert("✅ L'événement a été publié et mis à jour en temps réel sur le site public !");
 };
 
 window.supprimerActualiteCMS = function(id) {

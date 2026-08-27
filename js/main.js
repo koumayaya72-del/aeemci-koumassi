@@ -56,7 +56,7 @@ function synchroniserActualitesPublic() {
 
   try {
     const actualites = JSON.parse(actualitesRaw);
-    const container = document.getElementById('container-actualites') || document.getElementById('publicNewsContainer') || document.querySelector('.grille-actualites');
+    const container = document.getElementById('container-actualites') || document.getElementById('publicNewsContainer') || document.querySelector('.grille-actualites-cartes');
 
     if (container && actualites && actualites.length > 0) {
       container.innerHTML = '';
@@ -65,23 +65,20 @@ function synchroniserActualitesPublic() {
         article.className = 'carte-actualite-moderne';
         article.innerHTML = `
           <div class="carte-actu-image">
+            <span class="carte-actu-badge or">${actu.categorie || 'ÉVÉNEMENT'}</span>
             <img src="${actu.image || 'images/logo.png'}" alt="${actu.titre}" loading="lazy" onerror="this.src='images/logo.png';">
-            <span class="badge-categorie">${actu.categorie}</span>
           </div>
-          <div class="carte-actu-contenu">
-            <div class="méta-actu">
-              <span>📅 ${actu.date}</span>
-              <span>📍 ${actu.lieu}</span>
-            </div>
-            <h3>${actu.titre}</h3>
-            <p>${actu.description}</p>
+          <div class="carte-actu-corps">
+            <span class="carte-actu-date">📅 ${actu.date} ${actu.lieu ? '• 📍 ' + actu.lieu : ''}</span>
+            <h3 class="carte-actu-titre">${actu.titre}</h3>
+            <p class="carte-actu-desc">${actu.description}</p>
           </div>
         `;
         container.appendChild(article);
       });
     }
   } catch (e) {
-    console.warn("Mise à jour des actualités ignorée.");
+    console.warn("Mise à jour des actualités ignorée:", e);
   }
 }
 
