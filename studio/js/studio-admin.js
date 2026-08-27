@@ -5,8 +5,10 @@
 const CMS_DEFAUTS = {
   bureau: {
     presidentNom: "Sow Mohamed",
+    presidentTitre: "Président Exécutif",
+    presidentMandat: "Mandat 2025 – 2026",
     presidentMot: "L'AEEMCI Koumassi s'engage résolument pour l'excellence académique, spirituelle et l'épanouissement de la jeunesse musulmane.",
-    presidentPhoto: "images/president.jpg",
+    presidentPhoto: "images/membres/sow-mohamed.jpg",
     sgNom: "Diabaté Fodé",
     contactTel1: "+225 05 45 30 51 80",
     contactTel2: "+225 07 57 47 73 72",
@@ -20,7 +22,7 @@ const CMS_DEFAUTS = {
       date: "25-26 Août 2026",
       lieu: "Collège Moderne La Colombe",
       description: "Grand rassemblement spirituel et conférences sur la vie du Prophète (SWS). Interventions de plusieurs guides religieux.",
-      image: "images/logo.png"
+      image: "images/maouloud.jpg"
     },
     {
       id: 102,
@@ -29,7 +31,30 @@ const CMS_DEFAUTS = {
       date: "01 Septembre 2026",
       lieu: "Siège AEEMCI Koumassi",
       description: "Cours de renforcement gratuits organisés par la commission académique pour tous les élèves du sous-comité.",
-      image: "images/logo.png"
+      image: "images/secofis.jpg"
+    }
+  ],
+  formations: [
+    {
+      id: 201,
+      intitule: "Module 1 : Tajwid & Coran",
+      description: "Perfectionnement dans la récitation coranique et règles de Tajwid dispensé par des maîtres qualifiés.",
+      lien: "https://wa.me/2250545305180?text=Je%20souhaite%20m'inscrire%20au%20module%20Tajwid",
+      inscrits: 84
+    },
+    {
+      id: 202,
+      intitule: "Module 2 : Art Oratoire & Prise de Parole",
+      description: "Techniques d'art oratoire, maîtrise de soi, structuration de discours et éloquence en public.",
+      lien: "https://wa.me/2250545305180?text=Je%20souhaite%20m'inscrire%20au%20module%20Art%20Oratoire",
+      inscrits: 120
+    },
+    {
+      id: 203,
+      intitule: "Module 3 : Soutien Scolaire BEPC & BAC",
+      description: "Encadrement intensif en Mathématiques, Physique-Chimie, SVT et Français pour les candidats aux examens.",
+      lien: "https://wa.me/2250545305180?text=Je%20souhaite%20m'inscrire%20au%20Soutien%20Scolaire",
+      inscrits: 195
     }
   ],
   galerie: [],
@@ -47,6 +72,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   initialiserDonneesCMS();
   chargerProfilPresidentForm();
   chargerActualitesCMS();
+  chargerFormationsCMS();
   chargerGalerieCMS();
   chargerMilitantsCMS();
   chargerContactForm();
@@ -61,6 +87,9 @@ function initialiserDonneesCMS() {
   if (!localStorage.getItem('aeemci_cms_actualites')) {
     localStorage.setItem('aeemci_cms_actualites', JSON.stringify(CMS_DEFAUTS.actualites));
   }
+  if (!localStorage.getItem('aeemci_cms_formations')) {
+    localStorage.setItem('aeemci_cms_formations', JSON.stringify(CMS_DEFAUTS.formations));
+  }
   if (!localStorage.getItem('aeemci_cms_contact')) {
     localStorage.setItem('aeemci_cms_contact', JSON.stringify(CMS_DEFAUTS.contact));
   }
@@ -70,16 +99,20 @@ function initialiserDonneesCMS() {
   localStorage.setItem('aeemci_cms_galerie', JSON.stringify(galerieStockee));
 }
 
-// 1. GESTION DU BUREAU EXÉCUTIF & PHOTO DU PRÉSIDENT
+// 1. GESTION DU BUREAU EXÉCUTIF & PRÉSIDENCE
 function chargerProfilPresidentForm() {
   const bureau = JSON.parse(localStorage.getItem('aeemci_cms_bureau')) || CMS_DEFAUTS.bureau;
   
   const inputNom = document.getElementById('cmsPresidentNom');
+  const inputTitre = document.getElementById('cmsPresidentTitre');
+  const inputMandat = document.getElementById('cmsPresidentMandat');
   const inputMot = document.getElementById('cmsPresidentMot');
   const inputTel1 = document.getElementById('cmsContactTel1');
   const previewPhoto = document.getElementById('cmsPresidentPhotoPreview');
 
   if (inputNom) inputNom.value = bureau.presidentNom || '';
+  if (inputTitre) inputTitre.value = bureau.presidentTitre || 'Président Exécutif';
+  if (inputMandat) inputMandat.value = bureau.presidentMandat || 'Mandat 2025 – 2026';
   if (inputMot) inputMot.value = bureau.presidentMot || '';
   if (inputTel1) inputTel1.value = bureau.contactTel1 || '';
   if (previewPhoto && bureau.presidentPhoto) previewPhoto.src = bureau.presidentPhoto;
@@ -91,26 +124,33 @@ window.enregistrerBureauCMS = function(e) {
   let bureau = JSON.parse(localStorage.getItem('aeemci_cms_bureau')) || CMS_DEFAUTS.bureau;
 
   const nom = document.getElementById('cmsPresidentNom')?.value.trim();
+  const titre = document.getElementById('cmsPresidentTitre')?.value.trim();
+  const mandat = document.getElementById('cmsPresidentMandat')?.value.trim();
   const mot = document.getElementById('cmsPresidentMot')?.value.trim();
   const tel1 = document.getElementById('cmsContactTel1')?.value.trim();
   const fileInput = document.getElementById('cmsPresidentPhotoFile');
 
   if (nom) bureau.presidentNom = nom;
+  if (titre) bureau.presidentTitre = titre;
+  if (mandat) bureau.presidentMandat = mandat;
   if (mot) bureau.presidentMot = mot;
   if (tel1) bureau.contactTel1 = tel1;
+
+  const sauvegarderEtNotifier = () => {
+    localStorage.setItem('aeemci_cms_bureau', JSON.stringify(bureau));
+    chargerProfilPresidentForm();
+    alert("✅ Les informations de la Présidence ont été sauvegardées et mises à jour sur le site public !");
+  };
 
   if (fileInput && fileInput.files && fileInput.files[0]) {
     const reader = new FileReader();
     reader.onload = function(evt) {
       bureau.presidentPhoto = evt.target.result;
-      localStorage.setItem('aeemci_cms_bureau', JSON.stringify(bureau));
-      chargerProfilPresidentForm();
-      alert("✅ Les informations du Président et la photo ont été mises à jour sur le site public !");
+      sauvegarderEtNotifier();
     };
     reader.readAsDataURL(fileInput.files[0]);
   } else {
-    localStorage.setItem('aeemci_cms_bureau', JSON.stringify(bureau));
-    alert("✅ Les informations du Bureau Exécutif ont été sauvegardées avec succès !");
+    sauvegarderEtNotifier();
   }
 };
 
@@ -216,7 +256,7 @@ window.ajouterActualiteCMS = function(e) {
       date: date || "Prochainement",
       lieu: lieu || "Koumassi",
       description: description,
-      image: "images/logo.png"
+      image: "images/maouloud.jpg"
     };
     actualites.unshift(nouvelleActu);
   }
@@ -237,7 +277,78 @@ window.supprimerActualiteCMS = function(id) {
   }
 };
 
-// 4. GESTION DÉDIÉE DU TÉLÉVERSEMENT & GALERIE (UPLOAD + DRAG AND DROP)
+// 4. GESTION DES MODULES DE FORMATION (CRUD)
+function chargerFormationsCMS() {
+  const formations = JSON.parse(localStorage.getItem('aeemci_cms_formations')) || CMS_DEFAUTS.formations;
+  const container = document.getElementById('containerFormationsCMS');
+  if (!container) return;
+
+  container.innerHTML = '';
+
+  if (formations.length === 0) {
+    container.innerHTML = `<p style="color: var(--texte-secondaire); padding: 20px;">Aucun module de formation enregistré.</p>`;
+    return;
+  }
+
+  formations.forEach(f => {
+    const item = document.createElement('div');
+    item.style.cssText = "border: 1px solid var(--bordure-carte); border-radius: 14px; padding: 20px; background: #FFFFFF; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--ombre-carte);";
+    item.innerHTML = `
+      <div>
+        <h4 style="font-size: 1.1rem; color: var(--vert-institutionnel); font-weight: 800; margin-bottom: 8px;">🎓 ${f.intitule}</h4>
+        <p style="font-size: 0.88rem; color: var(--texte-secondaire); margin-bottom: 12px; line-height: 1.5;">${f.description}</p>
+        <span style="font-size: 0.82rem; color: var(--or-sombre); font-weight: 700;">👥 ${f.inscrits || 0} Inscrits en ce moment</span>
+      </div>
+      <div style="display: flex; gap: 10px; margin-top: 14px;">
+        <button class="bouton-action-contour btn-touch-evt" onclick="supprimerFormationCMS(${f.id})" style="border-color: #EF4444; color: #EF4444; width: 100%; justify-content: center;">🗑️ Supprimer</button>
+      </div>
+    `;
+    container.appendChild(item);
+  });
+}
+
+window.enregistrerFormationCMS = function(e) {
+  if (e) e.preventDefault();
+
+  const intitule = document.getElementById('cmsFormationIntitule')?.value.trim();
+  const description = document.getElementById('cmsFormationDesc')?.value.trim();
+  const lien = document.getElementById('cmsFormationLien')?.value.trim();
+
+  if (!intitule || !description) {
+    alert("Veuillez renseigner au moins l'intitulé et la description de la formation.");
+    return;
+  }
+
+  let formations = JSON.parse(localStorage.getItem('aeemci_cms_formations')) || CMS_DEFAUTS.formations;
+
+  const nouvelleFormation = {
+    id: Date.now(),
+    intitule: intitule,
+    description: description,
+    lien: lien || "https://wa.me/2250545305180",
+    inscrits: 0
+  };
+
+  formations.push(nouvelleFormation);
+  localStorage.setItem('aeemci_cms_formations', JSON.stringify(formations));
+  chargerFormationsCMS();
+
+  const form = document.getElementById('formAjoutFormationCMS');
+  if (form) form.reset();
+
+  alert("✅ Le module de formation a été ajouté et publié sur le site public !");
+};
+
+window.supprimerFormationCMS = function(id) {
+  if (confirm("Voulez-vous vraiment supprimer ce module de formation ?")) {
+    let formations = JSON.parse(localStorage.getItem('aeemci_cms_formations')) || [];
+    formations = formations.filter(f => f.id !== id);
+    localStorage.setItem('aeemci_cms_formations', JSON.stringify(formations));
+    chargerFormationsCMS();
+  }
+};
+
+// 5. GESTION DU TÉLÉVERSEMENT & GALERIE (UPLOAD + DRAG AND DROP)
 window.declencherSelecteurPhotos = function() {
   const input = document.getElementById('inputUploadGalerie');
   if (input) input.click();
@@ -337,7 +448,7 @@ window.supprimerPhotoGalerie = function(id) {
   }
 };
 
-// 5. SUPPORT TACTILE REHAUSSÉ
+// 6. SUPPORT TACTILE REHAUSSÉ
 function attacherGestionnairesTactiles() {
   const boutonsTactiles = document.querySelectorAll('.bouton-action-pro, .bouton-action-contour, .modal-fermer, .btn-touch-evt');
   boutonsTactiles.forEach(btn => {
@@ -351,7 +462,7 @@ function attacherGestionnairesTactiles() {
   });
 }
 
-// 6. GESTION DES MILITANTS
+// 7. GESTION DES MILITANTS
 async function chargerMilitantsCMS() {
   let militants = [];
   if (window.militantsDb && typeof window.militantsDb.fetchMilitants === 'function') {
@@ -433,7 +544,7 @@ window.supprimerMilitantCMS = async function(id) {
   }
 };
 
-// 7. GESTION DES COORDONNÉES & DU FOOTER DU SITE PUBLIC
+// 8. GESTION DES COORDONNÉES & DU FOOTER DU SITE PUBLIC
 function chargerContactForm() {
   const contact = JSON.parse(localStorage.getItem('aeemci_cms_contact')) || CMS_DEFAUTS.contact;
 

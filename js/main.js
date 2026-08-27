@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
   lancerSynchronisationGlobale();
 });
 
-// Écouteur en temps réel : Réactualise automatiquement le site public si le Studio enregistre des modifications dans un autre onglet
+// Écouteurs d'événements temps réel pour mise à jour instantanée sans rechargement de page
 window.addEventListener('storage', function() {
   lancerSynchronisationGlobale();
 });
@@ -18,12 +18,13 @@ window.addEventListener('focus', function() {
 function lancerSynchronisationGlobale() {
   synchroniserBureauPublic();
   synchroniserActualitesPublic();
+  synchroniserFormationsPublic();
   synchroniserStatistiquesPublic();
   synchroniserGaleriePublic();
   synchroniserContactPublic();
 }
 
-// 1. Synchronisation des Infos du Bureau & Photo du Président
+// 1. Synchronisation de la Présidence & Mot du Président
 function synchroniserBureauPublic() {
   const bureauRaw = localStorage.getItem('aeemci_cms_bureau');
   if (!bureauRaw) return;
@@ -31,27 +32,31 @@ function synchroniserBureauPublic() {
   try {
     const bureau = JSON.parse(bureauRaw);
 
-    const nomEl = document.getElementById('publicPresidentNom') || document.querySelector('.carte-president .nom-president');
-    const motEl = document.getElementById('publicPresidentMot') || document.querySelector('.mot-du-president p');
-    const photoEl = document.getElementById('publicPresidentPhoto') || document.querySelector('.carte-president img');
+    const nomEls = document.querySelectorAll('#site-nom-president, #publicPresidentNom, .carte-president .nom-president');
+    const titreEls = document.querySelectorAll('#site-titre-president, #publicPresidentTitre');
+    const mandatEls = document.querySelectorAll('#site-mandat-president');
+    const motEls = document.querySelectorAll('#site-mot-president, #publicPresidentMot, .mot-du-president p');
+    const photoEls = document.querySelectorAll('#site-photo-president, #publicPresidentPhoto, .carte-president img');
 
-    if (nomEl && bureau.presidentNom) nomEl.textContent = bureau.presidentNom;
-    if (motEl && bureau.presidentMot) motEl.textContent = bureau.presidentMot;
-    if (photoEl && bureau.presidentPhoto) photoEl.src = bureau.presidentPhoto;
+    if (bureau.presidentNom) nomEls.forEach(el => el.textContent = bureau.presidentNom);
+    if (bureau.presidentTitre) titreEls.forEach(el => el.textContent = bureau.presidentTitre);
+    if (bureau.presidentMandat) mandatEls.forEach(el => el.textContent = bureau.presidentMandat);
+    if (bureau.presidentMot) motEls.forEach(el => el.textContent = bureau.presidentMot);
+    if (bureau.presidentPhoto) photoEls.forEach(el => el.src = bureau.presidentPhoto);
 
   } catch (e) {
-    console.warn("Mise à jour dynamique du bureau ignorée.");
+    console.warn("Mise à jour dynamique de la présidence ignorée.");
   }
 }
 
-// 2. Synchronisation Dynamique des Événements & Actualités du Studio Admin
+// 2. Synchronisation Dynamique des Événements & Actualités
 function synchroniserActualitesPublic() {
   const actualitesRaw = localStorage.getItem('aeemci_cms_actualites');
   if (!actualitesRaw) return;
 
   try {
     const actualites = JSON.parse(actualitesRaw);
-    const container = document.getElementById('publicNewsContainer') || document.querySelector('.grille-actualites');
+    const container = document.getElementById('container-actualites') || document.getElementById('publicNewsContainer') || document.querySelector('.grille-actualites');
 
     if (container && actualites && actualites.length > 0) {
       container.innerHTML = '';
@@ -80,7 +85,42 @@ function synchroniserActualitesPublic() {
   }
 }
 
-// 3. Synchronisation Dynamique des Compteurs Statistiques sur la Page d'Accueil
+// 3. Synchronisation Dynamique des Modules de Formation
+function synchroniserFormationsPublic() {
+  const formationsRaw = localStorage.getItem('aeemci_cms_formations');
+  if (!formationsRaw) return;
+
+  try {
+    const formations = JSON.parse(formationsRaw);
+    const container = document.getElementById('container-formations') || document.getElementById('publicFormationsContainer') || document.querySelector('.grille-formations');
+
+    if (container && formations && formations.length > 0) {
+      container.innerHTML = '';
+      formations.forEach(f => {
+        const item = document.createElement('div');
+        item.className = 'carte-formation-item';
+        item.style.cssText = "border: 1px solid var(--bordure-carte); border-radius: 16px; padding: 24px; background: #FFFFFF; box-shadow: var(--ombre-carte); display: flex; flex-direction: column; justify-content: space-between;";
+        item.innerHTML = `
+          <div>
+            <span class="badge-tag or" style="margin-bottom: 10px; display: inline-block;">Module Officiel</span>
+            <h3 style="font-size: 1.2rem; color: var(--vert-emeraude); font-weight: 800; margin-bottom: 8px;">${f.intitule}</h3>
+            <p style="font-size: 0.9rem; color: var(--texte-doux); line-height: 1.6; margin-bottom: 16px;">${f.description}</p>
+          </div>
+          <div>
+            <a href="${f.lien || 'https://wa.me/2250545305180'}" target="_blank" class="bouton-action-contour" style="width: 100%; justify-content: center; font-weight: 700;">
+              Réserver ma place sur WhatsApp →
+            </a>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+  } catch (e) {
+    console.warn("Mise à jour des formations ignorée.");
+  }
+}
+
+// 4. Synchronisation des Compteurs Statistiques
 function synchroniserStatistiquesPublic() {
   const militantsRaw = localStorage.getItem('aeemci_militants_db');
   if (!militantsRaw) return;
@@ -98,14 +138,14 @@ function synchroniserStatistiquesPublic() {
   }
 }
 
-// 4. Synchronisation Dynamique des Photos de la Galerie Uploadées depuis le Studio
+// 5. Synchronisation des Photos de la Galerie Uploadées depuis le Studio
 function synchroniserGaleriePublic() {
   const galerieRaw = localStorage.getItem('aeemci_cms_galerie');
   if (!galerieRaw) return;
 
   try {
     const mefGalerie = JSON.parse(galerieRaw);
-    const container = document.querySelector('.grille-galerie-filtree');
+    const container = document.getElementById('container-galerie') || document.querySelector('.grille-galerie-filtree');
 
     if (container && mefGalerie && mefGalerie.length > 0) {
       const photosValides = mefGalerie.filter(item => item && item.url && !item.url.includes('../images/'));
@@ -128,7 +168,7 @@ function synchroniserGaleriePublic() {
   }
 }
 
-// 5. Synchronisation Dynamique des Coordonnées & Réseaux Sociaux du Footer sur Tout le Site
+// 6. Synchronisation des Coordonnées Officielles & Footer
 function synchroniserContactPublic() {
   const contactRaw = localStorage.getItem('aeemci_cms_contact');
   if (!contactRaw) return;
@@ -136,11 +176,11 @@ function synchroniserContactPublic() {
   try {
     const contact = JSON.parse(contactRaw);
 
-    const adresseEls = document.querySelectorAll('#publicFooterAdresse, .contact-adresse-txt');
-    const tel1Els = document.querySelectorAll('#publicFooterTel, .contact-tel-txt');
-    const emailEls = document.querySelectorAll('#publicFooterEmail, .contact-email-txt');
-    const horairesEls = document.querySelectorAll('#publicFooterHoraires, .contact-horaires-txt');
-    const whatsappLinks = document.querySelectorAll('#publicSocialWhatsapp, a.btn-join-whatsapp');
+    const adresseEls = document.querySelectorAll('#site-contact-adresse, #publicFooterAdresse, .contact-adresse-txt');
+    const tel1Els = document.querySelectorAll('#site-contact-phone, #publicFooterTel, .contact-tel-txt');
+    const emailEls = document.querySelectorAll('#site-contact-email, #publicFooterEmail, .contact-email-txt');
+    const horairesEls = document.querySelectorAll('#site-contact-horaires, #publicFooterHoraires, .contact-horaires-txt');
+    const whatsappLinks = document.querySelectorAll('#site-contact-whatsapp, #publicSocialWhatsapp, a.btn-join-whatsapp');
 
     adresseEls.forEach(el => el.textContent = contact.adresse || 'Koumassi, Abidjan');
     tel1Els.forEach(el => el.textContent = (contact.tel1 ? contact.tel1 : '') + (contact.tel2 ? ' / ' + contact.tel2 : ''));

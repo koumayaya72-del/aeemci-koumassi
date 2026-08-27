@@ -145,6 +145,46 @@
           </div>
         </div>
 
+        <!-- FORMULAIRE SECTION PRÉSIDENT & MOT DU PRÉSIDENT -->
+        <div class="carte-tableau" style="padding: 28px; margin-bottom: 24px;">
+          <h3 style="margin-bottom: 18px; color: var(--vert-institutionnel);">👑 Édition de la Présidence &amp; Mot du Président</h3>
+          <form onsubmit="enregistrerBureauCMS(event)" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+            <div class="form-groupe">
+              <label>Nom &amp; Prénoms du Président *</label>
+              <input type="text" id="cmsPresidentNom" placeholder="ex: Sow Mohamed" required>
+            </div>
+
+            <div class="form-groupe">
+              <label>Titre Officiel *</label>
+              <input type="text" id="cmsPresidentTitre" placeholder="ex: Président Exécutif" required>
+            </div>
+
+            <div class="form-groupe">
+              <label>Période du Mandat *</label>
+              <input type="text" id="cmsPresidentMandat" placeholder="ex: Mandat 2025 – 2026" required>
+            </div>
+
+            <div class="form-groupe" style="grid-column: 1 / -1;">
+              <label>Mot de bienvenue / Discours du Président *</label>
+              <textarea id="cmsPresidentMot" rows="3" placeholder="Message officiel adressé aux militants et visiteurs..." required></textarea>
+            </div>
+
+            <div class="form-groupe">
+              <label>Photo Officielle du Président</label>
+              <input type="file" id="cmsPresidentPhotoFile" accept="image/*">
+            </div>
+
+            <div class="form-groupe" style="display: flex; align-items: center; gap: 12px;">
+              <img id="cmsPresidentPhotoPreview" src="../images/membres/sow-mohamed.jpg" alt="Aperçu Président" style="height: 50px; width: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--or);" onerror="this.src='../images/logo.png';">
+              <span style="font-size: 0.82rem; color: var(--texte-secondaire);">Aperçu actuel</span>
+            </div>
+
+            <div style="grid-column: 1 / -1; display: flex; justify-content: flex-end; margin-top: 10px;">
+              <button type="submit" class="bouton-action-pro btn-touch-evt">Enregistrer les Infos du Président</button>
+            </div>
+          </form>
+        </div>
+
         <!-- RECAPITULATIF RECENT DES MILITANTS -->
         <div class="carte-tableau">
           <div class="tableau-header">
@@ -289,6 +329,38 @@
               <div class="kpi-valeur">195</div>
             </div>
             <div class="kpi-icone-box">🎓</div>
+          </div>
+        </div>
+
+        <!-- FORMULAIRE DE CRÉATION DE MODULE DE FORMATION -->
+        <div class="carte-tableau" style="padding: 28px; margin-top: 24px;">
+          <h3 style="margin-bottom: 18px; color: var(--vert-institutionnel);">➕ Ajouter un Module de Formation</h3>
+          <form id="formAjoutFormationCMS" onsubmit="enregistrerFormationCMS(event)" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+            <div class="form-groupe">
+              <label>Intitulé du Module *</label>
+              <input type="text" id="cmsFormationIntitule" placeholder="ex: Module 4 : Leadership &amp; Projets" required>
+            </div>
+
+            <div class="form-groupe">
+              <label>Lien d'Inscription / Contact WhatsApp</label>
+              <input type="url" id="cmsFormationLien" placeholder="ex: https://wa.me/2250545305180">
+            </div>
+
+            <div class="form-groupe" style="grid-column: 1 / -1;">
+              <label>Description du Module *</label>
+              <textarea id="cmsFormationDesc" rows="3" placeholder="Objectifs pédagogiques, public cible et modalités d'encadrement..." required></textarea>
+            </div>
+
+            <div style="grid-column: 1 / -1; display: flex; justify-content: flex-end; margin-top: 10px;">
+              <button type="submit" class="bouton-action-pro btn-touch-evt">Publier la Formation sur le Site</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="carte-tableau" style="padding: 28px; margin-top: 24px;">
+          <h3 style="margin-bottom: 18px; color: var(--vert-institutionnel);">📖 Modules de Formation à l'Affiche</h3>
+          <div id="containerFormationsCMS" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+            <!-- Généré dynamiquement en JS -->
           </div>
         </div>
       </section>
