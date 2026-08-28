@@ -190,6 +190,8 @@ window.showToast = function(message, type = 'success') {
 
 document.addEventListener('DOMContentLoaded', async function() {
   initialiserDonneesCMS();
+  chargerConfigForms();
+  chargerProfilPresidentForm();
   chargerBureauCMS();
   chargerActualitesCMS();
   chargerFormationsCMS();
@@ -201,6 +203,24 @@ document.addEventListener('DOMContentLoaded', async function() {
 });
 
 function initialiserDonneesCMS() {
+  if (!localStorage.getItem('aeemci_cms_config')) {
+    localStorage.setItem('aeemci_cms_config', JSON.stringify(CMS_DEFAUTS.config));
+  }
+  if (!localStorage.getItem('aeemci_cms_hero')) {
+    localStorage.setItem('aeemci_cms_hero', JSON.stringify(CMS_DEFAUTS.hero));
+  }
+  if (!localStorage.getItem('aeemci_cms_historique')) {
+    localStorage.setItem('aeemci_cms_historique', JSON.stringify(CMS_DEFAUTS.historique));
+  }
+  if (!localStorage.getItem('aeemci_cms_impact')) {
+    localStorage.setItem('aeemci_cms_impact', JSON.stringify(CMS_DEFAUTS.impact));
+  }
+  if (!localStorage.getItem('aeemci_cms_piliers')) {
+    localStorage.setItem('aeemci_cms_piliers', JSON.stringify(CMS_DEFAUTS.piliers));
+  }
+  if (!localStorage.getItem('aeemci_cms_temoignages')) {
+    localStorage.setItem('aeemci_cms_temoignages', JSON.stringify(CMS_DEFAUTS.temoignages));
+  }
   if (!localStorage.getItem('aeemci_cms_bureau')) {
     localStorage.setItem('aeemci_cms_bureau', JSON.stringify(CMS_DEFAUTS.bureau));
   }
@@ -217,6 +237,215 @@ function initialiserDonneesCMS() {
     localStorage.setItem('aeemci_cms_galerie', JSON.stringify([]));
   }
 }
+
+function chargerConfigForms() {
+  const config = JSON.parse(localStorage.getItem('aeemci_cms_config')) || CMS_DEFAUTS.config;
+  if (document.getElementById('cmsConfigTitre')) document.getElementById('cmsConfigTitre').value = config.siteTitre || '';
+  if (document.getElementById('cmsConfigDesc')) document.getElementById('cmsConfigDesc').value = config.siteDescription || '';
+  if (document.getElementById('cmsConfigLogo')) document.getElementById('cmsConfigLogo').value = config.logoUrl || '';
+  if (document.getElementById('cmsConfigMaouloudDate')) document.getElementById('cmsConfigMaouloudDate').value = config.maouloudDate || '';
+  if (document.getElementById('cmsConfigCopyright')) document.getElementById('cmsConfigCopyright').value = config.footerCopyright || '';
+  if (document.getElementById('cmsConfigMandat')) document.getElementById('cmsConfigMandat').value = config.mandatLabel || '';
+
+  const hero = JSON.parse(localStorage.getItem('aeemci_cms_hero')) || CMS_DEFAUTS.hero;
+  if (document.getElementById('cmsHeroSlogan1')) document.getElementById('cmsHeroSlogan1').value = hero.slogan1 || '';
+  if (document.getElementById('cmsHeroSlogan2')) document.getElementById('cmsHeroSlogan2').value = hero.slogan2 || '';
+  if (document.getElementById('cmsHeroTitre')) document.getElementById('cmsHeroTitre').value = hero.titre || '';
+  if (document.getElementById('cmsHeroAccent')) document.getElementById('cmsHeroAccent').value = hero.accentKoumassi || '';
+  if (document.getElementById('cmsHeroDesc')) document.getElementById('cmsHeroDesc').value = hero.description || '';
+  if (document.getElementById('cmsHeroCta1T')) document.getElementById('cmsHeroCta1T').value = hero.ctaPrimaireTexte || '';
+  if (document.getElementById('cmsHeroCta1L')) document.getElementById('cmsHeroCta1L').value = hero.ctaPrimaireLien || '';
+  if (document.getElementById('cmsHeroCta2T')) document.getElementById('cmsHeroCta2T').value = hero.ctaSecondaireTexte || '';
+  if (document.getElementById('cmsHeroCta2L')) document.getElementById('cmsHeroCta2L').value = hero.ctaSecondaireLien || '';
+  if (document.getElementById('cmsHeroMedNom')) document.getElementById('cmsHeroMedNom').value = hero.medaillonNom || '';
+  if (document.getElementById('cmsHeroMedDev')) document.getElementById('cmsHeroMedDev').value = hero.medaillonDevise || '';
+
+  const hist = JSON.parse(localStorage.getItem('aeemci_cms_historique')) || CMS_DEFAUTS.historique;
+  if (document.getElementById('cmsHistBadge')) document.getElementById('cmsHistBadge').value = hist.badge || '';
+  if (document.getElementById('cmsHistTitre')) document.getElementById('cmsHistTitre').value = hist.titre || '';
+  if (document.getElementById('cmsHistDesc')) document.getElementById('cmsHistDesc').value = hist.description || '';
+
+  const impact = JSON.parse(localStorage.getItem('aeemci_cms_impact')) || CMS_DEFAUTS.impact;
+  if (document.getElementById('cmsImpactBadge')) document.getElementById('cmsImpactBadge').value = impact.badge || '';
+  if (document.getElementById('cmsImpactTitre')) document.getElementById('cmsImpactTitre').value = impact.titre || '';
+  if (document.getElementById('cmsImpactDesc')) document.getElementById('cmsImpactDesc').value = impact.description || '';
+
+  const piliers = JSON.parse(localStorage.getItem('aeemci_cms_piliers')) || CMS_DEFAUTS.piliers;
+  if (document.getElementById('cmsPiliersBadge')) document.getElementById('cmsPiliersBadge').value = piliers.badge || '';
+  if (document.getElementById('cmsPiliersTitre')) document.getElementById('cmsPiliersTitre').value = piliers.titre || '';
+  if (document.getElementById('cmsPiliersDesc')) document.getElementById('cmsPiliersDesc').value = piliers.description || '';
+
+  const temos = JSON.parse(localStorage.getItem('aeemci_cms_temoignages')) || CMS_DEFAUTS.temoignages;
+  if (document.getElementById('cmsTemosBadge')) document.getElementById('cmsTemosBadge').value = temos.badge || '';
+  if (document.getElementById('cmsTemosTitre')) document.getElementById('cmsTemosTitre').value = temos.titre || '';
+  if (document.getElementById('cmsTemosDesc')) document.getElementById('cmsTemosDesc').value = temos.description || '';
+}
+
+function chargerProfilPresidentForm() {
+  const bureau = JSON.parse(localStorage.getItem('aeemci_cms_bureau')) || CMS_DEFAUTS.bureau;
+
+  const inputNom = document.getElementById('cmsPresidentNom');
+  const inputTitre = document.getElementById('cmsPresidentTitre');
+  const inputMandat = document.getElementById('cmsPresidentMandat');
+  const inputMot = document.getElementById('cmsPresidentMot');
+  const inputTel1 = document.getElementById('cmsContactTel1');
+  const previewPhoto = document.getElementById('cmsPresidentPhotoPreview');
+
+  if (inputNom) inputNom.value = bureau.presidentNom || 'Sow Mohamed';
+  if (inputTitre) inputTitre.value = bureau.presidentTitre || 'Président Exécutif';
+  if (inputMandat) inputMandat.value = bureau.presidentMandat || bureau.mandat || 'Mandat 2025 – 2026';
+  if (inputMot) inputMot.value = bureau.presidentMot || bureau.motDuPresident || '';
+  if (inputTel1) inputTel1.value = bureau.contactTel1 || '';
+  if (previewPhoto && bureau.presidentPhoto) previewPhoto.src = bureau.presidentPhoto;
+}
+
+window.enregistrerConfigCMS = async function(e) {
+  if (e) e.preventDefault();
+  const config = {
+    siteTitre: document.getElementById('cmsConfigTitre')?.value.trim(),
+    siteDescription: document.getElementById('cmsConfigDesc')?.value.trim(),
+    logoUrl: document.getElementById('cmsConfigLogo')?.value.trim(),
+    maouloudDate: document.getElementById('cmsConfigMaouloudDate')?.value,
+    footerCopyright: document.getElementById('cmsConfigCopyright')?.value.trim(),
+    mandatLabel: document.getElementById('cmsConfigMandat')?.value.trim(),
+  };
+  localStorage.setItem('aeemci_cms_config', JSON.stringify(config));
+  if (window.cmsDb && typeof window.cmsDb.saveSection === 'function') {
+    await window.cmsDb.saveSection('config', config);
+  }
+  showToast("✅ Configuration générale enregistrée avec succès !");
+};
+
+window.enregistrerHeroCMS = async function(e) {
+  if (e) e.preventDefault();
+  const hero = {
+    slogan1: document.getElementById('cmsHeroSlogan1')?.value.trim(),
+    slogan2: document.getElementById('cmsHeroSlogan2')?.value.trim(),
+    titre: document.getElementById('cmsHeroTitre')?.value.trim(),
+    accentKoumassi: document.getElementById('cmsHeroAccent')?.value.trim(),
+    description: document.getElementById('cmsHeroDesc')?.value.trim(),
+    ctaPrimaireTexte: document.getElementById('cmsHeroCta1T')?.value.trim(),
+    ctaPrimaireLien: document.getElementById('cmsHeroCta1L')?.value.trim(),
+    ctaSecondaireTexte: document.getElementById('cmsHeroCta2T')?.value.trim(),
+    ctaSecondaireLien: document.getElementById('cmsHeroCta2L')?.value.trim(),
+    medaillonNom: document.getElementById('cmsHeroMedNom')?.value.trim(),
+    medaillonDevise: document.getElementById('cmsHeroMedDev')?.value.trim(),
+  };
+  localStorage.setItem('aeemci_cms_hero', JSON.stringify(hero));
+  if (window.cmsDb && typeof window.cmsDb.saveSection === 'function') {
+    await window.cmsDb.saveSection('hero', hero);
+  }
+  showToast("✅ Section Hero mise à jour avec succès !");
+};
+
+window.enregistrerHistoriqueCMS = async function(e) {
+  if (e) e.preventDefault();
+  const hist = {
+    badge: document.getElementById('cmsHistBadge')?.value.trim(),
+    titre: document.getElementById('cmsHistTitre')?.value.trim(),
+    description: document.getElementById('cmsHistDesc')?.value.trim()
+  };
+  localStorage.setItem('aeemci_cms_historique', JSON.stringify(hist));
+  if (window.cmsDb && typeof window.cmsDb.saveSection === 'function') {
+    await window.cmsDb.saveSection('historique', hist);
+  }
+  showToast("✅ Frise chronologique et historique enregistrés !");
+};
+
+window.enregistrerImpactCMS = async function(e) {
+  if (e) e.preventDefault();
+  const impact = {
+    badge: document.getElementById('cmsImpactBadge')?.value.trim(),
+    titre: document.getElementById('cmsImpactTitre')?.value.trim(),
+    description: document.getElementById('cmsImpactDesc')?.value.trim()
+  };
+  localStorage.setItem('aeemci_cms_impact', JSON.stringify(impact));
+  if (window.cmsDb && typeof window.cmsDb.saveSection === 'function') {
+    await window.cmsDb.saveSection('impact', impact);
+  }
+  showToast("✅ Chiffres clés et impact enregistrés !");
+};
+
+window.enregistrerPiliersCMS = async function(e) {
+  if (e) e.preventDefault();
+  const piliers = {
+    badge: document.getElementById('cmsPiliersBadge')?.value.trim(),
+    titre: document.getElementById('cmsPiliersTitre')?.value.trim(),
+    description: document.getElementById('cmsPiliersDesc')?.value.trim()
+  };
+  localStorage.setItem('aeemci_cms_piliers', JSON.stringify(piliers));
+  if (window.cmsDb && typeof window.cmsDb.saveSection === 'function') {
+    await window.cmsDb.saveSection('piliers', piliers);
+  }
+  showToast("✅ Missions et piliers enregistrés !");
+};
+
+window.enregistrerTemosCMS = async function(e) {
+  if (e) e.preventDefault();
+  const temos = {
+    badge: document.getElementById('cmsTemosBadge')?.value.trim(),
+    titre: document.getElementById('cmsTemosTitre')?.value.trim(),
+    description: document.getElementById('cmsTemosDesc')?.value.trim()
+  };
+  localStorage.setItem('aeemci_cms_temoignages', JSON.stringify(temos));
+  if (window.cmsDb && typeof window.cmsDb.saveSection === 'function') {
+    await window.cmsDb.saveSection('temoignages', temos);
+  }
+  showToast("✅ Témoignages enregistrés avec succès !");
+};
+
+window.enregistrerBureauCMS = async function(e) {
+  if (e) e.preventDefault();
+
+  let bureau = JSON.parse(localStorage.getItem('aeemci_cms_bureau')) || CMS_DEFAUTS.bureau;
+
+  const nom = document.getElementById('cmsPresidentNom')?.value.trim();
+  const titre = document.getElementById('cmsPresidentTitre')?.value.trim();
+  const mandat = document.getElementById('cmsPresidentMandat')?.value.trim();
+  const mot = document.getElementById('cmsPresidentMot')?.value.trim();
+  const tel1 = document.getElementById('cmsContactTel1')?.value.trim();
+  const fileInput = document.getElementById('cmsPresidentPhotoFile');
+
+  if (nom) bureau.presidentNom = nom;
+  if (titre) bureau.presidentTitre = titre;
+  if (mandat) {
+    bureau.presidentMandat = mandat;
+    bureau.mandat = mandat;
+  }
+  if (mot) {
+    bureau.presidentMot = mot;
+    bureau.motDuPresident = mot;
+  }
+  if (tel1) bureau.contactTel1 = tel1;
+
+  const sauvegarderEtNotifier = async () => {
+    localStorage.setItem('aeemci_cms_bureau', JSON.stringify(bureau));
+    if (window.cmsDb && typeof window.cmsDb.saveSection === 'function') {
+      await window.cmsDb.saveSection('bureau', bureau);
+    }
+    const previewPhoto = document.getElementById('cmsPresidentPhotoPreview');
+    if (previewPhoto && bureau.presidentPhoto) previewPhoto.src = bureau.presidentPhoto;
+    showToast("✅ Les informations de la Présidence ont été enregistrées et mises à jour en direct !");
+  };
+
+  if (fileInput && fileInput.files && fileInput.files[0]) {
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+      compresserImageCanvas(evt.target.result, 600, 0.8, function(photoCompressee) {
+        bureau.presidentPhoto = photoCompressee;
+        sauvegarderEtNotifier();
+      });
+    };
+    reader.readAsDataURL(fileInput.files[0]);
+  } else {
+    await sauvegarderEtNotifier();
+  }
+};
+
+window.ajouterEtapeCMS = function() { showToast("Saisissez la nouvelle étape ci-dessus et cliquez sur Enregistrer.", "info"); };
+window.ajouterStatCMS = function() { showToast("Saisissez la nouvelle statistique et cliquez sur Enregistrer.", "info"); };
+window.ajouterPilierCMS = function() { showToast("Saisissez le nouveau pilier et cliquez sur Enregistrer.", "info"); };
+window.ajouterTemoCMS = function() { showToast("Saisissez le nouveau témoignage et cliquez sur Enregistrer.", "info"); };
 
 // 1. GESTION DU BUREAU EXÉCUTIF (Dynamique)
 function chargerBureauCMS() {
