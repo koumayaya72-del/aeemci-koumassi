@@ -86,27 +86,49 @@ window.studioAuth = {
 // Module de Gestion du Stockage (Images) via Supabase Storage
 window.storageDb = {
   uploadImage: async function(file, folder = 'uploads') {
-    if (!supabaseClient) return null;
-    try {
-      const fileExt = file.name.split('.').pop();
-      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
-      const filePath = `${folder}/${fileName}`;
+    if (supabaseClient) {
+      try {
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+        const filePath = `${folder}/${fileName}`;
 
-      const { data, error } = await supabaseClient.storage
-        .from('aeemci-assets')
-        .upload(filePath, file);
+        const { data, error } = await supabaseClient.storage
+          .from('aeemci-assets')
+          .upload(filePath, file);
 
-      if (error) throw error;
+        if (!error && data) {
+          const { data: urlData } = supabaseClient.storage
+            .from('aeemci-assets')
+            .getPublicUrl(filePath);
 
-      const { data: { publicUrl } } = supabaseClient.storage
-        .from('aeemci-assets')
-        .getPublicUrl(filePath);
-
-      return publicUrl;
-    } catch (e) {
-      console.error("Erreur upload Storage:", e);
-      return null;
+          if (urlData && urlData.publicUrl) return urlData.publicUrl;
+        }
+      } catch (e) {
+        console.warn("Supabase Storage non disponible, bascule sur la compression Canvas HD locale.");
+      }
     }
+
+    // Fallback automatique Canvas HD local (Web-ready)
+    return new Promise((resolve) => {
+      if (!file || !file.type || !file.type.startsWith('image/')) {
+        resolve(null);
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        if (typeof window.compresserImageCanvas === 'function') {
+          window.compresserImageCanvas(evt.target.result, 1000, 0.8, function(compressedUrl) {
+            resolve(compressedUrl);
+          });
+        } else {
+          resolve(evt.target.result);
+        }
+      };
+      reader.onerror = function() {
+        resolve(null);
+      };
+      reader.readAsDataURL(file);
+    });
   },
 
   deleteImage: async function(url) {

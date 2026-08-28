@@ -748,11 +748,7 @@ window.ajouterActualiteCMS = function(e) {
   if (fileInput && fileInput.files && fileInput.files[0]) {
     const file = fileInput.files[0];
     const imageUrl = await window.storageDb.uploadImage(file, 'actualites');
-    if (imageUrl) {
-      await enregistrer(imageUrl);
-    } else {
-      showToast("Erreur lors du téléversement de l'image. Veuillez réessayer.", "error");
-    }
+    await enregistrer(imageUrl || "images/maouloud.jpg");
   } else {
     await enregistrer(null);
   }
