@@ -639,11 +639,12 @@ table.studio-table tbody tr:hover {
 }
 
 /* ---------- Modales CRUD ---------- */
-.studio-modal {
+.studio-modal,
+.modal-overlay {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(11, 60, 38, 0.6);
+  background: rgba(11, 60, 38, 0.65);
   backdrop-filter: blur(8px);
   z-index: 2000;
   align-items: center;
@@ -651,17 +652,19 @@ table.studio-table tbody tr:hover {
   padding: 20px;
 }
 
-.studio-modal.active {
-  display: flex;
+.studio-modal.active,
+.modal-overlay.active {
+  display: flex !important;
 }
 
-.modal-contenu {
+.modal-contenu,
+.modal-conteneur {
   background: #FFFFFF;
   border-radius: 20px;
   width: min(580px, 100%);
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
   border: 1px solid var(--or);
   animation: modalSlide 0.35s ease;
 }
@@ -735,6 +738,7 @@ table.studio-table tbody tr:hover {
 }
 
 /* ---------- Notifications Toast ---------- */
+#toast-container,
 .toast-container {
   position: fixed;
   top: 24px;
