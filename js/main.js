@@ -238,7 +238,7 @@ async function synchroniserGaleriePublic() {
       item.innerHTML = `
         <img src="${src}" alt="${photo.titre || 'Photo AEEMCI Koumassi'}" loading="lazy" onerror="this.src='images/logo.png';">
         <div class="carte-galerie-overlay">
-          <span class="carte-galerie-cat">Nouveau • Studio Admin</span>
+          <span class="carte-galerie-cat">Nouveau • Activité Koumassi</span>
           <h3 class="carte-galerie-titre">${photo.titre || 'Activité Koumassi'}</h3>
         </div>
       `;
@@ -404,3 +404,26 @@ function initialiserCompteAReboursAutomatique() {
   mettreAJourChronometre();
   setInterval(mettreAJourChronometre, 1000);
 }
+
+// 10. Accès Discret Administrateur (Raccourci Secret Ctrl + Shift + A & Triple Clic Copyright)
+document.addEventListener('keydown', function(e) {
+  if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+    e.preventDefault();
+    window.location.href = 'studio/index.html';
+  }
+});
+
+let nbClicsFooter = 0;
+let timerClicsFooter = null;
+document.addEventListener('click', function(e) {
+  if (e.target && (e.target.closest('.bas-pied-site') || e.target.closest('footer'))) {
+    nbClicsFooter++;
+    clearTimeout(timerClicsFooter);
+    if (nbClicsFooter >= 4) {
+      nbClicsFooter = 0;
+      window.location.href = 'studio/index.html';
+    } else {
+      timerClicsFooter = setTimeout(() => { nbClicsFooter = 0; }, 1200);
+    }
+  }
+});
