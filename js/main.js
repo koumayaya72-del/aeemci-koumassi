@@ -5,6 +5,7 @@
 document.addEventListener('DOMContentLoaded', function() {
   lancerSynchronisationGlobale();
   initialiserAnimationsScroll();
+  initialiserCompteursChiffres();
 });
 
 
@@ -293,4 +294,42 @@ function initialiserAnimationsScroll() {
     el.classList.add('reveal');
     observer.observe(el);
   });
+}
+
+// 8. Animation dynamique de comptage pour les Chiffres Clés (Impact)
+function initialiserCompteursChiffres() {
+  const elements = document.querySelectorAll('.nombre-chiffre-cle[data-compteur]');
+  if (elements.length === 0) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animerCompteur(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  elements.forEach(el => observer.observe(el));
+}
+
+function animerCompteur(el) {
+  const cible = parseInt(el.getAttribute('data-compteur')) || 0;
+  const prefix = el.getAttribute('data-prefix') || '';
+  const suffix = el.getAttribute('data-suffix') || '';
+  let depart = 0;
+  const duree = 1500;
+  const pasTemps = 20;
+  const etapes = duree / pasTemps;
+  const increment = cible / etapes;
+
+  const timer = setInterval(() => {
+    depart += increment;
+    if (depart >= cible) {
+      el.textContent = `${prefix}${cible}${suffix}`;
+      clearInterval(timer);
+    } else {
+      el.textContent = `${prefix}${Math.floor(depart)}${suffix}`;
+    }
+  }, pasTemps);
 }

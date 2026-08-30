@@ -1150,67 +1150,148 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
-   CHIFFRES CLÉS & CARTE D'IMPACT (4 COLONNES PARFAITES EN 1 LIGNE SUR PC)
+   CHIFFRES CLÉS & CARTE D'IMPACT (DESIGN LUXUEUX HAUT DE GAMME PRO)
    ========================================================================== */
+.section-chiffres-cles {
+  padding: 95px 0 !important;
+  background: linear-gradient(180deg, #F8FAFC 0%, #F1F5F9 50%, #E2E8F0 100%) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.section-chiffres-cles::before {
+  content: "" !important;
+  position: absolute !important;
+  top: -120px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 900px !important;
+  height: 450px !important;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, rgba(212, 175, 55, 0.08) 45%, transparent 70%) !important;
+  pointer-events: none !important;
+}
+
 .grille-chiffres-cles {
   display: grid !important;
   grid-template-columns: repeat(4, 1fr) !important;
-  gap: 20px !important;
-  margin-top: 36px !important;
+  gap: 24px !important;
+  margin-top: 48px !important;
+  position: relative !important;
+  z-index: 2 !important;
 }
 
 @media (max-width: 1024px) {
   .grille-chiffres-cles {
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 18px !important;
+    gap: 20px !important;
   }
 }
 
 @media (max-width: 600px) {
   .grille-chiffres-cles {
     grid-template-columns: 1fr !important;
-    gap: 16px !important;
+    gap: 18px !important;
   }
 }
 
 .carte-chiffre-cle {
   background: #FFFFFF !important;
-  border-radius: var(--rayon-carte, 16px) !important;
-  padding: 28px 20px !important;
+  border-radius: 20px !important;
+  padding: 32px 24px 28px !important;
   text-align: center !important;
-  border: 1px solid var(--bordure-douce, rgba(0,0,0,0.08)) !important;
-  box-shadow: 0 8px 24px rgba(12, 56, 35, 0.05) !important;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+  border: 1px solid rgba(12, 56, 35, 0.08) !important;
+  box-shadow: 0 10px 30px -5px rgba(12, 56, 35, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.8) inset !important;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
   position: relative !important;
   overflow: hidden !important;
   display: flex !important;
   flex-direction: column !important;
+  align-items: center !important;
   justify-content: flex-start !important;
 }
 
+/* Ligne supérieure dorée/émeraude sur chaque carte */
+.carte-chiffre-cle::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 4px !important;
+  background: linear-gradient(90deg, #10B981 0%, #0C3823 50%, #D4AF37 100%) !important;
+  transition: opacity 0.3s ease !important;
+}
+
 .carte-chiffre-cle:hover {
-  transform: translateY(-6px) !important;
-  box-shadow: 0 16px 36px rgba(12, 56, 35, 0.12) !important;
-  border-color: rgba(212, 175, 55, 0.5) !important;
+  transform: translateY(-10px) !important;
+  box-shadow: 0 20px 40px -10px rgba(12, 56, 35, 0.18), 0 0 0 2px rgba(212, 175, 55, 0.4) !important;
+  border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+.chiffre-icone-wrapper {
+  width: 56px !important;
+  height: 56px !important;
+  border-radius: 16px !important;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(212, 175, 55, 0.15) 100%) !important;
+  border: 1px solid rgba(212, 175, 55, 0.25) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-bottom: 16px !important;
+  transition: transform 0.3s ease, background 0.3s ease !important;
+}
+
+.carte-chiffre-cle:hover .chiffre-icone-wrapper {
+  transform: scale(1.12) rotate(4deg) !important;
+  background: linear-gradient(135deg, #0C3823 0%, #10B981 100%) !important;
+}
+
+.chiffre-icone {
+  font-size: 1.6rem !important;
+  line-height: 1 !important;
 }
 
 .nombre-chiffre-cle {
-  font-family: var(--font-titre, sans-serif) !important;
-  font-size: clamp(2rem, 3.2vw, 2.7rem) !important;
-  font-weight: 800 !important;
-  color: var(--vert-emeraude, #0C3823) !important;
+  font-family: var(--font-titre, 'Montserrat', sans-serif) !important;
+  font-size: clamp(2.2rem, 3.5vw, 3rem) !important;
+  font-weight: 900 !important;
   line-height: 1.1 !important;
   margin-bottom: 8px !important;
-  background: linear-gradient(135deg, var(--vert-emeraude, #0C3823) 0%, #062215 100%) !important;
+  background: linear-gradient(135deg, #0C3823 0%, #10B981 60%, #B89628 100%) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
+  letter-spacing: -0.5px !important;
+}
+
+.titre-chiffre-cle {
+  font-size: 1.12rem !important;
+  font-weight: 700 !important;
+  color: var(--vert-emeraude, #0C3823) !important;
+  margin-bottom: 8px !important;
+  line-height: 1.3 !important;
 }
 
 .label-chiffre-cle {
   font-size: 0.88rem !important;
   font-weight: 500 !important;
-  color: var(--texte-doux, #4A5568) !important;
-  line-height: 1.45 !important;
+  color: #4A5568 !important;
+  line-height: 1.5 !important;
+  margin: 0 !important;
+}
+
+.carte-chiffre-glow {
+  position: absolute !important;
+  bottom: -40px !important;
+  right: -40px !important;
+  width: 100px !important;
+  height: 100px !important;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%) !important;
+  pointer-events: none !important;
+  transition: transform 0.4s ease !important;
+}
+
+.carte-chiffre-cle:hover .carte-chiffre-glow {
+  transform: scale(1.8) !important;
 }
 
 /* ---------- Section CTA Adhésion / Dons ---------- */
