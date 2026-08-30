@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
   lancerSynchronisationGlobale();
   initialiserAnimationsScroll();
   initialiserCompteursChiffres();
+  initialiserCompteAReboursAutomatique();
 });
 
 
@@ -332,4 +333,74 @@ function animerCompteur(el) {
       el.textContent = `${prefix}${Math.floor(depart)}${suffix}`;
     }
   }, pasTemps);
+}
+
+// 9. Gestion Automatique du Compte à Rebours & Masquage Automatique au Jour J / Échéance
+function initialiserCompteAReboursAutomatique() {
+  const sectionWidget = document.getElementById('section-widget-evenement');
+  if (!sectionWidget) return;
+
+  function obtenirDateCible() {
+    // 1. Essayer de lire la date configurée dans le CMS Config
+    const configRaw = localStorage.getItem('aeemci_cms_config');
+    if (configRaw) {
+      try {
+        const config = JSON.parse(configRaw);
+        if (config.maouloudDate) {
+          const d = new Date(config.maouloudDate);
+          if (!isNaN(d.getTime())) return d.getTime();
+        }
+      } catch(e) {}
+    }
+
+    // 2. Sinon lire la date du prochain événement en cours
+    const actusRaw = localStorage.getItem('aeemci_cms_actualites');
+    if (actusRaw) {
+      try {
+        const actus = JSON.parse(actusRaw);
+        const prochain = actus.find(a => (a.categorie && a.categorie.toUpperCase().includes('PROCHAIN')) || (a.badge && a.badge.toUpperCase().includes('PROCHAIN')));
+        if (prochain && prochain.date) {
+          const parsed = Date.parse(prochain.date);
+          if (!isNaN(parsed)) return parsed;
+        }
+      } catch(e) {}
+    }
+
+    // 3. Date par défaut : Lancement Officiel Soutien Scolaire BEPC & BAC 2026 (01 Septembre 2026 08H00)
+    return new Date('2026-09-01T08:00:00').getTime();
+  }
+
+  function mettreAJourChronometre() {
+    const targetTime = obtenirDateCible();
+    const now = Date.now();
+    const diff = targetTime - now;
+
+    // ⚠️ Si la date est arrivée (Jour J) ou déjà passée (diff <= 0) -> Masquage automatique immédiat du widget !
+    if (diff <= 0) {
+      sectionWidget.style.display = 'none';
+      return;
+    }
+
+    // L'événement est à venir -> Le widget reste affiché et le compte à rebours tourne en direct
+    sectionWidget.style.display = 'block';
+
+    const totalSeconds = Math.floor(diff / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = Math.floor(totalSeconds % 60);
+
+    const elJours = document.getElementById('compteurJours');
+    const elHeures = document.getElementById('compteurHeures');
+    const elMin = document.getElementById('compteurMinutes');
+    const elSec = document.getElementById('compteurSecondes');
+
+    if (elJours) elJours.textContent = String(days).padStart(2, '0');
+    if (elHeures) elHeures.textContent = String(hours).padStart(2, '0');
+    if (elMin) elMin.textContent = String(minutes).padStart(2, '0');
+    if (elSec) elSec.textContent = String(seconds).padStart(2, '0');
+  }
+
+  mettreAJourChronometre();
+  setInterval(mettreAJourChronometre, 1000);
 }
