@@ -13,13 +13,13 @@ document.addEventListener('DOMContentLoaded', function () {
   document.addEventListener('keydown', function (e) {
     if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
       e.preventDefault();
-      ouvrirModalBaseDonnees();
+      window.location.href = 'studio/index.html';
     }
   });
 
   // Accès secret Administrateur via URL avec le mot #admin
   if (window.location.hash === '#admin') {
-    ouvrirModalBaseDonnees();
+    window.location.href = 'studio/index.html';
   }
 });
 
